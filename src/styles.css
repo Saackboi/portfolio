@@ -1,3 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #e63946;
+  --color-secondary: #5ded84;
+  --color-accent: #ff9f1c;
+  --color-dark: #1a1a1a;
+  --color-background-light: #e0e0e0;
+  --color-background-dark: #1a1a1a;
+  --color-card-dark: #262626;
+
+  --font-display: "Permanent Marker", cursive;
+  --font-body: "Special Elite", monospace;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-background-light);
+    background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  }
+}
+
+@layer utilities {
+  .bg-noise {
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  }
+
+  .bg-paper {
+    background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  }
+
+  .brutalist-border {
+    border: 4px solid #000000;
+  }
+
+  .brutalist-shadow {
+    box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 1);
+  }
+
+  .brutalist-shadow-accent {
+    box-shadow: 8px 8px 0 0 rgba(230, 57, 70, 1);
+  }
+
+  .brutalist-card {
+    border: 4px solid #000000;
+    box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 1);
+  }
+
+  .brutalist-card-invert {
+    border: 4px solid #ffffff;
+    box-shadow: 8px 8px 0 0 rgba(230, 57, 70, 1);
+  }
+}
