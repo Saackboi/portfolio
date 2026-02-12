@@ -7,6 +7,11 @@ export const routes: Routes = [
   {
     path: '',
     component: ShellComponent,
-    children: []
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/landing/landing.page').then(m => m.LandingPage)
+      }
+    ]
   }
 ];

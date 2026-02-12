@@ -1,0 +1,60 @@
+@reference "../../../../../styles.css";
+
+@keyframes float-soft {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-6px) rotate(1deg);
+  }
+}
+
+.skill-chart {
+  @apply bg-accent p-4 border-2 border-black -rotate-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] w-56;
+  animation: float-soft 8.5s ease-in-out infinite alternate;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-chart:hover {
+  transform: translateY(-4px) rotate(-2deg);
+  box-shadow: 12px 12px 0 0 rgba(0, 0, 0, 1);
+}
+
+.skill-chart__title {
+  font-family: var(--font-display);
+  @apply text-base mb-2 text-black;
+}
+
+.skill-chart__row {
+  @apply flex items-center gap-5;
+}
+
+.skill-chart__label {
+  font-family: var(--font-display);
+  @apply text-sm w-10;
+}
+
+.skill-chart__stamp {
+  @apply px-3 py-1 text-xs uppercase border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
+  font-family: var(--font-display);
+  transform: rotate(-2deg);
+}
+
+.skill-chart__stamp--rising {
+  @apply bg-accent text-black;
+}
+
+.skill-chart__stamp--solid {
+  @apply bg-secondary text-black;
+}
+
+.skill-chart__stamp--strong {
+  @apply bg-primary text-white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-chart {
+    animation: none;
+    transition: none;
+  }
+}

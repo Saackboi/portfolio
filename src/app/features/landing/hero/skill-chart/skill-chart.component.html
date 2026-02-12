@@ -1,0 +1,18 @@
+<div class="skill-chart">
+  <h4 class="skill-chart__title">SKILL STATS</h4>
+  <div class="space-y-1">
+    @for (skill of skills(); track skill.label) {
+      <div class="skill-chart__row">
+        <span class="skill-chart__label">{{ skill.label }}</span>
+        <span
+          class="skill-chart__stamp"
+          [class.skill-chart__stamp--strong]="isStrong(skill.value)"
+          [class.skill-chart__stamp--solid]="isSolid(skill.value)"
+          [class.skill-chart__stamp--rising]="isRising(skill.value)"
+        >
+          {{ stampLabel(skill.value) }}
+        </span>
+      </div>
+    }
+  </div>
+</div>
