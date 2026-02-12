@@ -3,6 +3,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap");
 @import "tailwindcss";
 
+/* Use class-based dark mode to match the template. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: #e63946;
   --color-secondary: #5ded84;
