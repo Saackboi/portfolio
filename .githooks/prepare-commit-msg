@@ -1,0 +1,44 @@
+#!/bin/sh
+#
+# Hook: prepare-commit-message
+# Uso: Inserta el número de ticket desde el nombre del branch en el mensaje del commit
+# Protege contra rebase/cherry-pick para no duplicar ni modificar commits re-aplicados.
+
+MSG_FILE=$1   # archivo temporal donde Git escribe el mensaje
+SOURCE=$2     # origen del commit (message, template, merge, commit, rebase, etc.)
+SHA1=$3       # hash del commit original (si aplica)
+
+# Obtener el branch actual
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+# Extraer el número del ticket: primer grupo de dígitos encontrado
+TICKET_NUM=$(echo "$BRANCH_NAME" | grep -oE '[0-9]{4}' | head -n1)
+
+# -----------------------------------------------------------------------------
+# Control de ejecución del hook según el "origen" del commit
+#
+# $SOURCE puede ser:
+#   vacío        → commit normal hecho con "git commit"
+#   commit       → commit explícito (ej: "git commit --amend")
+#   merge        → commit de merge
+#   message      → commit con mensaje pasado con -m
+#   template     → commit con mensaje a partir de plantilla
+#   rebase       → commit generado automáticamente por rebase
+#   cherry-pick  → commit generado automáticamente por cherry-pick
+#   squash       → commit de squash
+#
+# Regla que aplicamos:
+# ✅ insertar ticket SOLO en commits normales
+# ❌ no tocar commits re-aplicados (rebase, cherry-pick, squash) para evitar duplicados
+# -----------------------------------------------------------------------------
+if [ "$SOURCE" = "commit" ] || [ "$SOURCE" = "template" ] || [ -z "$SOURCE" ]; then
+    if [ -n "$TICKET_NUM" ]; then
+        if ! grep -q "Resolve #$TICKET_NUM" "$MSG_FILE"; then
+            # Si hay número de ticket, reemplazar el marcador por T#<numero>
+            sed -i "s/{{NUMERO_TICKET}}/Resolve #${TICKET_NUM}/g" "$MSG_FILE"
+        fi
+    else
+        # Si no hay número, limpiar el marcador
+        sed -i "s/{{NUMERO_TICKET}}//g" "$MSG_FILE"
+    fi
+fi

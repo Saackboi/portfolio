@@ -19,7 +19,6 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
-.githooks/
 
 # Visual Studio Code
 .vscode/
@@ -29,9 +28,6 @@ yarn-error.log
 !.vscode/extensions.json
 !.vscode/mcp.json
 .history/*
-
-# AI Instructions
-.agents/
 
 # Miscellaneous
 /.angular/cache
