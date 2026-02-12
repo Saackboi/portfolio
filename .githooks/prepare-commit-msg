@@ -12,7 +12,7 @@ SHA1=$3       # hash del commit original (si aplica)
 BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 
 # Extraer el número del ticket: primer grupo de dígitos encontrado
-TICKET_NUM=$(echo "$BRANCH_NAME" | grep -oE '[0-9]{4}' | head -n1)
+TICKET_NUM=$(echo "$BRANCH_NAME" | grep -oE '[0-9]{1}' | head -n1)
 
 # -----------------------------------------------------------------------------
 # Control de ejecución del hook según el "origen" del commit
