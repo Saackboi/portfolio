@@ -1,0 +1,45 @@
+<section class="hero" id="inicio">
+  <div class="hero__noise"></div>
+  <div class="hero__container">
+    <div class="hero__intro">
+      <div class="hero__headline">
+        <div class="hero__bubble hero__bubble--left">PROBLEM SOLVER</div>
+        <div class="hero__bubble hero__bubble--right">CREATIVE CODER</div>
+        <div class="hero__title-panel">
+          <h1 class="hero__title">
+            Hola, Mi Nombre Es <br />
+            <span class="hero__name">Kevin Sánchez</span>
+          </h1>
+        </div>
+      </div>
+      <div class="hero__detail-row">
+        <div class="hero__bio-card">
+          <p class="hero__bio-text">
+            Soy un desarrollador de software con experiencia en desarrollo web y aplicaciones de escritorio. Me
+            especializo en crear soluciones digitales innovadoras.
+          </p>
+        </div>
+        <app-skill-chart [skills]="skills()" />
+      </div>
+      <div class="hero__cta">
+        <a class="hero__cta-link" href="#proyectos">Ver Proyectos</a>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__frame">
+        <img
+          alt="Monochromatic code snippet background"
+          class="hero__image"
+          ngSrc="assets/shared/hero-code-bg.jpg"
+          fill
+          sizes="(min-width: 1024px) 50vw, (min-width: 768px) 60vw, 100vw"
+          priority
+        />
+        <div class="hero__frame-border"></div>
+        <div class="hero__error">ERROR_04</div>
+        <div class="hero__mode-tag">DEV MODE: ON</div>
+        <div class="hero__scanline"></div>
+      </div>
+    </div>
+  </div>
+</section>
