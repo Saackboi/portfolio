@@ -1,0 +1,4 @@
+/* Reserve space for the fixed nav so content does not hide behind it. */
+:host {
+  display: block;
+}

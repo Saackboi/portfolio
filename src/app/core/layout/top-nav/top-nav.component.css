@@ -1,0 +1,60 @@
+@reference "../../../../styles.css";
+
+/* Matches the exact nav layout from the template. */
+:host {
+  display: block;
+}
+
+.top-nav {
+  @apply fixed w-full z-50 top-0 bg-white/90 dark:bg-darkblue/90 border-b-4 border-black dark:border-primary;
+}
+
+.top-nav__container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.top-nav__row {
+  @apply flex justify-between items-center h-20;
+}
+
+.top-nav__brand {
+  @apply flex-shrink-0 flex items-center gap-3;
+}
+
+.top-nav__logo {
+  @apply w-12 h-12 bg-primary border-4 border-black rotate-3 flex items-center justify-center overflow-hidden;
+}
+
+.top-nav__logo-image {
+  @apply w-full h-full object-cover grayscale contrast-200;
+}
+
+.top-nav__title {
+  font-family: var(--font-display);
+  @apply text-3xl tracking-tighter text-black dark:text-white uppercase;
+}
+
+.top-nav__links {
+  @apply hidden md:flex space-x-6;
+}
+
+.top-nav__link {
+  font-family: var(--font-display);
+  @apply text-lg uppercase px-2 transition-all;
+}
+
+.top-nav__link--secondary {
+  @apply hover:bg-secondary hover:text-black;
+}
+
+.top-nav__link--primary {
+  @apply hover:bg-primary hover:text-white;
+}
+
+.top-nav__toggle {
+  @apply p-2 border-2 border-black dark:border-white hover:bg-secondary transition-colors;
+}
+
+.top-nav__toggle-icon {
+  @apply dark:text-white text-black;
+}
