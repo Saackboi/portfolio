@@ -7,6 +7,7 @@ The design must remain identical to the template; only the implementation is tra
 ## Current Status
 - Issue 3 (Top Navigation) implemented and aligned to the template.
 - Dark/light toggle follows the template behavior (toggling `dark` on `<html>`).
+- Issue 4 (Hero Section) implemented with a landing page route and skill chart component.
 
 ## Structure Principles
 - Use standalone components with feature-based routing.
@@ -17,8 +18,8 @@ The design must remain identical to the template; only the implementation is tra
 ## Styling Rules
 - Tailwind stays in CSS files (use `@apply` in component styles).
 - Keep global tokens and shared utilities in `src/styles.css`.
-- Match the template classes and layout 1:1.
-- Do not invent visual changes or refactor the design.
+- Match the template classes and layout 1:1 unless an issue explicitly allows deviations.
+- Keep component templates free of utility classes; use component CSS instead.
 
 ## Conventions
 - Use `@if`, `@for`, etc. (no `*ngIf` / `*ngFor`).
