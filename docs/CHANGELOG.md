@@ -7,3 +7,8 @@
 - Added landing hero section with animations and abstract skill stamps.
 - Added local template images under `src/assets`.
 - Registered `src/assets` in Angular build assets.
+
+## 2026-02-15
+- Added the About section wrapper matching the template layout.
+- Implemented the Know Me notepad component with manifesto and workflow.
+- Built the reactive Tech Stack grid with categorized badges.

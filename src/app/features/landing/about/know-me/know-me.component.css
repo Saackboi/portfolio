@@ -1,0 +1,92 @@
+@reference "../../../../../styles.css";
+
+/* Notepad block mirrors the template styling. */
+.know-me {
+  @apply relative -rotate-1;
+}
+
+.know-me__panel {
+  @apply bg-white dark:bg-gray-800 p-10 border-2 border-black dark:border-primary relative shadow-2xl;
+  clip-path: polygon(
+    0% 2%, 5% 0%, 10% 3%, 15% 1%, 20% 4%, 25% 0%, 30% 3%, 35% 1%, 40% 4%, 45% 0%, 50% 2%, 55% 0%, 60% 3%, 65% 1%, 70% 4%, 75% 0%, 80% 3%, 85% 1%, 90% 4%, 95% 0%, 100% 2%,
+    100% 98%, 95% 100%, 90% 97%, 85% 99%, 80% 96%, 75% 100%, 70% 97%, 65% 99%, 60% 96%, 55% 100%, 50% 98%, 45% 100%, 40% 97%, 35% 99%, 30% 96%, 25% 100%, 20% 97%, 15% 99%, 10% 96%, 5% 100%, 0% 98%
+  );
+}
+
+.know-me__tape {
+  background: rgba(93, 237, 132, 0.4);
+  transform: rotate(-15deg);
+  @apply w-24 h-8 absolute -top-4 -left-4 border border-black/10 z-20;
+}
+
+.know-me__tape--right {
+  background: rgba(230, 57, 70, 0.4);
+  transform: rotate(10deg);
+  @apply w-20 h-7 absolute -bottom-4 -right-4 border border-black/10 z-20;
+}
+
+.know-me__title {
+  font-family: var(--font-display);
+  @apply text-4xl mb-6 uppercase flex items-center gap-2 text-primary;
+}
+
+.know-me__icon {
+  @apply text-4xl;
+}
+
+.know-me__body {
+  @apply space-y-6 text-xl font-bold leading-tight text-gray-800 dark:text-gray-200;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+
+.know-me__highlight {
+  @apply bg-secondary text-black px-1;
+}
+
+.know-me__highlight--primary {
+  @apply bg-primary text-white px-1;
+}
+
+.know-me__manifesto {
+  @apply mt-8 bg-black/5 dark:bg-white/5 border-2 border-dashed border-black dark:border-white p-4 rotate-[-2deg] relative;
+}
+
+.know-me__manifesto-title {
+  font-family: var(--font-display);
+  @apply text-lg text-primary mb-2 uppercase;
+}
+
+.know-me__manifesto-list {
+  @apply text-sm space-y-2 uppercase font-bold italic;
+}
+
+.know-me__workflow {
+  @apply mt-8 border-t-2 border-dashed border-black dark:border-white pt-6;
+}
+
+.know-me__workflow-title {
+  font-family: var(--font-display);
+  @apply text-lg mb-4 text-black dark:text-white uppercase;
+}
+
+.know-me__workflow-row {
+  @apply flex items-center justify-between text-center gap-2 text-black dark:text-white;
+}
+
+.know-me__workflow-step {
+  font-family: var(--font-display);
+  @apply p-2 border-2 border-black dark:border-white text-xs;
+}
+
+.know-me__workflow-step--secondary {
+  @apply bg-secondary/20;
+}
+
+.know-me__workflow-step--primary {
+  @apply bg-primary/20;
+}
+
+.know-me__workflow-step--success {
+  @apply bg-green-400/20;
+}
