@@ -9,6 +9,7 @@ The design must remain identical to the template; only the implementation is tra
 - Dark/light toggle follows the template behavior (toggling `dark` on `<html>`).
 - Issue 4 (Hero Section) implemented with a landing page route and skill chart component.
 - Issue 5 (About + Tech Stack) implements the notepad profile and stack grid with reactive data.
+- About section uses shared motion keyframes and hover dynamics aligned with the Hero.
 
 ## Structure Principles
 - Use standalone components with feature-based routing.
