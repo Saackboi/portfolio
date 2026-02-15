@@ -16,6 +16,11 @@
 .about__title {
   font-family: var(--font-display);
   @apply text-6xl uppercase bg-black text-white inline-block px-8 py-2 border-4 border-primary;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about__title:hover {
+  transform: rotate(1deg);
 }
 
 .about__subtitle {
@@ -43,4 +48,25 @@
 .about__callout {
   font-family: var(--font-display);
   @apply absolute -left-12 bottom-0 bg-white text-black p-4 border-2 border-black rotate-12 z-20 text-xl uppercase shadow-[4px_4px_0px_0px_rgba(230,57,70,1)];
+  animation: float-sway 7.5s ease-in-out infinite alternate;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about__callout:hover {
+  transform: translateY(-4px) rotate(13deg);
+  box-shadow: 8px 8px 0 0 rgba(230, 57, 70, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__callout {
+    animation: none;
+  }
+
+  .about__title {
+    transition: none;
+  }
+
+  .about__callout {
+    transition: none;
+  }
 }
