@@ -21,6 +21,33 @@
 }
 
 @layer base {
+  @keyframes float-soft {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-6px) rotate(1deg);
+    }
+  }
+
+  @keyframes float-gentle {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-10px) rotate(-1deg);
+    }
+  }
+
+  @keyframes float-sway {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-8px) rotate(2deg);
+    }
+  }
+
   body {
     font-family: var(--font-body);
     background-color: var(--color-background-light);
@@ -29,6 +56,13 @@
 }
 
 @layer utilities {
+  .torn-edge {
+    clip-path: polygon(
+      0% 2%, 5% 0%, 10% 3%, 15% 1%, 20% 4%, 25% 0%, 30% 3%, 35% 1%, 40% 4%, 45% 0%, 50% 2%, 55% 0%, 60% 3%, 65% 1%, 70% 4%, 75% 0%, 80% 3%, 85% 1%, 90% 4%, 95% 0%, 100% 2%,
+      100% 98%, 95% 100%, 90% 97%, 85% 99%, 80% 96%, 75% 100%, 70% 97%, 65% 99%, 60% 96%, 55% 100%, 50% 98%, 45% 100%, 40% 97%, 35% 99%, 30% 96%, 25% 100%, 20% 97%, 15% 99%, 10% 96%, 5% 100%, 0% 98%
+    );
+  }
+
   .bg-noise {
     background-image: url("https://grainy-gradients.vercel.app/noise.svg");
   }

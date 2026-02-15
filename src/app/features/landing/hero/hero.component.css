@@ -1,32 +1,5 @@
 @reference "../../../../styles.css";
 
-@keyframes float-soft {
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-  100% {
-    transform: translateY(-6px) rotate(1deg);
-  }
-}
-
-@keyframes float-gentle {
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-  100% {
-    transform: translateY(-10px) rotate(-1deg);
-  }
-}
-
-@keyframes float-sway {
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-  100% {
-    transform: translateY(-8px) rotate(2deg);
-  }
-}
-
 .hero {
   @apply relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-background-dark pt-20;
 }

@@ -1,0 +1,25 @@
+<div class="tech-stack">
+  <div class="tech-stack__label">Stack Tecnológico</div>
+  <div class="tech-stack__panel">
+    <div class="tech-stack__grid">
+      @for (category of categories(); track category.title) {
+        <div class="tech-stack__category">
+          <h4 [class]="'tech-stack__category-title tech-stack__category-title--' + category.tone">
+            {{ category.title }}
+          </h4>
+          <div class="tech-stack__badges">
+            @for (badge of category.badges; track badge; let index = $index) {
+              <span
+                [class]="
+                  'tech-stack__badge ' + badgeToneClass(category, index) + ' ' + badgeTiltClass(index)
+                "
+              >
+                {{ badge }}
+              </span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
