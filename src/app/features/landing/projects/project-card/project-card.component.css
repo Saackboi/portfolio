@@ -1,0 +1,95 @@
+@reference "../../../../../styles.css";
+
+/* Polaroid card mirrors the template layout and tape accent. */
+.project-card {
+  @apply bg-white p-4 pb-12 shadow-xl border border-gray-200 relative transform transition-transform duration-300 hover:scale-105 hover:z-20;
+  width: 320px;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 128px;
+  height: 32px;
+  opacity: 0.9;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.project-card--left {
+  transform: rotate(-2deg);
+}
+
+.project-card--right {
+  transform: rotate(3deg);
+}
+
+.project-card--neutral {
+  transform: rotate(-1deg);
+}
+
+.project-card__image {
+  @apply w-full aspect-square bg-gray-100 overflow-hidden border border-gray-100 mb-4;
+  position: relative;
+}
+
+.project-card__photo {
+  @apply w-full h-full object-cover grayscale transition-all duration-300;
+}
+
+.project-card__photo:hover {
+  filter: grayscale(0%);
+}
+
+.project-card__caption {
+  @apply text-center mt-4;
+}
+
+.project-card__title {
+  font-family: var(--font-display);
+  @apply text-2xl text-black mb-1;
+}
+
+.project-card__description {
+  @apply text-sm text-gray-600 font-medium leading-tight px-2;
+  font-family: var(--font-body);
+}
+
+.project-card__meta {
+  @apply mt-4 flex justify-between items-center px-2;
+}
+
+.project-card__code {
+  font-family: var(--font-display);
+  @apply text-xl text-gray-400;
+}
+
+.project-card__year {
+  @apply text-xs font-bold text-gray-400 tracking-wider;
+  font-family: var(--font-body);
+}
+
+.project-card__tape--yellow::before {
+  background-color: rgba(250, 204, 21, 0.8);
+}
+
+.project-card__tape--primary::before {
+  background-color: rgba(230, 57, 70, 0.8);
+}
+
+.project-card__tape--blue::before {
+  background-color: rgba(96, 165, 250, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card {
+    transition: none;
+  }
+
+  .project-card__photo {
+    transition: none;
+  }
+}

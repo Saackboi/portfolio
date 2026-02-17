@@ -1,0 +1,33 @@
+@reference "../../../../styles.css";
+
+/* Polaroid gallery section mirrors the template layout. */
+.projects {
+  @apply py-24 bg-white dark:bg-darkblue relative;
+}
+
+.projects__container {
+  @apply container mx-auto px-4;
+}
+
+.projects__heading {
+  @apply text-center mb-24 relative;
+}
+
+.projects__title {
+  font-family: var(--font-display);
+  @apply text-8xl uppercase text-black dark:text-white -rotate-2;
+}
+
+.projects__title-shadow {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-24 bg-primary/20 -z-10 rotate-3;
+}
+
+.projects__subtitle {
+  @apply text-xl font-bold max-w-2xl mx-auto mt-4 text-gray-600 dark:text-gray-400;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+
+.projects__grid {
+  @apply flex flex-wrap justify-center gap-12;
+}

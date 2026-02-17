@@ -1,0 +1,17 @@
+<section class="projects" id="proyectos">
+  <div class="projects__container">
+    <div class="projects__heading">
+      <h2 class="projects__title">Proyectos</h2>
+      <div class="projects__title-shadow"></div>
+      <p class="projects__subtitle">
+        Selección de mis proyectos donde aplico mis habilidades.
+      </p>
+    </div>
+
+    <div class="projects__grid">
+      @for (project of projects(); track project.code) {
+        <app-project-card [project]="project" />
+      }
+    </div>
+  </div>
+</section>
