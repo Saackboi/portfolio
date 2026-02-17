@@ -24,3 +24,6 @@
 - Added the Contact section with social board, post-it notes, and form layout.
 - Implemented reactive social links with Font Awesome icons.
 - Added hover and motion dynamics across the Contact section.
+
+## 2026-02-19
+- Raised component style budgets to avoid CSS build failures.

@@ -12,6 +12,7 @@ The design must remain identical to the template; only the implementation is tra
 - About section uses shared motion keyframes and hover dynamics aligned with the Hero.
 - Issue 9 (Projects) implements the polaroid gallery with tape accents and hover scale.
 - Issue 10 (Contact) adds the contact form, social board, and post-it notes.
+- Issue 17 (CSS Budgets) raises component style budgets to keep builds green.
 
 ## Structure Principles
 - Use standalone components with feature-based routing.
