@@ -1,0 +1,21 @@
+<article [class]="'project-card ' + tiltClass() + ' ' + tapeClass()">
+  <div class="project-card__image">
+    <img
+      [alt]="project.title"
+      class="project-card__photo"
+      [ngSrc]="project.image"
+      fill
+      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 40vw, 80vw"
+    />
+  </div>
+  <div class="project-card__caption">
+    <h3 class="project-card__title">{{ project.title }}</h3>
+    <p class="project-card__description">
+      {{ project.description }}
+    </p>
+    <div class="project-card__meta">
+      <span class="project-card__code">{{ project.code }}</span>
+      <span class="project-card__year">{{ project.year }}</span>
+    </div>
+  </div>
+</article>
