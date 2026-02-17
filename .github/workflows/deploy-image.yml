@@ -9,7 +9,7 @@ on:
       - '.gitignore'     # Ignora cambios en gitignore
       - 'LICENSE'        # Ignora la licencia
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 env:
   REGISTRY: ghcr.io
