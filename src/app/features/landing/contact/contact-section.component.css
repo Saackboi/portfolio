@@ -21,6 +21,13 @@
 .contact__title {
   font-family: var(--font-display);
   @apply text-7xl uppercase mb-4 text-black bg-white inline-block px-10 py-2 border-4 border-black;
+  animation: float-sway 7s ease-in-out infinite alternate;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact__title:hover {
+  transform: translateY(-2px) rotate(0.5deg);
+  box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 1);
 }
 
 .contact__subtitle {
@@ -35,8 +42,26 @@
 
 .contact__board {
   @apply bg-white p-8 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact__board:hover {
+  transform: translateY(-3px) rotate(-0.5deg);
+  box-shadow: 14px 14px 0 0 rgba(0, 0, 0, 1);
 }
 
 .contact__notes {
   @apply flex flex-wrap gap-4 mt-8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__title,
+  .contact__board {
+    animation: none;
+  }
+
+  .contact__title,
+  .contact__board {
+    transition: none;
+  }
 }

@@ -7,6 +7,8 @@
 
 .contact-form__shell {
   @apply bg-white dark:bg-gray-800 p-8 md:p-12 border-4 border-black;
+  animation: float-gentle 8s ease-in-out infinite alternate;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   clip-path: polygon(
     0% 0%,
     3% 2%,
@@ -48,6 +50,11 @@
   );
 }
 
+.contact-form__shell:hover {
+  transform: translateY(-4px) rotate(1deg);
+  box-shadow: 12px 12px 0 0 rgba(0, 0, 0, 1);
+}
+
 .contact-form__form {
   @apply space-y-6;
 }
@@ -80,4 +87,23 @@
 .contact-form__submit {
   font-family: var(--font-display);
   @apply bg-primary text-white px-12 py-5 text-3xl uppercase border-4 border-black hover:bg-secondary hover:text-black transition-all shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-full;
+}
+
+.contact-form__submit:hover {
+  transform: translateY(-3px) rotate(-1deg);
+  box-shadow: 12px 12px 0 0 rgba(0, 0, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form__shell {
+    animation: none;
+  }
+
+  .contact-form__shell {
+    transition: none;
+  }
+
+  .contact-form__submit {
+    transition: none;
+  }
 }
