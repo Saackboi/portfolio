@@ -1,0 +1,31 @@
+@reference "../../../../../styles.css";
+
+/* Post-it notes mirror the template styles. */
+.post-it {
+  @apply p-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full sm:w-64;
+}
+
+.post-it--accent {
+  @apply bg-accent;
+}
+
+.post-it--secondary {
+  @apply bg-secondary;
+}
+
+.post-it--right {
+  @apply rotate-2;
+}
+
+.post-it--left {
+  @apply -rotate-3;
+}
+
+.post-it__title {
+  font-family: var(--font-display);
+  @apply text-lg text-black mb-2 underline;
+}
+
+.post-it__text {
+  @apply text-sm font-bold text-black uppercase;
+}

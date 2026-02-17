@@ -1,0 +1,36 @@
+<section class="contact" id="contacto">
+  <div class="contact__noise"></div>
+  <div class="contact__container">
+    <div class="contact__heading">
+      <h2 class="contact__title">Contacto</h2>
+      <p class="contact__subtitle">
+        ¡Hagamos algo grandioso juntos! Si tienes un proyecto en mente o simplemente quieres saludar.
+      </p>
+    </div>
+
+    <div class="contact__grid">
+      <div class="contact__left">
+        <div class="contact__board">
+          <app-social-board />
+        </div>
+        <div class="contact__notes">
+          <app-post-it
+            title="¿Estás disponible?"
+            text="¡SÍ! BUSCO NUEVOS RETOS Y COLABORACIONES FREELANCE."
+            tone="accent"
+            tilt="right"
+          />
+          <app-post-it
+            title="¿Stacks favoritos?"
+            text="LAMP, DOCKER, KOTLIN Y CUALQUIER COSA QUE MANEJE DATA."
+            tone="secondary"
+            tilt="left"
+          />
+        </div>
+      </div>
+      <div class="contact__right">
+        <app-contact-form />
+      </div>
+    </div>
+  </div>
+</section>
