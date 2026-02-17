@@ -19,3 +19,8 @@
 - Added the Projects section with polaroid-style cards.
 - Implemented tape accents via pseudo-elements and hover scaling.
 - Rendered project cards from a reactive list.
+
+## 2026-02-18
+- Added the Contact section with social board, post-it notes, and form layout.
+- Implemented reactive social links with Font Awesome icons.
+- Added hover and motion dynamics across the Contact section.

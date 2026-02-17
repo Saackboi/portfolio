@@ -11,6 +11,7 @@ The design must remain identical to the template; only the implementation is tra
 - Issue 5 (About + Tech Stack) implements the notepad profile and stack grid with reactive data.
 - About section uses shared motion keyframes and hover dynamics aligned with the Hero.
 - Issue 9 (Projects) implements the polaroid gallery with tape accents and hover scale.
+- Issue 10 (Contact) adds the contact form, social board, and post-it notes.
 
 ## Structure Principles
 - Use standalone components with feature-based routing.
