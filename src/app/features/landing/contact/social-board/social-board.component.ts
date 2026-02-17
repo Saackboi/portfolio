@@ -19,21 +19,21 @@ export class SocialBoardComponent {
   protected readonly socials = signal<SocialLink[]>([
     {
       label: 'GITHUB',
-      href: '#',
+      href: 'https://github.com/Saackboi',
       icon: 'fab fa-github',
       tone: 'dark',
       tilt: 'left'
     },
     {
       label: 'LINKEDIN',
-      href: '#',
+      href: 'https://www.linkedin.com/in/kevinsanchez06',
       icon: 'fab fa-linkedin-in',
       tone: 'secondary',
       tilt: 'right'
     },
     {
       label: 'INSTAGRAM',
-      href: '#',
+      href: 'https://www.instagram.com/code.koji/',
       icon: 'fab fa-instagram',
       tone: 'accent',
       tilt: 'neutral'

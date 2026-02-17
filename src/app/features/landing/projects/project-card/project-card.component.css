@@ -1,6 +1,4 @@
 @reference "../../../../../styles.css";
-
-/* Polaroid card mirrors the template layout and tape accent. */
 .project-card {
   @apply bg-white p-4 pb-12 shadow-xl border border-gray-200 relative transform transition-transform duration-300 hover:scale-105 hover:z-20;
   width: 320px;
@@ -41,7 +39,7 @@
 }
 
 .project-card__photo:hover {
-  filter: grayscale(0%);
+  filter: grayscale(0);
 }
 
 .project-card__caption {
