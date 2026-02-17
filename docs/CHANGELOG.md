@@ -14,3 +14,8 @@
 - Built the reactive Tech Stack grid with categorized badges.
 - Centralized motion keyframes and reused them across Hero and About sections.
 - Added hover dynamics for About cards, labels, and badges.
+
+## 2026-02-17
+- Added the Projects section with polaroid-style cards.
+- Implemented tape accents via pseudo-elements and hover scaling.
+- Rendered project cards from a reactive list.
