@@ -1,0 +1,17 @@
+<div class="social-board">
+  <h3 class="social-board__title">Interactive Connect Board</h3>
+  <div class="social-board__list">
+    @for (social of socials(); track social.label) {
+      <a
+        [href]="social.href"
+        [class]="'social-board__button ' + toneClass(social.tone) + ' ' + tiltClass(social.tilt)"
+      >
+        <div class="social-board__button-left">
+          <i [class]="social.icon"></i>
+          <span class="social-board__label">{{ social.label }}</span>
+        </div>
+        <span class="material-symbols-outlined social-board__arrow">arrow_outward</span>
+      </a>
+    }
+  </div>
+</div>

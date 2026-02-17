@@ -1,0 +1,112 @@
+@reference "../../../../../styles.css";
+
+/* Social board uses 3D-style buttons from the template. */
+.social-board {
+  @apply flex flex-col gap-6 relative;
+}
+
+.social-board__title {
+  font-family: var(--font-display);
+  @apply text-3xl text-black mb-4 border-b-4 border-black pb-2 text-center;
+}
+
+.social-board__list {
+  @apply flex flex-col gap-6 relative;
+}
+
+.social-board__button {
+  @apply relative z-10 p-6 border-4 overflow-hidden flex items-center justify-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform: rotate(var(--tilt, 0deg));
+}
+
+.social-board__button--dark {
+  @apply bg-black text-white border-white shadow-[8px_8px_0px_0px_rgba(93,237,132,1)];
+}
+
+.social-board__button--dark:hover {
+  box-shadow: 12px 12px 0 0 rgba(93, 237, 132, 1);
+}
+
+.social-board__button--secondary {
+  @apply bg-secondary text-black border-black shadow-[8px_8px_0px_0px_rgba(230,57,70,1)];
+}
+
+.social-board__button--secondary:hover {
+  box-shadow: 12px 12px 0 0 rgba(230, 57, 70, 1);
+}
+
+.social-board__button--accent {
+  @apply bg-accent text-black border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
+}
+
+.social-board__button--accent:hover {
+  box-shadow: 12px 12px 0 0 rgba(0, 0, 0, 1);
+}
+
+.social-board__button--left {
+  @apply -rotate-3;
+  --tilt: -3deg;
+}
+
+.social-board__button--right {
+  @apply rotate-2 -mt-4;
+  z-index: 20;
+  --tilt: 2deg;
+}
+
+.social-board__button--neutral {
+  @apply -rotate-1 -mt-4;
+  z-index: 30;
+  --tilt: -1deg;
+}
+
+.social-board__button:hover {
+  transform: translateY(-2px) rotate(calc(var(--tilt, 0deg) + 0.5deg));
+}
+
+.social-board__button-left {
+  @apply flex items-center gap-4;
+}
+
+.social-board__button-left i {
+  @apply text-5xl;
+}
+
+.social-board__label {
+  font-family: var(--font-display);
+  @apply text-3xl uppercase tracking-tighter;
+  transition: transform 0.2s ease;
+}
+
+.social-board__arrow {
+  @apply text-4xl transition-transform;
+}
+
+.social-board__button:hover .social-board__arrow {
+  transform: translateX(8px);
+}
+
+.social-board__button:hover .social-board__label {
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+.social-board__button:hover .social-board__button-left i {
+  transform: translateY(-2px) rotate(2deg);
+}
+
+.social-board__button-left i {
+  transition: transform 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-board__button,
+  .social-board__arrow {
+    transition: none;
+  }
+
+  .social-board__label,
+  .social-board__button-left i {
+    transition: none;
+  }
+}

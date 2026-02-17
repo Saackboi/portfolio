@@ -1,0 +1,39 @@
+<div class="contact-form">
+  <div class="contact-form__shell">
+    <form [formGroup]="form" class="contact-form__form" (ngSubmit)="submit()">
+      <div class="contact-form__field">
+        <label class="contact-form__label" for="nombre">Nombre</label>
+        <input
+          class="contact-form__input"
+          id="nombre"
+          placeholder="TU NOMBRE AQUÍ"
+          type="text"
+          formControlName="nombre"
+        />
+      </div>
+      <div class="contact-form__field">
+        <label class="contact-form__label" for="correo">Correo</label>
+        <input
+          class="contact-form__input"
+          id="correo"
+          placeholder="TU@EMAIL.COM"
+          type="email"
+          formControlName="correo"
+        />
+      </div>
+      <div class="contact-form__field">
+        <label class="contact-form__label" for="mensaje">Mensaje</label>
+        <textarea
+          class="contact-form__input contact-form__input--textarea"
+          id="mensaje"
+          placeholder="QUÉ TIENES EN MENTE?"
+          rows="4"
+          formControlName="mensaje"
+        ></textarea>
+      </div>
+      <div class="contact-form__actions">
+        <button class="contact-form__submit" type="submit">ENVIAR AHORA!</button>
+      </div>
+    </form>
+  </div>
+</div>
