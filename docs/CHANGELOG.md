@@ -27,3 +27,8 @@
 
 ## 2026-02-19
 - Raised component style budgets to avoid CSS build failures.
+
+## 2026-02-20
+- Added responsive rules for mobile and tablet layouts.
+- Implemented a mobile dropdown navigation menu.
+- Tuned section spacing and sizing to prevent overlaps on smaller screens.

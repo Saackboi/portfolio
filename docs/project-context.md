@@ -13,6 +13,7 @@ The design must remain identical to the template; only the implementation is tra
 - Issue 9 (Projects) implements the polaroid gallery with tape accents and hover scale.
 - Issue 10 (Contact) adds the contact form, social board, and post-it notes.
 - Issue 17 (CSS Budgets) raises component style budgets to keep builds green.
+- Issue 30 (Responsive) adds mobile/tablet layout adjustments and a dropdown nav.
 
 ## Structure Principles
 - Use standalone components with feature-based routing.
