@@ -158,3 +158,31 @@
     transition: none;
   }
 }
+
+@media (max-width: 768px) {
+  .tech-stack {
+    transform: rotate(0.5deg);
+  }
+
+  .tech-stack__label {
+    @apply text-2xl -translate-y-8 -translate-x-2;
+  }
+
+  .tech-stack__grid {
+    @apply grid-cols-1;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .tech-stack {
+    transform: rotate(0.5deg);
+  }
+
+  .tech-stack__label {
+    @apply text-2xl -translate-y-8 -translate-x-2;
+  }
+
+  .tech-stack__grid {
+    @apply grid-cols-1;
+  }
+}

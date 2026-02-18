@@ -18,14 +18,32 @@
         <a class="top-nav__link top-nav__link--secondary" href="#proyectos">Proyectos</a>
         <a class="top-nav__link top-nav__link--primary" href="#contacto">Contacto</a>
       </div>
-      <button
-        class="top-nav__toggle"
-        type="button"
-        aria-label="Alternar modo oscuro"
-        (click)="toggleTheme()"
-      >
-        <span class="material-symbols-outlined top-nav__toggle-icon">settings_brightness</span>
-      </button>
+      <div class="top-nav__actions">
+        <button
+          class="top-nav__toggle"
+          type="button"
+          aria-label="Alternar modo oscuro"
+          (click)="toggleTheme()"
+        >
+          <span class="material-symbols-outlined top-nav__toggle-icon">settings_brightness</span>
+        </button>
+        <button
+          class="top-nav__mobile-toggle"
+          type="button"
+          aria-label="Abrir menu"
+          (click)="toggleMenu()"
+        >
+          <span class="material-symbols-outlined top-nav__toggle-icon">menu</span>
+        </button>
+      </div>
     </div>
   </div>
+  @if (isMenuOpen()) {
+    <div class="top-nav__panel">
+      <a class="top-nav__panel-link" href="#inicio" (click)="closeMenu()">Inicio</a>
+      <a class="top-nav__panel-link" href="#sobre-mi" (click)="closeMenu()">Sobre Mí</a>
+      <a class="top-nav__panel-link" href="#proyectos" (click)="closeMenu()">Proyectos</a>
+      <a class="top-nav__panel-link" href="#contacto" (click)="closeMenu()">Contacto</a>
+    </div>
+  }
 </nav>

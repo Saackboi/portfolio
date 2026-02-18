@@ -110,3 +110,42 @@
     transition: none;
   }
 }
+
+@media (max-width: 768px) {
+  .social-board__list {
+    @apply gap-4;
+  }
+
+  .social-board__button {
+    @apply p-4 gap-3;
+  }
+
+  .social-board__button--right,
+  .social-board__button--neutral {
+    margin-top: 0;
+  }
+
+  .social-board__button--left {
+    --tilt: -2deg;
+  }
+
+  .social-board__button--right {
+    --tilt: 1.5deg;
+  }
+
+  .social-board__button--neutral {
+    --tilt: -0.5deg;
+  }
+
+  .social-board__button-left i {
+    @apply text-3xl;
+  }
+
+  .social-board__label {
+    @apply text-xl;
+  }
+
+  .social-board__arrow {
+    @apply text-3xl;
+  }
+}

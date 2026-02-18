@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
 import { ThemeService } from '../../services/theme.service';
 
@@ -10,8 +10,17 @@ import { ThemeService } from '../../services/theme.service';
 })
 export class TopNavComponent {
   private readonly theme = inject(ThemeService);
+  protected readonly isMenuOpen = signal(false);
 
   toggleTheme(): void {
     this.theme.toggle();
+  }
+
+  toggleMenu(): void {
+    this.isMenuOpen.update((open) => !open);
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen.set(false);
   }
 }
