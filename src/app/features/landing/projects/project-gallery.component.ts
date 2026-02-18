@@ -25,7 +25,7 @@ export class ProjectGalleryComponent {
   // Reactive list makes it easy to add or reorder projects later.
   protected readonly projects = signal<ProjectCard[]>([
     {
-      title: 'Sistema Web UTP',
+      title: 'Sistema Web CEL UTP',
       description: 'Sistema para el Centro Especializado en Lenguas. Web dinámica.',
       year: '2024',
       code: '#001',
