@@ -30,3 +30,4 @@
 - Tuned section spacing and sizing to prevent overlaps on smaller screens.
 - Updated navbar logo and hero background assets.
 - Fixed mobile overflow and centering for the Skill Stats card.
+- Expanded About and Contact section copy for additional context.

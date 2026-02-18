@@ -16,6 +16,7 @@ The design must remain identical to the template; only the implementation is tra
 - Issue 30 (Responsive) adds mobile/tablet layout adjustments and a dropdown nav.
 - Issue 32 (Assets) updates the navbar logo and hero background images.
 - Issue 35 (Skill Stats) fixes mobile overflow and centers the stats card.
+- Issue 37 (Content) expands About and Contact copy for more context.
 
 ## Structure Principles
 - Use standalone components with feature-based routing.
