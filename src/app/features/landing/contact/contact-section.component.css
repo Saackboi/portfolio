@@ -65,3 +65,27 @@
     transition: none;
   }
 }
+
+@media (max-width: 768px) {
+  .contact__title {
+    @apply text-5xl;
+  }
+
+  .contact__subtitle {
+    @apply text-lg;
+  }
+
+  .contact__grid {
+    @apply grid-cols-1;
+  }
+
+  .contact__right {
+    @apply mt-8;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .contact__title {
+    @apply text-6xl;
+  }
+}

@@ -91,3 +91,10 @@
     transition: none;
   }
 }
+
+@media (max-width: 768px) {
+  .project-card {
+    width: 100%;
+    max-width: 320px;
+  }
+}

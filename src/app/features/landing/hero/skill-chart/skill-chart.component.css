@@ -58,3 +58,9 @@
     transition: none;
   }
 }
+
+@media (max-width: 768px) {
+  .skill-chart {
+    @apply w-48;
+  }
+}

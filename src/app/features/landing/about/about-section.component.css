@@ -70,3 +70,51 @@
     transition: none;
   }
 }
+
+@media (max-width: 768px) {
+  .about__title {
+    @apply text-4xl;
+  }
+
+  .about__subtitle {
+    @apply text-lg;
+  }
+
+  .about__grid {
+    @apply grid-cols-1 gap-10;
+  }
+
+  .about__callout {
+    position: static;
+    display: inline-block;
+    max-width: 240px;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transform: rotate(6deg);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .about__title {
+    @apply text-4xl;
+  }
+
+  .about__subtitle {
+    @apply text-lg;
+  }
+
+  .about__grid {
+    @apply grid-cols-1 gap-10;
+  }
+
+  .about__callout {
+    position: static;
+    display: inline-block;
+    max-width: 240px;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transform: rotate(6deg);
+  }
+}

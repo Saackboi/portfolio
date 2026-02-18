@@ -123,3 +123,39 @@
     transition: none;
   }
 }
+
+@media (max-width: 768px) {
+  .know-me {
+    transform: rotate(-0.5deg);
+  }
+
+  .know-me__panel {
+    @apply p-6;
+  }
+
+  .know-me__title {
+    @apply text-3xl;
+  }
+
+  .know-me__body {
+    @apply text-lg;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .know-me {
+    transform: rotate(-0.5deg);
+  }
+
+  .know-me__panel {
+    @apply p-6;
+  }
+
+  .know-me__title {
+    @apply text-3xl;
+  }
+
+  .know-me__body {
+    @apply text-lg;
+  }
+}

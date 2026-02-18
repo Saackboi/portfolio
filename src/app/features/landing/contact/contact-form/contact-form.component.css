@@ -69,3 +69,9 @@
     transition: none;
   }
 }
+
+@media (max-width: 768px) {
+  .contact-form__submit {
+    @apply text-2xl;
+  }
+}
