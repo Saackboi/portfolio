@@ -29,6 +29,10 @@
   @apply flex items-center gap-5;
 }
 
+.skill-chart__list {
+  @apply space-y-1;
+}
+
 .skill-chart__label {
   font-family: var(--font-display);
   @apply text-sm w-10;
@@ -61,6 +65,25 @@
 
 @media (max-width: 768px) {
   .skill-chart {
-    @apply w-48;
+    width: min(100%, 16rem);
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    text-align: center;
+    transform: rotate(-1deg);
+    align-self: center;
+  }
+
+  .skill-chart__row {
+    @apply justify-center;
+  }
+
+  .skill-chart__title {
+    @apply text-base;
+  }
+
+  .skill-chart__label {
+    @apply text-sm;
   }
 }

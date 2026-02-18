@@ -373,7 +373,7 @@
     }
 
     .hero__detail-row {
-      @apply flex-col gap-8;
+      @apply flex-col gap-8 items-center;
     }
 
     .hero__cta {
