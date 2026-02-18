@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html class="scroll-smooth dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Treecify SaaS - Project Case Study</title>
+<meta content="Case study for Treecify SaaS project." name="description"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&amp;family=Special+Elite&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#E63946",
+                        secondary: "#5DED84",
+                        accent: "#FF9F1C",
+                        magenta: "#FF00FF",
+                        cyan: "#00FFFF",
+                        darkblue: "#0A0A0A", 
+                        "background-dark": "#050505",
+                        "card-dark": "#151515",
+                        "industrial-grey": "#1a1a1a",
+                        "blueprint-white": "#F8F9FA",
+                    },
+                    fontFamily: {
+                        display: ["'Permanent Marker'", "cursive"],
+                        body: ["'Special Elite'", "monospace"],
+                    },
+                    backgroundImage: {
+                        'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
+                        'paper': "url('https://www.transparenttextures.com/patterns/paper-fibers.png')",
+                    },
+                    animation: {
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scanline': 'scanline 8s linear infinite',
+                    },
+                    keyframes: {
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '1', boxShadow: '0 0 10px #00FFFF, 0 0 20px #00FFFF' },
+                            '50%': { opacity: '.8', boxShadow: '0 0 5px #00FFFF, 0 0 10px #00FFFF' },
+                        },
+                        'scanline': {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' },
+                        }
+                    }
+                },
+            },
+        };
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply font-body bg-industrial-grey text-gray-100;
+            }
+        }
+        .torn-edge {
+            clip-path: polygon(
+                0% 2%, 5% 0%, 10% 3%, 15% 1%, 20% 4%, 25% 0%, 30% 3%, 35% 1%, 40% 4%, 45% 0%, 50% 2%, 55% 0%, 60% 3%, 65% 1%, 70% 4%, 75% 0%, 80% 3%, 85% 1%, 90% 4%, 95% 0%, 100% 2%,
+                100% 98%, 95% 100%, 90% 97%, 85% 99%, 80% 96%, 75% 100%, 70% 97%, 65% 99%, 60% 96%, 55% 100%, 50% 98%, 45% 100%, 40% 97%, 35% 99%, 30% 96%, 25% 100%, 20% 97%, 15% 99%, 10% 96%, 5% 100%, 0% 98%
+            );
+        }
+        .polaroid {
+            @apply bg-white p-4 shadow-lg transform transition-transform hover:scale-105 hover:z-10;
+        }
+        .polaroid img {
+            @apply border border-gray-200 mb-4 bg-gray-100 block;
+        }
+        .tape {
+            @apply absolute w-24 h-8 bg-white/30 backdrop-blur-sm border-l border-r border-white/50 shadow-sm z-20;
+            transform: rotate(-15deg);
+        }
+        .neon-text {
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 40px #FF00FF;
+        }
+        .hud-grid {
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .distressed-bg {
+            background: #1a1a1a;position: relative;
+        }
+        .distressed-bg::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.1), transparent);
+            animation: scanline 4s linear infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .red-leak {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-industrial-grey text-gray-100 transition-colors duration-300 overflow-x-hidden font-body selection:bg-magenta selection:text-white">
+<div class="fixed inset-0 pointer-events-none z-50 mix-blend-overlay opacity-20" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA-qNR6dbZfF5ZZN4lDZoZ6Rp-6Q23a4uSzL2sAYJy-uBzWuUKcMlOwq_kyeMyMZX52d_Sjs7vPaJzDZMsyntBCPiU68wv0Nr4M8370AfNXwR3Ryf5v_n51-nfEOMtDQeTx5CpzHdx6TKW1VMBcZc_k3bultEKilAm7VvPxpUFiXg5hOqcYlcqGpFit8ZTQa6I1PgGleNoXGXJiOIPnrMmHRD0xYkFsmSzy6XbXZ_UUmAL5EUsY1maVQzCfCa2YBS3Y4oeU5lDAcFcz')"></div>
+<div class="red-leak"></div>
+<nav class="fixed w-full z-40 top-0 bg-[#1a1a1a]/90 border-b-2 border-primary backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<a class="flex items-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span class="font-display text-xl uppercase text-white tracking-widest">Back to HQ</span>
+</a>
+<div class="font-display text-2xl text-magenta animate-pulse">CLASSIFIED CASE FILE #003</div>
+</div>
+</div>
+</nav>
+<section class="relative min-h-[90vh] flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden distressed-bg">
+<div class="scan-line"></div>
+<div class="container mx-auto px-4 relative z-10 text-center">
+<div class="relative inline-block mb-12">
+<h1 class="text-6xl md:text-7xl lg:text-8xl font-display text-white uppercase leading-none transform -rotate-2 neon-text tracking-tighter mix-blend-screen z-10 relative">
+                    TREECIFY
+                </h1>
+<div class="absolute -top-10 -right-10 w-32 h-32 border-4 border-cyan rounded-full opacity-50 animate-[spin_10s_linear_infinite] border-dashed"></div>
+<div class="absolute -bottom-5 -left-10 bg-black text-secondary px-4 py-1 font-display text-2xl -rotate-6 border border-secondary shadow-[4px_4px_0_0_#5DED84]">
+                    SAAS EDITION
+                </div>
+</div>
+<div class="relative max-w-5xl mx-auto mt-8 perspective-1000 group">
+<div class="relative transform rotate-x-12 rotate-y-6 rotate-z-2 transition-transform duration-700 ease-out group-hover:rotate-0 hover:scale-[1.02]">
+<div class="bg-gray-800 rounded-t-xl p-2 pb-0 border-4 border-gray-700 shadow-2xl mx-auto w-full md:w-[80%] aspect-video relative overflow-hidden">
+<div class="bg-black w-full h-full rounded-t-lg overflow-hidden border border-gray-900 relative">
+<img alt="Treecify Dashboard" class="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChr3csefNHKXLFM2t5GCbrU4Jp0A_lHFAJcnVe4uSTAa-YXpg6iGHEeTbtUrJIn6_QKTy0HCJOvXclUXVGiU6qQ1A0Gy2RQo8T16LlYGfa7ckNt8pIGK54QsMcc1QvIa1uiYwMWgyRDuiSERlnX0wZpz31Rjcwv_hnw7MlU3KRP_T1LCU9fdnQ0ruJl95BcFXVvM_nx1NL3mXIuwS35VvwFd2-_b0_3vhktkOkuvig97qNOaSa-A7ueleiSSlARPEMsrjyoBotQXPs"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+<div class="w-3 h-3 rounded-full bg-green-500"></div>
+</div>
+</div>
+</div>
+<div class="bg-gray-700 h-4 w-[90%] mx-auto rounded-b-xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] border-t border-gray-600"></div>
+</div>
+<div class="absolute top-1/2 -left-12 bg-magenta text-black font-bold p-2 font-display text-sm rotate-12 shadow-lg z-20">v2.0.4 STABLE</div>
+<div class="absolute bottom-10 -right-8 bg-cyan text-black font-bold p-2 font-display text-sm -rotate-6 shadow-lg z-20">HIGH TRAFFIC READY</div>
+</div>
+</div>
+</section>
+<section class="py-20 relative bg-industrial-grey border-t-2 border-primary">
+<div class="absolute inset-0 bg-noise opacity-15"></div>
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+<div class="container mx-auto px-4 grid lg:grid-cols-2 gap-16 relative z-10">
+<div class="relative">
+<div class="absolute -top-4 -left-4 w-full h-full border-2 border-dashed border-gray-600 pointer-events-none"></div>
+<div class="bg-blueprint-white bg-paper p-8 border-4 border-black shadow-[20px_20px_0_0_rgba(0,0,0,0.8)] relative overflow-hidden group">
+<div class="absolute top-8 right-8 border-4 border-magenta/40 text-magenta/40 font-display text-4xl p-2 rotate-[-15deg] uppercase pointer-events-none z-0">
+                        Top Secret
+                    </div>
+<div class="flex items-center gap-3 mb-6 border-b-2 border-black pb-4 relative z-10">
+<span class="material-symbols-outlined text-magenta text-4xl">inventory_2</span>
+<h2 class="font-body font-bold text-3xl text-black tracking-tighter uppercase">Project Scope // Dossier</h2>
+</div>
+<p class="font-mono text-black mb-8 italic text-lg relative z-10">
+                        &gt; Initiated to solve the fragmentation of digital identity in local commerce. The objective was clear: Centralize, Optimize, Monetize.
+                    </p>
+<ul class="space-y-6 relative z-10">
+<li class="flex items-start gap-4 group/item">
+<span class="bg-magenta text-white font-bold w-10 h-10 flex items-center justify-center font-display text-xl flex-shrink-0 mt-0 shadow-[3px_3px_0_0_#000]">01</span>
+<div>
+<h3 class="font-display text-2xl text-black mb-1 group-hover/item:text-magenta transition-colors">CENTRALIZED IDENTITY</h3>
+<p class="text-sm font-mono text-gray-700 leading-relaxed">Single-point profile management for merchants allowing real-time updates across all customer touchpoints.</p>
+</div>
+</li>
+<li class="flex items-start gap-4 group/item">
+<span class="bg-magenta text-white font-bold w-10 h-10 flex items-center justify-center font-display text-xl flex-shrink-0 mt-0 shadow-[3px_3px_0_0_#000]">02</span>
+<div>
+<h3 class="font-display text-2xl text-black mb-1 group-hover/item:text-magenta transition-colors">DYNAMIC QR GENERATION</h3>
+<p class="text-sm font-mono text-gray-700 leading-relaxed">On-the-fly vector QR creation linked to short-urls. Analytics baked into every scan.</p>
+</div>
+</li>
+<li class="flex items-start gap-4 group/item">
+<span class="bg-magenta text-white font-bold w-10 h-10 flex items-center justify-center font-display text-xl flex-shrink-0 mt-0 shadow-[3px_3px_0_0_#000]">03</span>
+<div>
+<h3 class="font-display text-2xl text-black mb-1 group-hover/item:text-magenta transition-colors">SECURE VPS DEPLOYMENT</h3>
+<p class="text-sm font-mono text-gray-700 leading-relaxed">Self-hosted infrastructure on DigitalOcean utilizing Docker Swarm for zero-downtime updates.</p>
+</div>
+</li>
+</ul>
+<div class="mt-12 pt-6 border-t-2 border-black border-dashed flex justify-between items-center text-xs font-mono font-bold text-black relative z-10">
+<span class="bg-black text-white px-2 py-1">AUTH: K. SANCHEZ</span>
+<span>DATE: 2023.11.02</span>
+<span class="bg-black text-white px-2 py-1">ID: 884-XJ</span>
+</div>
+</div>
+</div>
+<div class="relative flex flex-col justify-center">
+<div class="hud-grid border border-cyan/30 p-6 relative bg-black/40 backdrop-blur-sm min-h-[400px]">
+<div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan"></div>
+<div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyan"></div>
+<div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyan"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyan"></div>
+<h3 class="font-display text-cyan text-xl mb-6 tracking-widest text-center shadow-cyan drop-shadow-[0_0_5px_rgba(0,255,255,0.8)]">SYSTEM ARCHITECTURE</h3>
+<div class="relative w-full h-64 flex items-center justify-center">
+<div class="w-20 h-20 border-2 border-cyan rounded-full flex items-center justify-center bg-cyan/10 shadow-[0_0_15px_rgba(0,255,255,0.4)] z-10 relative">
+<span class="material-symbols-outlined text-cyan text-3xl">dns</span>
+<div class="absolute -bottom-8 w-full text-center text-[10px] text-cyan uppercase">Core API</div>
+</div>
+<div class="absolute top-4 left-10 w-12 h-12 border border-cyan/50 rounded flex items-center justify-center bg-black">
+<span class="material-symbols-outlined text-cyan/70 text-lg">public</span>
+</div>
+<div class="absolute bottom-4 right-10 w-12 h-12 border border-cyan/50 rounded flex items-center justify-center bg-black">
+<span class="material-symbols-outlined text-cyan/70 text-lg">database</span>
+</div>
+<div class="absolute top-4 right-10 w-12 h-12 border border-cyan/50 rounded flex items-center justify-center bg-black">
+<span class="material-symbols-outlined text-cyan/70 text-lg">smartphone</span>
+</div>
+<svg class="absolute inset-0 w-full h-full pointer-events-none stroke-cyan/40" style="stroke-dasharray: 4;">
+<line stroke-width="1" x1="30%" x2="50%" y1="25%" y2="50%"></line>
+<line stroke-width="1" x1="70%" x2="50%" y1="75%" y2="50%"></line>
+<line stroke-width="1" x1="70%" x2="50%" y1="25%" y2="50%"></line>
+</svg>
+<div class="absolute w-2 h-2 bg-cyan rounded-full top-[25%] left-[30%] animate-ping"></div>
+<div class="absolute w-2 h-2 bg-cyan rounded-full bottom-[25%] right-[30%] animate-ping" style="animation-delay: 1s;"></div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-6 font-mono text-[10px] text-cyan/60 uppercase">
+<div class="border border-cyan/20 p-1">Latency: 24ms</div>
+<div class="border border-cyan/20 p-1">Uptime: 99.9%</div>
+<div class="border border-cyan/20 p-1">Req/s: 450</div>
+<div class="border border-cyan/20 p-1">Status: Operational</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-[#0a0a0a] relative overflow-hidden shadow-[inset_0_0_150px_rgba(0,0,0,1)] border-y-4 border-[#1a1a1a]">
+<div class="absolute inset-0 bg-noise opacity-20"></div>
+<div class="absolute -right-20 top-20 text-9xl font-display text-white opacity-5 rotate-90 pointer-events-none">TOOLS</div>
+<div class="container mx-auto px-4 relative z-10">
+<h2 class="text-5xl md:text-7xl font-display text-white text-center mb-16 uppercase stroke-white" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Stack Tecnológico</h2>
+<div class="flex flex-wrap justify-center gap-8 md:gap-12 max-w-5xl mx-auto">
+<div class="bg-black text-white p-4 border-4 border-white transform -rotate-6 hover:rotate-0 hover:scale-110 transition-all duration-300 shadow-[8px_8px_0_0_rgba(255,255,255,0.1)] cursor-pointer">
+<div class="flex flex-col items-center">
+<i class="fab fa-node-js text-5xl text-green-500 mb-2"></i>
+<span class="font-display text-xl uppercase">Node.js</span>
+<span class="text-xs font-mono bg-white text-black px-1 mt-1">BACKEND</span>
+</div>
+</div>
+<div class="bg-blue-600 text-white p-4 border-4 border-black transform rotate-3 hover:rotate-0 hover:scale-110 transition-all duration-300 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)] cursor-pointer z-10">
+<div class="flex flex-col items-center">
+<i class="fab fa-react text-5xl text-black mb-2"></i>
+<span class="font-display text-xl uppercase">React</span>
+<span class="text-xs font-mono bg-black text-white px-1 mt-1">FRONTEND</span>
+</div>
+</div>
+<div class="bg-white text-black p-4 border-4 border-blue-500 transform -rotate-3 hover:rotate-0 hover:scale-110 transition-all duration-300 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)] cursor-pointer -ml-4">
+<div class="flex flex-col items-center">
+<i class="fab fa-docker text-5xl text-blue-500 mb-2"></i>
+<span class="font-display text-xl uppercase">Docker</span>
+<span class="text-xs font-mono bg-blue-500 text-white px-1 mt-1">CONTAINER</span>
+</div>
+</div>
+<div class="bg-[#336791] text-white p-4 border-4 border-white transform rotate-6 hover:rotate-0 hover:scale-110 transition-all duration-300 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)] cursor-pointer">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-5xl mb-2">database</span>
+<span class="font-display text-xl uppercase">Postgres</span>
+<span class="text-xs font-mono bg-white text-[#336791] px-1 mt-1">DATA</span>
+</div>
+</div>
+<div class="bg-[#FF9900] text-black p-4 border-4 border-black transform -rotate-2 hover:rotate-0 hover:scale-110 transition-all duration-300 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)] cursor-pointer -mt-6">
+<div class="flex flex-col items-center">
+<i class="fab fa-aws text-5xl text-black mb-2"></i>
+<span class="font-display text-xl uppercase">AWS</span>
+<span class="text-xs font-mono bg-black text-[#FF9900] px-1 mt-1">CLOUD</span>
+</div>
+</div>
+<div class="bg-green-700 text-white p-4 border-4 border-green-300 transform rotate-12 hover:rotate-0 hover:scale-110 transition-all duration-300 shadow-[8px_8px_0_0_rgba(0,0,0,0.5)] cursor-pointer">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-5xl mb-2">router</span>
+<span class="font-display text-xl uppercase">Nginx</span>
+<span class="text-xs font-mono bg-white text-green-700 px-1 mt-1">PROXY</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-[#111] relative">
+<div class="absolute inset-0 bg-noise opacity-15 pointer-events-none"></div>
+<div class="container mx-auto px-4 relative z-10">
+<div class="flex items-center gap-4 mb-16">
+<div class="h-1 bg-white flex-grow"></div>
+<h2 class="text-4xl md:text-6xl font-display text-white uppercase bg-red-600 px-6 py-2 transform -rotate-1">System Footage</h2>
+<div class="h-1 bg-white flex-grow"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="polaroid rotate-2 transition-transform hover:-rotate-1">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow-200/40 backdrop-blur-sm shadow-sm rotate-2 z-20"></div>
+<img alt="Login Screen" class="w-full grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChr3csefNHKXLFM2t5GCbrU4Jp0A_lHFAJcnVe4uSTAa-YXpg6iGHEeTbtUrJIn6_QKTy0HCJOvXclUXVGiU6qQ1A0Gy2RQo8T16LlYGfa7ckNt8pIGK54QsMcc1QvIa1uiYwMWgyRDuiSERlnX0wZpz31Rjcwv_hnw7MlU3KRP_T1LCU9fdnQ0ruJl95BcFXVvM_nx1NL3mXIuwS35VvwFd2-_b0_3vhktkOkuvig97qNOaSa-A7ueleiSSlARPEMsrjyoBotQXPs"/>
+<div class="font-display text-black text-center text-xl rotate-1">Auth Module v1</div>
+<p class="font-mono text-xs text-gray-500 mt-2 text-center">Secure entry point with JWT implementation.</p>
+</div>
+<div class="polaroid -rotate-2 transition-transform hover:rotate-1">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-pink-300/40 backdrop-blur-sm shadow-sm -rotate-1 z-20"></div>
+<img alt="Dashboard Analytics" class="w-full grayscale hover:grayscale-0 transition-all contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQhjz8hJ5uKDHdXCigJvNDNBP4F2Z2Y2SxM70hU_EmY4czQG0iyz23kDaqI0CVdK9oshh19PO9RJEtfhYt77HTqMlPFE0mI7mPmgPyt_5JhI6RQxfT_xlPnvjHbEIAJcuYSH_d-P59LbtITjqWqd9T2tFL6rDkxp4Aj5prgIYtrjRuO3bdBz8bSkOEOeoUmS5P8jnBsr6f0YEjjPMkvjnqJvK-RcLgbirJei-XOQ5MeCQVmbkpXb28-NIOU3U399Q2BhwZEe_iy63_"/>
+<div class="font-display text-black text-center text-xl -rotate-1">Real-time Stats</div>
+<p class="font-mono text-xs text-gray-500 mt-2 text-center">Charts powered by D3.js. Look at those curves.</p>
+</div>
+<div class="polaroid rotate-1 transition-transform hover:-rotate-2">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-blue-200/40 backdrop-blur-sm shadow-sm rotate-3 z-20"></div>
+<img alt="Mobile View" class="w-full grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeOnGQUkDrrekwzHblRd9f_fKwaH56yk9lWyjjFvLTnZJO5Fsi7W2CeNBbmie_cqLDBHqKW9idOgXMfY8-4-G4tRRpMNEawoIoh9CTHo-ulib6inar_jeVsjnVsFFQfjCV1ffXg849FaajpqtSMOJ4Mvb1cg0qTXTgH6enBKolF1J1oihGFlf7goU69ZWGtcTXUI5BELcKP-pM8BZTscwItRymPIFuWQ-wyvnt_GybNlDpPkRs0S1wnJMPPgrfewDb8zsPNidDS0jV"/>
+<div class="font-display text-black text-center text-xl">Mobile Response</div>
+<p class="font-mono text-xs text-gray-500 mt-2 text-center">Perfectly scaled for handheld devices.</p>
+</div>
+<div class="polaroid -rotate-3 transition-transform hover:rotate-2">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-green-200/40 backdrop-blur-sm shadow-sm -rotate-2 z-20"></div>
+<img alt="Code Snippet" class="w-full grayscale hover:grayscale-0 transition-all contrast-150" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQhjz8hJ5uKDHdXCigJvNDNBP4F2Z2Y2SxM70hU_EmY4czQG0iyz23kDaqI0CVdK9oshh19PO9RJEtfhYt77HTqMlPFE0mI7mPmgPyt_5JhI6RQxfT_xlPnvjHbEIAJcuYSH_d-P59LbtITjqWqd9T2tFL6rDkxp4Aj5prgIYtrjRuO3bdBz8bSkOEOeoUmS5P8jnBsr6f0YEjjPMkvjnqJvK-RcLgbirJei-XOQ5MeCQVmbkpXb28-NIOU3U399Q2BhwZEe_iy63_"/>
+<div class="font-display text-black text-center text-xl">The Core Algorithm</div>
+<p class="font-mono text-xs text-gray-500 mt-2 text-center">Where the magic happens. Clean code policy.</p>
+</div>
+<div class="polaroid rotate-3 transition-transform hover:-rotate-1">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-orange-200/40 backdrop-blur-sm shadow-sm rotate-6 z-20"></div>
+<img alt="Database UI" class="w-full grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-qNR6dbZfF5ZZN4lDZoZ6Rp-6Q23a4uSzL2sAYJy-uBzWuUKcMlOwq_kyeMyMZX52d_Sjs7vPaJzDZMsyntBCPiU68wv0Nr4M8370AfNXwR3Ryf5v_n51-nfEOMtDQeTx5CpzHdx6TKW1VMBcZc_k3bultEKilAm7VvPxpUFiXg5hOqcYlcqGpFit8ZTQa6I1PgGleNoXGXJiOIPnrMmHRD0xYkFsmSzy6XbXZ_UUmAL5EUsY1maVQzCfCa2YBS3Y4oeU5lDAcFcz"/>
+<div class="font-display text-black text-center text-xl rotate-1">Query Engine</div>
+<p class="font-mono text-xs text-gray-500 mt-2 text-center">Optimized indexing for lightning speed.</p>
+</div>
+<div class="polaroid -rotate-1 transition-transform hover:rotate-3">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-purple-200/40 backdrop-blur-sm shadow-sm -rotate-3 z-20"></div>
+<img alt="Log Terminal" class="w-full grayscale hover:grayscale-0 transition-all invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChr3csefNHKXLFM2t5GCbrU4Jp0A_lHFAJcnVe4uSTAa-YXpg6iGHEeTbtUrJIn6_QKTy0HCJOvXclUXVGiU6qQ1A0Gy2RQo8T16LlYGfa7ckNt8pIGK54QsMcc1QvIa1uiYwMWgyRDuiSERlnX0wZpz31Rjcwv_hnw7MlU3KRP_T1LCU9fdnQ0ruJl95BcFXVvM_nx1NL3mXIuwS35VvwFd2-_b0_3vhktkOkuvig97qNOaSa-A7ueleiSSlARPEMsrjyoBotQXPs"/>
+<div class="font-display text-black text-center text-xl -rotate-1">System Terminal</div>
+<p class="font-mono text-xs text-gray-500 mt-2 text-center">Raw access to the underlying infrastructure.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-32 bg-industrial-grey flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-noise opacity-15"></div>
+<div class="absolute inset-0" style="background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px); background-size: 50px 50px;"></div>
+<div class="relative z-10 text-center">
+<div class="inline-block relative group">
+<div class="absolute inset-0 bg-cyan rounded-lg blur-xl opacity-20 group-hover:opacity-60 transition-opacity duration-500"></div>
+<a class="relative block bg-yellow-400 text-black px-12 py-6 font-display text-4xl uppercase border-4 border-black shadow-[0_0_0_4px_#FFFF00,0_0_20px_#00FFFF] hover:scale-105 transition-transform duration-200 flex items-center gap-4" href="#">
+<span class="material-symbols-outlined text-4xl">warning</span>
+                    Launch Live Demo
+                    <span class="material-symbols-outlined text-4xl">warning</span>
+</a>
+<div class="absolute -bottom-4 left-0 right-0 h-4 bg-[repeating-linear-gradient(45deg,black,black_10px,#FFFF00_10px,#FFFF00_20px)] border border-black"></div>
+</div>
+<p class="mt-8 font-mono text-cyan text-sm tracking-widest uppercase">
+<span class="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                Server Status: Online
+            </p>
+</div>
+</section>
+<footer class="bg-black text-white py-12 border-t-8 border-primary relative z-10">
+<div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-center md:text-left">
+<h3 class="font-display text-3xl uppercase text-secondary mb-2">Treecify Case Study</h3>
+<p class="font-bold font-mono text-gray-500 text-sm max-w-md">
+                    Designed &amp; Developed by Kevin Sánchez.
+                </p>
+</div>
+<div class="flex gap-4">
+<a class="font-display text-xl hover:text-primary underline decoration-wavy" href="#">Next Project -&gt;</a>
+</div>
+</div>
+</footer>
+</body></html>
