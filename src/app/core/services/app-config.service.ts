@@ -1,7 +1,5 @@
 import { Injectable, signal } from '@angular/core';
 
-import { environment } from '../../../environments/environment';
-
 type AppConfig = {
   googleSheetsApiUrl?: string;
 };
@@ -24,7 +22,7 @@ export class AppConfigService {
       config = {};
     }
 
-    const resolvedUrl = config.googleSheetsApiUrl || environment.googleSheetsApiUrl || '';
+    const resolvedUrl = config.googleSheetsApiUrl || '';
     this.config.set(config);
     this.googleSheetsApiUrl.set(resolvedUrl);
   }
