@@ -34,3 +34,7 @@
 
 ## 2026-02-19
 - Replaced the default favicon and updated the document title.
+
+## 2026-02-20
+- Added runtime env loader for the Google Sheets CMS endpoint.
+- Connected Projects and Tech Stack to the CMS content service.
