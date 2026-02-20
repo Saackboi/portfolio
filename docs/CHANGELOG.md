@@ -31,3 +31,6 @@
 - Updated navbar logo and hero background assets.
 - Fixed mobile overflow and centering for the Skill Stats card.
 - Expanded About and Contact section copy for additional context.
+
+## 2026-02-19
+- Replaced the default favicon and updated the document title.

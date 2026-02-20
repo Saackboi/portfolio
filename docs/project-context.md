@@ -17,6 +17,7 @@ The design must remain identical to the template; only the implementation is tra
 - Issue 32 (Assets) updates the navbar logo and hero background images.
 - Issue 35 (Skill Stats) fixes mobile overflow and centers the stats card.
 - Issue 37 (Content) expands About and Contact copy for more context.
+- Issue 33 (Favicon) replaces the browser tab icon with the brand asset.
 
 ## Structure Principles
 - Use standalone components with feature-based routing.
