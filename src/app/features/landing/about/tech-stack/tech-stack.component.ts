@@ -1,11 +1,7 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
-type TechCategory = {
-  title: string;
-  tone: 'primary' | 'secondary' | 'accent' | 'ink' | 'paper' | 'light';
-  badges: string[];
-  badgeTones: Array<'ink' | 'primary' | 'secondary' | 'accent' | 'paper' | 'muted'>;
-};
+import { TechCategory } from '../../../../core/models/portfolio-content.model';
+import { PortfolioContentService } from '../../../../core/services/portfolio-content.service';
 
 @Component({
   selector: 'app-tech-stack',
@@ -14,33 +10,9 @@ type TechCategory = {
   styleUrl: './tech-stack.component.css'
 })
 export class TechStackComponent {
-  // Reactive categories make it easy to extend the stack by area.
-  protected readonly categories = signal<TechCategory[]>([
-    {
-      title: 'Lenguajes de Programacion',
-      tone: 'primary',
-      badges: ['C# .NET', 'NodeJS', 'TypeScript', 'JavaScript'],
-      badgeTones: ['ink', 'primary', 'secondary', 'accent']
-    },
-    {
-      title: 'Frameworks & Librerias',
-      tone: 'secondary',
-      badges: ['Angular', 'React', 'Express.js', 'n8n', 'Power Apps', 'Google Gemini'],
-      badgeTones: ['paper', 'ink', 'secondary', 'primary', 'accent', 'paper']
-    },
-    {
-      title: 'Bases de Datos',
-      tone: 'accent',
-      badges: ['SQL Server', 'MySQL', 'Supabase'],
-      badgeTones: ['ink', 'accent', 'paper']
-    },
-    {
-      title: 'Herramientas & Devops',
-      tone: 'ink',
-      badges: ['Docker', 'Cloudflare', 'Linux', 'Google Cloud', 'Git', 'Postman', 'Visual Studio'],
-      badgeTones: ['accent', 'paper', 'primary', 'secondary', 'paper', 'muted', 'secondary']
-    }
-  ]);
+  private readonly portfolioContent = inject(PortfolioContentService);
+
+  protected readonly categories = this.portfolioContent.techStack;
 
   protected badgeToneClass(category: TechCategory, index: number): string {
     const tone = category.badgeTones[index % category.badgeTones.length];
