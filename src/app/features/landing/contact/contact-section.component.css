@@ -7,7 +7,7 @@
 
 .contact__noise {
   @apply absolute inset-0 opacity-20 pointer-events-none;
-  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  background-image: url("/assets/backgrounds/bg-noise.svg");
 }
 
 .contact__container {
