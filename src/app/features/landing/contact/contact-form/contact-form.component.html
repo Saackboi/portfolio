@@ -1,11 +1,45 @@
 <div class="contact-form">
+  @if (sendSuccess) {
+    <div
+      class="contact-form__toast contact-form__toast--success"
+      [class.contact-form__toast--closing]="isToastClosing"
+      role="status"
+      aria-live="polite"
+    >
+      <span
+        class="contact-form__toast-text"
+        data-text="Mensaje recibido. Te respondo pronto."
+      >
+        Mensaje recibido. Te respondo pronto.
+      </span>
+    </div>
+  }
+  @if (sendError) {
+    <div
+      class="contact-form__toast contact-form__toast--error"
+      [class.contact-form__toast--closing]="isToastClosing"
+      role="status"
+      aria-live="polite"
+    >
+      <span
+        class="contact-form__toast-text"
+        data-text="No se pudo enviar. Intentalo de nuevo."
+      >
+        No se pudo enviar. Intentalo de nuevo.
+      </span>
+    </div>
+  }
   <div class="contact-form__shell">
-    <form [formGroup]="form" class="contact-form__form" (ngSubmit)="submit()">
+    <form #formRef [formGroup]="form" class="contact-form__form" (ngSubmit)="submit()">
+      <input type="hidden" name="title" [value]="emailTitle" />
+      <input type="hidden" name="time" [value]="emailTime" />
       <div class="contact-form__field">
         <label class="contact-form__label" for="nombre">Nombre</label>
         <input
           class="contact-form__input"
+          [class.contact-form__input--invalid]="isInvalid('nombre')"
           id="nombre"
+          name="name"
           placeholder="TU NOMBRE AQUÍ"
           type="text"
           formControlName="nombre"
@@ -15,7 +49,9 @@
         <label class="contact-form__label" for="correo">Correo</label>
         <input
           class="contact-form__input"
+          [class.contact-form__input--invalid]="isInvalid('correo')"
           id="correo"
+          name="email"
           placeholder="TU@EMAIL.COM"
           type="email"
           formControlName="correo"
@@ -25,14 +61,18 @@
         <label class="contact-form__label" for="mensaje">Mensaje</label>
         <textarea
           class="contact-form__input contact-form__input--textarea"
+          [class.contact-form__input--invalid]="isInvalid('mensaje')"
           id="mensaje"
+          name="message"
           placeholder="QUÉ TIENES EN MENTE?"
           rows="4"
           formControlName="mensaje"
         ></textarea>
       </div>
       <div class="contact-form__actions">
-        <button class="contact-form__submit" type="submit">ENVIAR AHORA!</button>
+        <button class="contact-form__submit" type="submit" [disabled]="isSending">
+          {{ isSending ? 'ENVIANDO...' : 'ENVIAR AHORA!' }}
+        </button>
       </div>
     </form>
   </div>
