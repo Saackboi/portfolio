@@ -103,22 +103,30 @@
 }
 
 .project-hero__screen-inner {
-  @apply bg-black w-full h-full rounded-t-lg overflow-hidden border border-gray-900 relative;
+  @apply w-full h-full rounded-t-lg overflow-hidden border border-gray-900 relative;
+  background-color: #0a0a0a;
+  padding-top: 32px;
 }
 
 .project-hero__image {
   @apply w-full h-full object-cover;
   opacity: 1;
   mix-blend-mode: normal;
+  position: relative;
+  z-index: 2;
+  height: calc(100% - 32px);
+  object-position: center top;
 }
 
 .project-hero__screen-glint {
   @apply absolute inset-0 pointer-events-none;
   background: linear-gradient(to top right, transparent, rgba(255, 255, 255, 0.05), transparent);
+  z-index: 3;
 }
 
 .project-hero__controls {
-  @apply absolute top-4 left-4 flex gap-2;
+  @apply absolute top-1.5 left-4 flex gap-2;
+  z-index: 4;
 }
 
 .project-hero__dot {
@@ -496,7 +504,7 @@
 .project-footage__card {
   @apply bg-white p-4 shadow-lg border border-gray-200 relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 534px;
   transform: rotate(var(--footage-tilt, 0deg));
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

@@ -49,7 +49,11 @@ export class ShellComponent implements OnInit {
     void this.portfolioContent.load(300);
     this.isDetailRoute.set(this.router.url.startsWith('/projects/'));
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      this.isDetailRoute.set((event as NavigationEnd).urlAfterRedirects.startsWith('/projects/'));
+      const isDetail = (event as NavigationEnd).urlAfterRedirects.startsWith('/projects/');
+      this.isDetailRoute.set(isDetail);
+      if (isDetail) {
+        this.document.defaultView?.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
     });
   }
 
