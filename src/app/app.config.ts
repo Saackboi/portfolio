@@ -1,10 +1,10 @@
 import { APP_INITIALIZER, ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { AppConfigService } from './core/services/app-config.service';
-import { PortfolioContentService } from './core/services/portfolio-content.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,10 +13,11 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_INITIALIZER,
       multi: true,
-      deps: [AppConfigService, PortfolioContentService],
-      useFactory: (appConfigService: AppConfigService, portfolioContent: PortfolioContentService) => () =>
-        appConfigService.load().then(() => portfolioContent.load(3000))
+      deps: [AppConfigService],
+      useFactory: (appConfigService: AppConfigService) => () =>
+        appConfigService.load()
     },
+    provideAnimations(),
     provideRouter(routes)
   ]
 };

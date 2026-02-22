@@ -12,6 +12,8 @@ export class PortfolioContentService {
   private readonly emptyPayload: SheetsPayload = { projects: [], techStack: [] };
 
   private readonly data = signal<SheetsPayload>(this.emptyPayload);
+  private readonly loadingState = signal(true);
+  private readonly loadedState = signal(false);
 
   readonly projects = computed(() =>
     this.data().projects
@@ -21,33 +23,42 @@ export class PortfolioContentService {
     this.data().techStack
   );
 
-  async load(timeoutMs = 3000): Promise<void> {
-    const url = this.appConfig.googleSheetsApiUrl();
-    if (!url) {
-      this.data.set(this.emptyPayload);
+  readonly loading = computed(() =>
+    this.loadingState()
+  );
+
+  async load(minDurationMs = 300): Promise<void> {
+    if (this.loadedState()) {
       return;
     }
 
-    let timedOut = false;
-    const timeout = new Promise<void>(resolve => {
-      setTimeout(() => {
-        timedOut = true;
-        resolve();
-      }, timeoutMs);
-    });
+    this.loadingState.set(true);
+    const start = Date.now();
+    const url = this.appConfig.googleSheetsApiUrl();
+    if (!url) {
+      this.data.set(this.emptyPayload);
+      await this.ensureMinimumDelay(start, minDurationMs);
+      this.loadingState.set(false);
+      this.loadedState.set(true);
+      return;
+    }
 
-    const request = firstValueFrom(this.http.get<SheetsPayload>(url))
-      .then(payload => {
-        if (!timedOut) {
-          this.data.set(payload ?? this.emptyPayload);
-        }
-      })
-      .catch(() => {
-        if (!timedOut) {
-          this.data.set(this.emptyPayload);
-        }
-      });
+    try {
+      const payload = await firstValueFrom(this.http.get<SheetsPayload>(url));
+      this.data.set(payload ?? this.emptyPayload);
+    } catch {
+      this.data.set(this.emptyPayload);
+    } finally {
+      await this.ensureMinimumDelay(start, minDurationMs);
+      this.loadingState.set(false);
+      this.loadedState.set(true);
+    }
+  }
 
-    await Promise.race([request.then(() => undefined), timeout]);
+  private async ensureMinimumDelay(startTime: number, minDurationMs: number): Promise<void> {
+    const elapsed = Date.now() - startTime;
+    if (elapsed < minDurationMs) {
+      await new Promise(resolve => setTimeout(resolve, minDurationMs - elapsed));
+    }
   }
 }

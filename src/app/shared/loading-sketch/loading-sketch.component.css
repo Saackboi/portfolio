@@ -1,0 +1,50 @@
+@reference "../../../styles.css";
+
+:host {
+  @apply fixed inset-0 z-[9999] flex items-center justify-center bg-background-light/95 dark:bg-background-dark/95;
+  backdrop-filter: blur(6px);
+}
+
+.loading-sketch {
+  @apply flex items-center justify-center;
+}
+
+.loading-sketch__content {
+  @apply flex flex-col items-center gap-4;
+}
+
+.loading-sketch__spinner {
+  width: 72px;
+  height: 72px;
+  border-radius: 9999px;
+  border: 4px dashed #000000;
+  animation: sketch-spin 1.2s linear infinite;
+  box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 1);
+}
+
+.loading-sketch__text {
+  font-family: var(--font-display);
+  @apply text-2xl uppercase text-black dark:text-white;
+  animation: flicker 1.4s steps(2) infinite;
+}
+
+@keyframes sketch-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
