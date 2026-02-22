@@ -42,5 +42,78 @@
         </div>
       </div>
     </section>
+    <section class="project-scope">
+      <div class="project-scope__noise"></div>
+      <div class="project-scope__container">
+        <div class="project-scope__grid">
+          <div class="project-dossier">
+            <div class="project-dossier__frame"></div>
+            <div class="project-dossier__card">
+              <div class="project-dossier__stamp">Top Secret</div>
+              <div class="project-dossier__header">
+                <span class="material-symbols-outlined project-dossier__icon">inventory_2</span>
+                <h2 class="project-dossier__title">Project Scope // Dossier</h2>
+              </div>
+              @if (project.longDescription) {
+                <p class="project-dossier__intro">
+                  &gt; {{ project.longDescription }}
+                </p>
+              }
+              @if (project.technicalChallenges?.length) {
+                <ul class="project-dossier__list">
+                  @for (challenge of project.technicalChallenges; track challenge; let index = $index) {
+                    <li class="project-dossier__item">
+                      <span class="project-dossier__index">{{ (index + 1).toString().padStart(2, '0') }}</span>
+                      <div class="project-dossier__content">
+                        <h3 class="project-dossier__item-title">{{ challenge.title }}</h3>
+                        @if (challenge.description) {
+                          <p class="project-dossier__item-desc">{{ challenge.description }}</p>
+                        }
+                      </div>
+                    </li>
+                  }
+                </ul>
+              }
+              <div class="project-dossier__footer">
+                <span class="project-dossier__footer-tag">AUTH: K. SANCHEZ</span>
+                <span>DATE: {{ project.year }}</span>
+                @if (project.slug) {
+                  <span class="project-dossier__footer-tag">SLUG: {{ project.slug | uppercase }}</span>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="project-architecture">
+            <div class="project-architecture__frame">
+              <div class="project-architecture__corner project-architecture__corner--tl"></div>
+              <div class="project-architecture__corner project-architecture__corner--tr"></div>
+              <div class="project-architecture__corner project-architecture__corner--bl"></div>
+              <div class="project-architecture__corner project-architecture__corner--br"></div>
+              <h3 class="project-architecture__title">SYSTEM ARCHITECTURE</h3>
+              <div class="project-architecture__placeholder">
+                @if (project.archImage) {
+                  <img
+                    [alt]="project.title + ' architecture'"
+                    class="project-architecture__image"
+                    [ngSrc]="project.archImage"
+                    width="800"
+                    height="600"
+                  />
+                } @else {
+                  <span class="material-symbols-outlined project-architecture__placeholder-icon">dns</span>
+                  <span class="project-architecture__placeholder-text">ARCHITECTURE IMAGE</span>
+                }
+              </div>
+              <div class="project-architecture__stats">
+                <div class="project-architecture__stat">Latency: 24ms</div>
+                <div class="project-architecture__stat">Uptime: 99.9%</div>
+                <div class="project-architecture__stat">Req/s: 450</div>
+                <div class="project-architecture__stat">Status: Operational</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 }

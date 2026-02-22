@@ -15,11 +15,12 @@ export type ProjectCard = {
   tilt: ProjectTilt;
   slug?: string;
   longDescription?: string;
-  technicalChallenges?: string[];
+  technicalChallenges?: Array<{ title: string; description?: string }>;
   techStackDetail?: string[];
   demoUrl?: string;
   repoUrl?: string;
   gallery?: Array<{ src: string; caption: string }>;
+  archImage?: string;
 };
 
 export type TechTone = 'primary' | 'secondary' | 'accent' | 'ink' | 'paper' | 'light';
