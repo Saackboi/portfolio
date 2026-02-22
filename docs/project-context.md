@@ -19,6 +19,8 @@ The design must remain identical to the template; only the implementation is tra
 - Issue 37 (Content) expands About and Contact copy for more context.
 - Issue 33 (Favicon) replaces the browser tab icon with the brand asset.
 - Issue 41 (CMS) connects Projects and Tech Stack to Google Sheets JSON via a runtime config loader.
+- Issue 15 (Project Detail) implements the full detail view with hero, dossier, architecture, tech stack, gallery, and CTA.
+- Issue 51 (Theme) persists light mode across Project Detail and updates detail styles for light/dark parity.
 
 ## Structure Principles
 - Use standalone components with feature-based routing.

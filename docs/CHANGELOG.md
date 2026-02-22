@@ -38,3 +38,15 @@
 ## 2026-02-20
 - Added runtime env loader for the Google Sheets CMS endpoint.
 - Connected Projects and Tech Stack to the CMS content service.
+
+## 2026-02-21
+- Implemented Project Detail view (hero, dossier/scope, architecture, tech stack, gallery, CTA).
+- Wired Project Detail to CMS data with slug routing and fallback redirect.
+- Added custom Project Detail nav and in-page section structure.
+- Added hero and detail assets, plus tech stack logo system.
+
+## 2026-02-22
+- Fixed Project Detail gallery behavior (tape shuffle, image alignment, modal view).
+- Split Project Detail into section components with shared styles to reduce CSS budgets.
+- Improved theme persistence and light-mode support in Project Detail.
+- Tuned CTA sizing and mobile behavior.
