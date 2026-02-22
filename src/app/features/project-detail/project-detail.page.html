@@ -115,5 +115,43 @@
         </div>
       </div>
     </section>
+    @if (project.techStackDetail?.length) {
+      <section class="project-tech">
+        <div class="project-tech__noise"></div>
+        <div class="project-tech__mark">TOOLS</div>
+        <div class="project-tech__container">
+          <h2 class="project-tech__title">Stack Tecnologico</h2>
+          <div class="project-tech__grid">
+            @for (tech of project.techStackDetail; track tech) {
+              @if (techCardFor(tech); as card) {
+                <article
+                  class="project-tech__card {{ card.variant }}"
+                  [style.--tech-bg]="card.color"
+                  [style.--tech-border]="card.border"
+                  [style.--tech-text]="card.text"
+                  [style.--tech-shadow]="card.shadow"
+                  [style.--tech-tag-bg]="card.tagBg"
+                  [style.--tech-tag-text]="card.tagText"
+                  [style.--tech-logo]="card.logoColor"
+                >
+                  <div class="project-tech__card-body">
+                    <span
+                      class="project-tech__logo"
+                      aria-hidden="true"
+                      [style.maskImage]="'url(' + card.logo + ')'"
+                      [style.webkitMaskImage]="'url(' + card.logo + ')'"
+                    ></span>
+                    <span class="project-tech__name">{{ card.displayName }}</span>
+                    @if (card.tagLabel) {
+                      <span class="project-tech__tag">{{ card.tagLabel }}</span>
+                    }
+                  </div>
+                </article>
+              }
+            }
+          </div>
+        </div>
+      </section>
+    }
   </main>
 }
