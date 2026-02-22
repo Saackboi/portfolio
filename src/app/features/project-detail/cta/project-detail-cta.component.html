@@ -1,0 +1,23 @@
+@if (project.demoUrl || project.repoUrl) {
+  <section class="project-cta">
+    <div class="project-cta__noise"></div>
+    <div class="project-cta__grid"></div>
+    <div class="project-cta__container">
+      <div class="project-cta__actions">
+        @if (project.demoUrl) {
+          <a class="project-cta__primary" [href]="project.demoUrl" target="_blank" rel="noreferrer">
+            <span class="material-symbols-outlined project-cta__icon">warning</span>
+            Launch Live Demo
+            <span class="material-symbols-outlined project-cta__icon">warning</span>
+          </a>
+        }
+        @if (project.repoUrl) {
+          <a class="project-cta__secondary" [href]="project.repoUrl" target="_blank" rel="noreferrer">
+            <i class="fab fa-github project-cta__github"></i>
+            View Repo
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+}

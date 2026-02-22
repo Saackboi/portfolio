@@ -1,0 +1,65 @@
+@if (project.gallery; as gallery) {
+  @if (gallery.length) {
+  <section class="project-footage">
+    <div class="project-footage__noise"></div>
+    <div class="project-footage__container">
+      <div class="project-footage__heading">
+        <div class="project-footage__line"></div>
+        <h2 class="project-footage__title">System Footage</h2>
+        <div class="project-footage__line"></div>
+      </div>
+      <div class="project-footage__grid">
+        @for (shot of gallery; track shot; let index = $index) {
+          @if (galleryStyleFor(project.slug ?? '', shot.caption, index); as style) {
+            <button
+              type="button"
+              class="project-footage__card {{ style.tilt }} {{ style.tape }}"
+              (click)="openModal(shot)"
+              [attr.aria-label]="'Abrir ' + shot.caption"
+            >
+              <div class="project-footage__image">
+                <img
+                  [alt]="shot.caption"
+                  class="project-footage__photo"
+                  [ngSrc]="shot.src"
+                  fill
+                  sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
+                />
+              </div>
+              <div class="project-footage__caption">
+                <h3 class="project-footage__caption-title">{{ shot.caption }}</h3>
+              </div>
+            </button>
+          }
+        }
+      </div>
+    </div>
+    @if (selectedShot; as shot) {
+      <div
+        class="project-footage__modal"
+        [class.project-footage__modal--closing]="isClosing"
+        (click)="closeModal()"
+      >
+        <div
+          class="project-footage__modal-content"
+          [class.project-footage__modal-content--closing]="isClosing"
+          role="dialog"
+          aria-modal="true"
+          [attr.aria-label]="shot.caption"
+          (click)="$event.stopPropagation()"
+        >
+          <img
+            class="project-footage__modal-image"
+            [ngSrc]="shot.src"
+            [alt]="shot.caption"
+            width="1200"
+            height="900"
+            sizes="(min-width: 1024px) 70vw, 90vw"
+          />
+          <p class="project-footage__modal-caption">{{ shot.caption }}</p>
+        </div>
+      </div>
+    }
+  </section>
+  }
+}

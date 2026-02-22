@@ -1,0 +1,75 @@
+@reference "../../../../styles.css";
+
+.project-detail-nav {
+  @apply fixed w-full z-40 top-0 border-b-2 backdrop-blur-md;
+  background-color: rgba(26, 26, 26, 0.9);
+  border-color: var(--color-primary);
+}
+
+.project-detail-nav__container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.project-detail-nav__row {
+  @apply flex justify-between items-center h-16;
+}
+
+.project-detail-nav__back {
+  @apply flex items-center gap-2;
+}
+
+.project-detail-nav__back-icon {
+  @apply transition-transform;
+  color: var(--color-primary);
+}
+
+.project-detail-nav__back:hover .project-detail-nav__back-icon {
+  transform: translateX(-4px);
+}
+
+.project-detail-nav__back-text {
+  font-family: var(--font-display);
+  @apply text-xl uppercase text-white tracking-widest;
+}
+
+.project-detail-nav__case {
+  font-family: var(--font-display);
+  @apply text-2xl animate-pulse flex items-center gap-2;
+  color: var(--color-magenta);
+}
+
+.project-detail-nav__case-label {
+  @apply uppercase tracking-widest;
+}
+
+.project-detail-nav__case-code {
+  @apply tracking-widest;
+}
+
+@media (max-width: 768px) {
+  .project-detail-nav__back-text {
+    @apply text-base;
+  }
+
+  .project-detail-nav__case {
+    @apply text-base;
+  }
+
+  .project-detail-nav__case-label {
+    @apply hidden;
+  }
+
+  .project-detail-nav__case-code {
+    @apply tracking-wider;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .project-detail-nav__back-text {
+    @apply text-lg;
+  }
+
+  .project-detail-nav__case {
+    @apply text-xl;
+  }
+}

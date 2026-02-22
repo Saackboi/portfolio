@@ -1,0 +1,10 @@
+@if (project(); as project) {
+  <app-project-detail-nav [code]="project.code" />
+  <main class="project-detail">
+    <app-project-detail-hero [project]="project" />
+    <app-project-detail-scope [project]="project" />
+    <app-project-detail-tech [project]="project" />
+    <app-project-detail-footage [project]="project" />
+    <app-project-detail-cta [project]="project" />
+  </main>
+}

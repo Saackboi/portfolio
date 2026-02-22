@@ -1,0 +1,16 @@
+<nav class="project-detail-nav">
+  <div class="project-detail-nav__container">
+    <div class="project-detail-nav__row">
+      <a class="project-detail-nav__back" [routerLink]="'/'" [fragment]="'proyectos'">
+        <span class="material-symbols-outlined project-detail-nav__back-icon">arrow_back</span>
+        <span class="project-detail-nav__back-text">Back to HQ</span>
+      </a>
+      @if (code) {
+        <div class="project-detail-nav__case">
+          <span class="project-detail-nav__case-label">CLASSIFIED CASE FILE</span>
+          <span class="project-detail-nav__case-code">{{ code }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</nav>
