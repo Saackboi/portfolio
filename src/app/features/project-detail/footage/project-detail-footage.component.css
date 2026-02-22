@@ -2,8 +2,7 @@
 @reference "../../../shared/styles/project-detail.shared.css";
 
 .project-footage {
-  @apply relative py-24;
-  background-color: #111111;
+  @apply relative py-24 bg-background-light dark:bg-black;
 }
 
 .project-footage__noise {

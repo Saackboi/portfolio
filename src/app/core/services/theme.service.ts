@@ -6,9 +6,49 @@ import { Injectable, inject } from '@angular/core';
 })
 export class ThemeService {
   private readonly document = inject(DOCUMENT);
+  private readonly storageKey = 'theme';
+
+  init(): void {
+    const stored = this.readStoredTheme();
+    if (stored) {
+      this.applyTheme(stored === 'dark');
+      return;
+    }
+
+    const prefersDark = this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+    this.applyTheme(prefersDark);
+  }
 
   // Matches the template behavior: toggles the "dark" class on <html>.
   toggle(): void {
-    this.document.documentElement.classList.toggle('dark');
+    const isDark = !this.document.documentElement.classList.contains('dark');
+    this.applyTheme(isDark);
+  }
+
+  private applyTheme(isDark: boolean): void {
+    this.document.documentElement.classList.toggle('dark', isDark);
+    this.document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    this.storeTheme(isDark ? 'dark' : 'light');
+  }
+
+  private readStoredTheme(): 'dark' | 'light' | null {
+    try {
+      const stored = this.document.defaultView?.localStorage?.getItem(this.storageKey);
+      if (stored === 'dark' || stored === 'light') {
+        return stored;
+      }
+    } catch {
+      return null;
+    }
+
+    return null;
+  }
+
+  private storeTheme(value: 'dark' | 'light'): void {
+    try {
+      this.document.defaultView?.localStorage?.setItem(this.storageKey, value);
+    } catch {
+      return;
+    }
   }
 }

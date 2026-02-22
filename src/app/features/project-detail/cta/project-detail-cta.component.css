@@ -2,8 +2,7 @@
 @reference "../../../shared/styles/project-detail.shared.css";
 
 .project-cta {
-  @apply relative py-24 flex items-center justify-center overflow-hidden;
-  background-color: #1a1a1a;
+  @apply relative py-24 flex items-center justify-center overflow-hidden bg-background-light dark:bg-darkblue;
 }
 
 .project-cta__noise {
@@ -86,10 +85,18 @@
 
 @media (max-width: 768px) {
   .project-cta__primary {
-    @apply text-2xl px-8 py-4;
+    @apply text-xl px-5 py-3 w-full;
+    min-width: 0;
+    min-height: 0;
+    max-width: 320px;
+    white-space: nowrap;
   }
 
   .project-cta__secondary {
-    @apply text-xl px-8 py-4;
+    @apply text-lg px-5 py-3 w-full;
+    min-width: 0;
+    min-height: 0;
+    max-width: 320px;
+    white-space: nowrap;
   }
 }

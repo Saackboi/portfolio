@@ -2,8 +2,7 @@
 @reference "../../../shared/styles/project-detail.shared.css";
 
 .project-scope {
-  @apply relative py-20 border-t-2;
-  background-color: #1a1a1a;
+  @apply relative py-20 border-t-2 bg-background-light dark:bg-darkblue;
   border-color: var(--color-primary);
 }
 
@@ -118,7 +117,7 @@
 .project-architecture__frame {
   @apply relative p-6 border;
   border-color: rgba(0, 255, 255, 0.3);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(6px);
   min-height: 600px;
 }
@@ -177,6 +176,10 @@
   height: 380px;
   overflow: hidden;
   background-color: transparent;
+}
+
+.dark .project-architecture__frame {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .project-architecture__image {
