@@ -98,3 +98,25 @@
     max-width: 320px;
   }
 }
+
+@media (hover: none) and (pointer: coarse) {
+  .project-card:active {
+    z-index: 20;
+  }
+
+  .project-card--left:active {
+    transform: rotate(-2deg) scale(1.05);
+  }
+
+  .project-card--right:active {
+    transform: rotate(3deg) scale(1.05);
+  }
+
+  .project-card--neutral:active {
+    transform: rotate(-1deg) scale(1.05);
+  }
+
+  .project-card:active .project-card__photo {
+    filter: grayscale(0);
+  }
+}
