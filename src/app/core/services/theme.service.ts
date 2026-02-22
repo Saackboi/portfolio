@@ -14,9 +14,7 @@ export class ThemeService {
       this.applyTheme(stored === 'dark');
       return;
     }
-
-    const prefersDark = this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
-    this.applyTheme(prefersDark);
+    this.applyTheme(true);
   }
 
   // Matches the template behavior: toggles the "dark" class on <html>.
