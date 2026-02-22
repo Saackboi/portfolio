@@ -4,9 +4,11 @@
 }
 
 @if (!isLoading()) {
-  <app-top-nav />
-  <main class="pt-20" @fadeContent>
+  @if (!isDetailRoute()) {
+    <app-top-nav />
+  }
+  <main class="pt-20" @fadeContent [@routeFade]="routeAnimation(outlet)">
     <!-- Feature routes render here. -->
-    <router-outlet />
+    <router-outlet #outlet="outlet" />
   </main>
 }

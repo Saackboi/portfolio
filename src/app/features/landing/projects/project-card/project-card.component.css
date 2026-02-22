@@ -4,6 +4,11 @@
   width: 320px;
 }
 
+.project-card__link {
+  @apply block no-underline;
+  color: inherit;
+}
+
 .project-card::before {
   content: '';
   position: absolute;

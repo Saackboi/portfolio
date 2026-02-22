@@ -1,0 +1,9 @@
+@reference "../../../styles.css";
+
+.project-detail {
+  @apply pt-24;
+}
+
+.project-detail__spacer {
+  @apply min-h-[60vh];
+}
