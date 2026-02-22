@@ -1,0 +1,95 @@
+@reference "../../../../styles.css";
+@reference "../../../shared/styles/project-detail.shared.css";
+
+.project-cta {
+  @apply relative py-24 flex items-center justify-center overflow-hidden;
+  background-color: #1a1a1a;
+}
+
+.project-cta__noise {
+  @apply absolute inset-0 opacity-15;
+  background-image: url("/assets/backgrounds/bg-noise.svg");
+}
+
+.project-cta__grid {
+  @apply absolute inset-0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.project-cta__container {
+  @apply relative z-10;
+}
+
+.project-cta__actions {
+  @apply flex flex-col md:flex-row items-center gap-6;
+}
+
+.project-cta__primary {
+  font-family: var(--font-display);
+  @apply flex items-center justify-center gap-4 bg-yellow-400 text-black px-12 py-6 text-3xl uppercase border-4 border-black;
+  min-width: 320px;
+  min-height: 72px;
+  box-shadow: 0 0 0 4px #ffff00, 0 0 20px #00ffff;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.project-cta__primary:hover {
+  transform: scale(1.05) rotate(-1deg);
+  background-color: #ff3b30;
+  color: #ffffff;
+  animation: project-cta-danger 0.8s ease-in-out infinite alternate;
+}
+
+.project-cta__icon {
+  @apply text-4xl;
+}
+
+.project-cta__secondary {
+  font-family: var(--font-display);
+  @apply flex items-center justify-center gap-3 bg-black text-white px-12 py-6 text-3xl uppercase border-4 border-white;
+  min-width: 320px;
+  min-height: 72px;
+  box-shadow: 8px 8px 0 0 rgba(255, 255, 255, 0.15);
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-cta__secondary:hover {
+  transform: translateY(-4px) rotate(-1deg) scale(1.04);
+  background-color: #1f1f1f;
+  box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.35), 0 12px 28px rgba(0, 255, 255, 0.35);
+  animation: project-cta-liftoff 0.8s ease-in-out infinite alternate;
+}
+
+.project-cta__github {
+  @apply text-3xl;
+}
+
+@keyframes project-cta-danger {
+  0% {
+    box-shadow: 0 0 0 4px #ffff00, 0 0 16px rgba(255, 59, 48, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 4px #ff3b30, 0 0 24px rgba(255, 59, 48, 0.9);
+  }
+}
+
+@keyframes project-cta-liftoff {
+  0% {
+    box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.25), 0 10px 20px rgba(0, 255, 255, 0.25);
+  }
+  100% {
+    box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.6), 0 16px 34px rgba(0, 255, 255, 0.6);
+  }
+}
+
+@media (max-width: 768px) {
+  .project-cta__primary {
+    @apply text-2xl px-8 py-4;
+  }
+
+  .project-cta__secondary {
+    @apply text-xl px-8 py-4;
+  }
+}

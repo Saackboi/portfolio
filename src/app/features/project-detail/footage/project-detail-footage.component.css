@@ -1,0 +1,128 @@
+@reference "../../../../styles.css";
+@reference "../../../shared/styles/project-detail.shared.css";
+
+.project-footage {
+  @apply relative py-24;
+  background-color: #111111;
+}
+
+.project-footage__noise {
+  @apply absolute inset-0 opacity-15 pointer-events-none;
+  background-image: url("/assets/backgrounds/bg-noise.svg");
+}
+
+.project-footage__container {
+  @apply container mx-auto px-4 relative z-10;
+}
+
+.project-footage__heading {
+  @apply flex items-center gap-4 mb-16;
+}
+
+.project-footage__line {
+  @apply h-1 bg-white flex-grow;
+}
+
+.project-footage__title {
+  font-family: var(--font-display);
+  @apply text-4xl md:text-6xl uppercase bg-primary text-white px-6 py-2;
+  transform: rotate(-1deg);
+}
+
+.project-footage__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  justify-content: center;
+  justify-items: center;
+  gap: 2rem;
+}
+
+.project-footage__card {
+  @apply bg-white p-4 shadow-lg border border-gray-200 relative;
+  width: 100%;
+  max-width: 534px;
+  transform: rotate(var(--footage-tilt, 0deg));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-footage__card:hover {
+  transform: rotate(0deg) scale(1.03);
+  z-index: 2;
+}
+
+.project-footage__card::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 128px;
+  height: 32px;
+  opacity: 0.9;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  background-color: rgba(250, 204, 21, 0.8);
+}
+
+.project-footage__card--tilt-left {
+  --footage-tilt: -2deg;
+}
+
+.project-footage__card--tilt-right {
+  --footage-tilt: 3deg;
+}
+
+.project-footage__card--tilt-neutral {
+  --footage-tilt: -1deg;
+}
+
+.project-footage__card--tape-yellow::before {
+  background-color: rgba(250, 204, 21, 0.8);
+}
+
+.project-footage__card--tape-pink::before {
+  background-color: rgba(244, 114, 182, 0.5);
+}
+
+.project-footage__card--tape-blue::before {
+  background-color: rgba(147, 197, 253, 0.6);
+}
+
+.project-footage__card--tape-green::before {
+  background-color: rgba(134, 239, 172, 0.5);
+}
+
+.project-footage__card--tape-orange::before {
+  background-color: rgba(253, 186, 116, 0.6);
+}
+
+.project-footage__card--tape-purple::before {
+  background-color: rgba(216, 180, 254, 0.5);
+}
+
+.project-footage__image {
+  @apply w-full aspect-square bg-gray-100 overflow-hidden border border-gray-100 mb-4 relative;
+}
+
+.project-footage__photo {
+  @apply w-full h-full object-cover grayscale transition-all duration-300;
+}
+
+.project-footage__photo:hover {
+  filter: grayscale(0);
+}
+
+.project-footage__caption {
+  @apply text-center;
+}
+
+.project-footage__caption-title {
+  font-family: var(--font-display);
+  @apply text-xl text-black;
+}
+
+@media (max-width: 768px) {
+  .project-footage__title {
+    @apply text-3xl;
+  }
+}

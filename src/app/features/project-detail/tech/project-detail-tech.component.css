@@ -1,0 +1,135 @@
+@reference "../../../../styles.css";
+@reference "../../../shared/styles/project-detail.shared.css";
+
+.project-tech {
+  @apply relative py-24 overflow-hidden;
+  background-color: #0a0a0a;
+  border-top: 4px solid #1a1a1a;
+  border-bottom: 4px solid #1a1a1a;
+  box-shadow: inset 0 0 150px rgba(0, 0, 0, 1);
+}
+
+.project-tech__noise {
+  @apply absolute inset-0 opacity-20;
+  background-image: url("/assets/backgrounds/bg-noise.svg");
+}
+
+.project-tech__mark {
+  font-family: var(--font-display);
+  @apply absolute -right-20 top-20 text-9xl text-white opacity-5 rotate-90 pointer-events-none;
+}
+
+.project-tech__container {
+  @apply container mx-auto px-4 relative z-10;
+}
+
+.project-tech__title {
+  font-family: var(--font-display);
+  @apply text-5xl md:text-7xl text-white text-center mb-16 uppercase;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+}
+
+.project-tech__grid {
+  @apply flex flex-wrap justify-center gap-8 md:gap-12 max-w-5xl mx-auto;
+}
+
+.project-tech__card {
+  @apply p-4 border-4 transition-all duration-300 cursor-pointer;
+  background-color: var(--tech-bg, #111111);
+  border-color: var(--tech-border, #ffffff);
+  color: var(--tech-text, #ffffff);
+  box-shadow: 8px 8px 0 0 var(--tech-shadow, rgba(0, 0, 0, 0.4));
+  transform: translate(var(--tech-shift-x, 0), var(--tech-shift-y, 0)) rotate(var(--tech-rotate, 0deg));
+}
+
+.project-tech__card:hover {
+  transform: translate(0, 0) rotate(0deg) scale(1.08);
+}
+
+.project-tech__card-body {
+  @apply flex flex-col items-center;
+}
+
+.project-tech__logo {
+  @apply w-14 h-14 mb-2;
+  display: inline-block;
+  background-color: var(--tech-logo, #ffffff);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+}
+
+.project-tech__name {
+  font-family: var(--font-display);
+  @apply text-xl uppercase text-center;
+}
+
+.project-tech__tag {
+  font-family: var(--font-body);
+  @apply text-xs uppercase px-2 py-0.5 mt-2;
+  display: inline-block;
+  letter-spacing: 0.08em;
+  background-color: var(--tech-tag-bg, #ffffff);
+  color: var(--tech-tag-text, #000000);
+}
+
+.project-tech__card--green {
+  --tech-rotate: -6deg;
+}
+
+.project-tech__card--blue {
+  --tech-rotate: 3deg;
+  z-index: 1;
+}
+
+.project-tech__card--orange {
+  --tech-rotate: -2deg;
+  --tech-shift-y: -1.5rem;
+}
+
+.project-tech__card--yellow {
+  --tech-rotate: -3deg;
+}
+
+.project-tech__card--red {
+  --tech-rotate: 6deg;
+  z-index: 1;
+}
+
+.project-tech__card--magenta {
+  --tech-rotate: 8deg;
+  --tech-shift-y: -0.75rem;
+}
+
+.project-tech__card--purple {
+  --tech-rotate: -4deg;
+  --tech-shift-x: -1rem;
+}
+
+.project-tech__card--ink {
+  --tech-rotate: 0deg;
+}
+
+@media (max-width: 768px) {
+  .project-tech__title {
+    @apply text-4xl;
+  }
+
+  .project-tech__grid {
+    @apply gap-6;
+  }
+
+  .project-tech__card {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .project-tech__title {
+    @apply text-6xl;
+  }
+}
