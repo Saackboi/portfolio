@@ -1,5 +1,5 @@
 @reference "../../../styles.css";
 
 .project-detail {
-  @apply bg-darkblue text-gray-100 overflow-x-hidden min-h-screen;
+  @apply bg-background-light text-gray-900 overflow-x-hidden min-h-screen dark:bg-darkblue dark:text-gray-100;
 }
