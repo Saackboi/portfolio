@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 
 import { ProjectCard } from '../../../core/models/portfolio-content.model';
@@ -12,6 +12,10 @@ import { ProjectCard } from '../../../core/models/portfolio-content.model';
 })
 export class ProjectDetailFootageComponent {
   @Input({ required: true }) project!: ProjectCard;
+
+  protected selectedShot: GalleryShot | null = null;
+  protected isClosing = false;
+  private closeTimeout: ReturnType<typeof setTimeout> | null = null;
 
   private readonly galleryTiltClasses = [
     'project-footage__card--tilt-left',
@@ -39,6 +43,35 @@ export class ProjectDetailFootageComponent {
       tilt: this.galleryTiltClasses[tiltIndex],
       tape: tapeSequence[tapeIndex]
     };
+  }
+
+  protected openModal(shot: GalleryShot): void {
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+    this.isClosing = false;
+    this.selectedShot = shot;
+  }
+
+  protected closeModal(): void {
+    if (!this.selectedShot || this.isClosing) {
+      return;
+    }
+
+    this.isClosing = true;
+    this.closeTimeout = setTimeout(() => {
+      this.selectedShot = null;
+      this.isClosing = false;
+      this.closeTimeout = null;
+    }, 180);
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  protected handleKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && this.selectedShot) {
+      this.closeModal();
+    }
   }
 
   private getTapeSequence(slug: string): string[] {
@@ -77,4 +110,9 @@ export class ProjectDetailFootageComponent {
 type GalleryStyleConfig = {
   tilt: string;
   tape: string;
+};
+
+type GalleryShot = {
+  src: string;
+  caption: string;
 };
