@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, effect, inject, signal } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { PortfolioContentService } from '../../core/services/portfolio-content.service';
@@ -7,7 +8,7 @@ import { ProjectDetailNavComponent } from './nav/project-detail-nav.component';
 @Component({
   selector: 'app-project-detail-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ProjectDetailNavComponent],
+  imports: [ProjectDetailNavComponent, NgOptimizedImage],
   templateUrl: './project-detail.page.html',
   styleUrl: './project-detail.page.css'
 })
@@ -21,6 +22,7 @@ export class ProjectDetailPage implements OnInit {
   protected readonly project = computed(() =>
     this.portfolioContent.projects().find(project => project.slug === this.slug())
   );
+
 
   constructor() {
     effect(() => {
@@ -39,4 +41,5 @@ export class ProjectDetailPage implements OnInit {
       this.slug.set(params.get('slug') ?? '');
     });
   }
+
 }

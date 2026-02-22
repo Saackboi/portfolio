@@ -7,7 +7,7 @@
   @if (!isDetailRoute()) {
     <app-top-nav />
   }
-  <main class="pt-20" @fadeContent [@routeFade]="routeAnimation(outlet)">
+  <main [class.pt-20]="!isDetailRoute()" @fadeContent [@routeFade]="routeAnimation(outlet)">
     <!-- Feature routes render here. -->
     <router-outlet #outlet="outlet" />
   </main>

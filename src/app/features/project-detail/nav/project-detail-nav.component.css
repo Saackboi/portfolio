@@ -34,6 +34,42 @@
 
 .project-detail-nav__case {
   font-family: var(--font-display);
-  @apply text-2xl animate-pulse;
+  @apply text-2xl animate-pulse flex items-center gap-2;
   color: var(--color-magenta);
+}
+
+.project-detail-nav__case-label {
+  @apply uppercase tracking-widest;
+}
+
+.project-detail-nav__case-code {
+  @apply tracking-widest;
+}
+
+@media (max-width: 768px) {
+  .project-detail-nav__back-text {
+    @apply text-base;
+  }
+
+  .project-detail-nav__case {
+    @apply text-base;
+  }
+
+  .project-detail-nav__case-label {
+    @apply hidden;
+  }
+
+  .project-detail-nav__case-code {
+    @apply tracking-wider;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .project-detail-nav__back-text {
+    @apply text-lg;
+  }
+
+  .project-detail-nav__case {
+    @apply text-xl;
+  }
 }
