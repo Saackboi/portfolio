@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+
+import { SeoService } from '../../core/services/seo.service';
 
 import { AboutSectionComponent } from './about/about-section.component';
 import { ContactSectionComponent } from './contact/contact-section.component';
@@ -12,4 +14,18 @@ import { ProjectGalleryComponent } from './projects/project-gallery.component';
   templateUrl: './landing.page.html',
   styleUrl: './landing.page.css'
 })
-export class LandingPage {}
+export class LandingPage implements OnInit {
+  private readonly seo = inject(SeoService);
+
+  ngOnInit(): void {
+    const title = 'Portfolio | Kevin Sánchez';
+    const description = 'A visual, terminal-inspired portfolio showcasing experiments, projects, and process.';
+    const url = location.origin;
+    const image = `${location.origin}/assets/projects/detail/self-03.png`;
+
+    this.seo.setTitle(title);
+    this.seo.setDescription(description);
+    this.seo.setOpenGraph({ title, description, image, url });
+    this.seo.setCanonical(url);
+  }
+}
