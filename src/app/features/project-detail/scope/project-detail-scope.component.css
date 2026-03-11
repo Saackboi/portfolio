@@ -116,21 +116,14 @@
 
 .project-architecture__frame {
   @apply relative p-6 border;
-  border-color: rgba(0, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(6px);
+  border-color: rgba(0, 255, 255, 0.4);
+  background-color: var(--color-background-dark);
+  box-shadow: 0 0 0 1px rgba(0, 255, 255, 0.35), 0 0 18px rgba(0, 255, 255, 0.35);
   min-height: 600px;
 }
 
 .project-architecture__frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
-  pointer-events: none;
+  content: none;
 }
 
 .project-architecture__corner {
@@ -178,13 +171,26 @@
   background-color: transparent;
 }
 
-.dark .project-architecture__frame {
-  background-color: rgba(0, 0, 0, 0.4);
+.project-architecture__placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .project-architecture__image {
-  @apply w-full h-full;
+  @apply w-full h-full relative z-10;
   object-fit: fill;
+}
+
+.dark .project-architecture__image {
+  mix-blend-mode: screen;
 }
 
 .project-architecture__placeholder-icon {
