@@ -42,6 +42,34 @@ export class ContactFormComponent {
     return control.invalid && (control.touched || control.dirty);
   }
 
+  protected getErrorMessage(controlName: keyof ContactFormGroup): string {
+    const control = this.form.controls[controlName];
+    const errors = control.errors;
+    if (!errors) {
+      return '';
+    }
+
+    if (errors['required']) {
+      if (controlName === 'nombre') {
+        return 'Nombre requerido.';
+      }
+      if (controlName === 'correo') {
+        return 'Correo requerido.';
+      }
+      return 'Mensaje requerido.';
+    }
+
+    if (controlName === 'correo' && errors['email']) {
+      return 'Correo inválido.';
+    }
+
+    if (controlName === 'mensaje' && errors['minlength']) {
+      return 'Mínimo 10 caracteres.';
+    }
+
+    return '';
+  }
+
   protected submit(): void {
     this.sendSuccess = false;
     this.sendError = false;
