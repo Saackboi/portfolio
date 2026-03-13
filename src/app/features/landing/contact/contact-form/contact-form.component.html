@@ -44,6 +44,9 @@
           type="text"
           formControlName="nombre"
         />
+        @if (isInvalid('nombre')) {
+          <span class="contact-form__error">{{ getErrorMessage('nombre') }}</span>
+        }
       </div>
       <div class="contact-form__field">
         <label class="contact-form__label" for="correo">Correo</label>
@@ -56,6 +59,9 @@
           type="email"
           formControlName="correo"
         />
+        @if (isInvalid('correo')) {
+          <span class="contact-form__error">{{ getErrorMessage('correo') }}</span>
+        }
       </div>
       <div class="contact-form__field">
         <label class="contact-form__label" for="mensaje">Mensaje</label>
@@ -68,9 +74,12 @@
           rows="4"
           formControlName="mensaje"
         ></textarea>
+        @if (isInvalid('mensaje')) {
+          <span class="contact-form__error">{{ getErrorMessage('mensaje') }}</span>
+        }
       </div>
       <div class="contact-form__actions">
-        <button class="contact-form__submit" type="submit" [disabled]="isSending">
+        <button class="contact-form__submit" type="submit" [disabled]="isSending || form.invalid">
           {{ isSending ? 'ENVIANDO...' : 'ENVIAR AHORA!' }}
         </button>
       </div>
