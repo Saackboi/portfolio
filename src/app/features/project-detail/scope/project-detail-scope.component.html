@@ -46,8 +46,13 @@
           <div class="project-architecture__corner project-architecture__corner--bl"></div>
           <div class="project-architecture__corner project-architecture__corner--br"></div>
           <h3 class="project-architecture__title">SYSTEM ARCHITECTURE</h3>
-          <div class="project-architecture__placeholder">
-            @if (project.archImage) {
+          @if (project.archImage) {
+            <button
+              type="button"
+              class="project-architecture__placeholder project-architecture__placeholder--interactive"
+              (click)="openModal()"
+              aria-label="View enlarged architecture diagram"
+            >
               <img
                 [alt]="project.title + ' architecture'"
                 class="project-architecture__image"
@@ -55,11 +60,13 @@
                 width="800"
                 height="600"
               />
-            } @else {
+            </button>
+          } @else {
+            <div class="project-architecture__placeholder">
               <span class="material-symbols-outlined project-architecture__placeholder-icon">dns</span>
               <span class="project-architecture__placeholder-text">ARCHITECTURE IMAGE</span>
-            }
-          </div>
+            </div>
+          }
           <div class="project-architecture__stats">
             <div class="project-architecture__stat">Latency: 24ms</div>
             <div class="project-architecture__stat">Uptime: 99.9%</div>
@@ -70,4 +77,30 @@
       </div>
     </div>
   </div>
+
+  @if (isModalOpen && project.archImage) {
+    <div
+      class="project-architecture__modal"
+      [class.project-architecture__modal--closing]="isClosing"
+      (click)="closeModal()"
+    >
+      <div
+        class="project-architecture__modal-content"
+        [class.project-architecture__modal-content--closing]="isClosing"
+        role="dialog"
+        aria-modal="true"
+        aria-label="System Architecture Diagram"
+        (click)="$event.stopPropagation()"
+      >
+        <img
+          class="project-architecture__modal-image"
+          [ngSrc]="project.archImage"
+          [alt]="project.title + ' architecture diagram'"
+          width="1600"
+          height="1200"
+          sizes="(min-width: 1024px) 80vw, 95vw"
+        />
+      </div>
+    </div>
+  }
 </section>

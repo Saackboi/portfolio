@@ -184,6 +184,15 @@
   z-index: 0;
 }
 
+.project-architecture__placeholder--interactive {
+  cursor: zoom-in;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.project-architecture__placeholder--interactive:hover {
+  opacity: 0.85;
+}
+
 .project-architecture__image {
   @apply w-full h-full relative z-10;
   object-fit: fill;
@@ -249,5 +258,101 @@
 
   .project-dossier__item-title {
     @apply text-xl;
+  }
+}
+
+.project-architecture__modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  z-index: 60;
+  animation: project-arch-fade-in 200ms ease;
+}
+
+.project-architecture__modal--closing {
+  animation: project-arch-fade-out 160ms ease forwards;
+}
+
+.project-architecture__modal-content {
+  @apply relative border shadow-2xl;
+  background-color: var(--color-background-dark);
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 0 1px rgba(0, 255, 255, 0.2), 0 0 25px rgba(0, 255, 255, 0.15);
+  width: min(1000px, 92vw);
+  max-height: 90vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  animation: project-arch-zoom-in 220ms ease;
+}
+
+.project-architecture__modal-content--closing {
+  animation: project-arch-zoom-out 160ms ease forwards;
+}
+
+.project-architecture__modal-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.dark .project-architecture__modal-image {
+  mix-blend-mode: screen;
+}
+
+@keyframes project-arch-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes project-arch-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes project-arch-zoom-in {
+  from {
+    opacity: 0.4;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes project-arch-zoom-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@media (max-width: 768px) {
+  .project-architecture__modal {
+    padding: 1.25rem;
+  }
+
+  .project-architecture__modal-content {
+    width: 100%;
+    max-width: 96vw;
+    padding: 0.75rem;
+  }
+
+  .project-architecture__modal-image {
+    max-height: 70vh;
   }
 }
