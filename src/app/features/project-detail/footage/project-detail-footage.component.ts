@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Input, inject } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 
 import { ProjectCard } from '../../../core/models/portfolio-content.model';
@@ -12,6 +12,8 @@ import { ProjectCard } from '../../../core/models/portfolio-content.model';
 })
 export class ProjectDetailFootageComponent {
   @Input({ required: true }) project!: ProjectCard;
+
+  private readonly cdr = inject(ChangeDetectorRef);
 
   protected selectedShot: GalleryShot | null = null;
   protected isClosing = false;
@@ -64,6 +66,7 @@ export class ProjectDetailFootageComponent {
       this.selectedShot = null;
       this.isClosing = false;
       this.closeTimeout = null;
+      this.cdr.markForCheck();
     }, 180);
   }
 
