@@ -74,7 +74,7 @@ export class ProjectDetailPage implements OnInit {
   }
 
   private resolveProjectImage(project: ProjectCard): string {
-    const fallback = `${location.origin}/assets/projects/detail/self-03.png`;
+    const fallback = `${location.origin}/assets/projects/detail/self/self-03.png`;
     if (project.heroImage) {
       return this.normalizeAssetUrl(project.heroImage, fallback);
     }

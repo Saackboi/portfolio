@@ -21,7 +21,7 @@ export class LandingPage implements OnInit {
     const title = 'Portfolio | Kevin Sánchez';
     const description = 'A visual, terminal-inspired portfolio showcasing experiments, projects, and process.';
     const url = location.origin;
-    const image = `${location.origin}/assets/projects/detail/self-03.png`;
+    const image = `${location.origin}/assets/projects/detail/self/self-03.png`;
 
     this.seo.setTitle(title);
     this.seo.setDescription(description);
