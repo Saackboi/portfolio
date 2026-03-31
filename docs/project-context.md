@@ -1,43 +1,103 @@
-# Project Context
+# Contexto General del Proyecto
 
-## Goal
-Migrate the exact UI from `index-template.html` into Angular 18+ using standalone features.
-The design must remain identical to the template; only the implementation is translated.
+## 1) Objetivo del producto
+Portfolio personal con identidad visual "Sketch-Punk", construido en Angular standalone.
+La regla principal es mantener coherencia visual y de experiencia con la plantilla base: los cambios deben preservar el lenguaje grafico, el ritmo de animacion y la estructura UX ya establecida.
 
-## Current Status
-- Issue 3 (Top Navigation) implemented and aligned to the template.
-- Dark/light toggle follows the template behavior (toggling `dark` on `<html>`).
-- Issue 4 (Hero Section) implemented with a landing page route and skill chart component.
-- Issue 5 (About + Tech Stack) implements the notepad profile and stack grid with reactive data.
-- About section uses shared motion keyframes and hover dynamics aligned with the Hero.
-- Issue 9 (Projects) implements the polaroid gallery with tape accents and hover scale.
-- Issue 10 (Contact) adds the contact form, social board, and post-it notes.
-- Issue 17 (CSS Budgets) raises component style budgets to keep builds green.
-- Issue 30 (Responsive) adds mobile/tablet layout adjustments and a dropdown nav.
-- Issue 32 (Assets) updates the navbar logo and hero background images.
-- Issue 35 (Skill Stats) fixes mobile overflow and centers the stats card.
-- Issue 37 (Content) expands About and Contact copy for more context.
-- Issue 33 (Favicon) replaces the browser tab icon with the brand asset.
-- Issue 41 (CMS) connects Projects and Tech Stack to Google Sheets JSON via a runtime config loader.
-- Issue 15 (Project Detail) implements the full detail view with hero, dossier, architecture, tech stack, gallery, and CTA.
-- Issue 51 (Theme) persists light mode across Project Detail and updates detail styles for light/dark parity.
+## 2) Stack y arquitectura tecnica
+- Framework: Angular standalone con Signals y ChangeDetection `OnPush`.
+- Estilos: Tailwind v4 en archivos CSS (`@apply`), tokens globales en `src/styles.css`.
+- Datos dinamicos: Google Sheets expuesto como JSON (CMS ligero en runtime).
+- Contacto: EmailJS desde cliente (sin backend propio).
+- SEO: metatags + canonical por vista (home y detalle de proyecto).
+- Shell global: carga contenido inicial, controla overlay de carga y top-nav persistente.
 
-## Structure Principles
-- Use standalone components with feature-based routing.
-- Keep layout in `src/app/core/layout` for global shells (nav, footer).
-- Place reusable UI, pipes, and utilities in `src/app/shared`.
-- Avoid monolithic components; each section lives in its own context folder.
+## 3) Estructura del codigo (regla de organizacion)
+- `src/app/core`: layout global, servicios, modelos y logica transversal.
+- `src/app/features/landing`: Home por secciones (Hero, About, Projects, Contact).
+- `src/app/features/project-detail`: Vista de detalle modular (nav, hero, scope, tech, footage, cta).
+- `src/app/shared`: piezas reutilizables y estilos compartidos.
+- Regla: evitar componentes monoliticos; dividir por feature/seccion con responsabilidades claras.
 
-## Styling Rules
-- Tailwind stays in CSS files (use `@apply` in component styles).
-- Keep global tokens and shared utilities in `src/styles.css`.
-- Match the template classes and layout 1:1 unless an issue explicitly allows deviations.
-- Keep component templates free of utility classes; use component CSS instead.
+## 4) Logica de negocio vigente
+### 4.1 Carga de configuracion runtime
+- `AppConfigService` lee `/env.json` al iniciar app (APP_INITIALIZER).
+- Variables esperadas:
+  - `googleSheetsApiUrl`
+  - `emailJsServiceId`
+  - `emailJsTemplateId`
+  - `emailJsPublicKey`
+- Si falta config, la app no revienta: degrada con fallback seguro.
 
-## Conventions
-- Use `@if`, `@for`, etc. (no `*ngIf` / `*ngFor`).
-- Document key lines and decisions in each file.
-- Commits are atomic and semantic; do not mix features.
+### 4.2 CMS (Google Sheets) y contenido
+- `PortfolioContentService` consume el JSON del CMS una sola vez por sesion (`loadedState`).
+- Expone signals/computed: `projects`, `techStack`, `loading`.
+- Si falla URL o request: retorna payload vacio (no crash).
+- Tiene delay minimo de carga para evitar parpadeo de UI.
 
-## Changelog
-See `docs/CHANGELOG.md` for incremental updates.
+### 4.3 Navegacion y rutas
+- Rutas activas:
+  - `/` -> Landing (dentro de `ShellComponent`).
+  - `/projects/:slug` -> detalle de proyecto.
+- Regla de negocio: si `slug` no existe, redirigir a `/` con fragmento `#proyectos`.
+
+### 4.4 SEO
+- Landing y Project Detail deben setear:
+  - `title`
+  - `description`
+  - Open Graph/Twitter tags
+  - canonical
+- En detalle, imagen OG se resuelve por prioridad:
+  - `heroImage` -> `image` -> primera de `gallery` -> fallback local.
+
+### 4.5 Tema (dark/light)
+- La clase `dark` se alterna en `<html>` (comportamiento identico a plantilla).
+- Persistencia en `localStorage` clave `theme`.
+- Tambien se actualiza atributo `data-theme` (`dark`/`light`).
+
+### 4.6 Contacto
+- Formulario reactivo con validaciones:
+  - nombre: requerido
+  - correo: requerido + formato email
+  - mensaje: requerido + minimo 10 caracteres
+- Envio mediante EmailJS (`sendForm`) con IDs runtime.
+- Maneja estado UX completo: enviando, exito/error, toast autocierre.
+- Si falta config de EmailJS, debe fallar de forma controlada.
+
+## 5) Modelo de datos (contrato operativo)
+- `SheetsPayload`:
+  - `projects: ProjectCard[]`
+  - `techStack: TechCategory[]`
+- `ProjectCard` admite detalle extendido (slug, hero, desafios tecnicos, stack, gallery, links demo/repo, etc.).
+- Regla: cualquier ampliacion de modelo debe mantener compatibilidad hacia atras con datos parciales del CMS.
+
+## 6) Sistema de diseno y UI (reglas obligatorias)
+- Mantener estetica "Sketch-Punk"/brutalist: bordes marcados, sombras duras, texturas, inclinaciones y sensacion manual.
+- Tokens de color/fuentes/utilidades compartidas viven en `src/styles.css`.
+- Usar clases semanticas por componente (`hero__*`, `top-nav__*`, etc.); no ensuciar templates con utilidades Tailwind masivas.
+- Las animaciones deben ser sutiles y con fallback de accesibilidad (`prefers-reduced-motion`).
+- Responsividad obligatoria: mobile/tablet/desktop sin solapes ni overflow visual.
+
+## 7) Convenciones de implementacion
+- Usar control flow moderno de Angular (`@if`, `@for`), evitar `*ngIf` y `*ngFor`.
+- Priorizar Signals/computed/effect para estado derivado y sincronizacion UI.
+- Mantener `OnPush` en componentes de feature.
+- Cada cambio nuevo debe respetar separacion `core` vs `features` vs `shared`.
+- Commits atomicos y semanticos (sin mezclar cambios no relacionados).
+
+## 8) Estado funcional actual (que ya existe y debe preservarse)
+- Top navigation brutalist con menu movil y toggle de tema persistente.
+- Landing completa: Hero, About/KnowMe, Tech Stack, Projects, Contact.
+- Gallery de proyectos estilo polaroid con acentos visuales.
+- Vista `Project Detail` completa con secciones modulares y estilos compartidos.
+- Integracion CMS para proyectos y tech stack en runtime.
+- SEO dinamico en home y detalle.
+- Ajustes responsive y paridad de tema en detalle.
+
+## 9) Guia para futuras implementaciones (para otros agentes)
+- Antes de construir: revisar si el cambio vive en `landing` o `project-detail`; no duplicar logica transversal.
+- Si se agrega contenido dinamico nuevo, integrarlo al contrato `SheetsPayload` con fallback seguro.
+- Si se toca UI, preservar lenguaje visual existente (no introducir estilos que rompan la identidad).
+- Si se agrega ruta nueva, incluir estrategia SEO y comportamiento de scroll coherente con Shell.
+- Si se agrega interaccion async, contemplar estado de carga/error y experiencia de transicion.
+- Si un cambio contradice estas reglas, documentar la excepcion dentro del mismo PR/commit.
