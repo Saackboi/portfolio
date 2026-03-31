@@ -4,13 +4,14 @@
       <h2 class="projects__title">Proyectos</h2>
       <div class="projects__title-shadow"></div>
       <p class="projects__subtitle">
-        Selección de mis proyectos donde aplico mis habilidades.
+        Muestra de soluciones enfocadas en la arquitectura de sistemas, la escalabilidad y el ciclo de vida del
+        software.
       </p>
     </div>
 
     <div class="projects__grid">
       @for (project of projects(); track project.code) {
-        <app-project-card [project]="project" />
+      <app-project-card [project]="project" />
       }
     </div>
   </div>
