@@ -27,9 +27,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Create environment.ts from Secret
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
         run: |
           mkdir -p src/environments
-          echo "${{ secrets.ENV_FILE }}" > src/environments/environment.ts
+          node -e 'fs.writeFileSync("src/environments/environment.ts", process.env.ENV_FILE)'
+
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
