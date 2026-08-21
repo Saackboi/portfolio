@@ -1,16 +1,14 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import emailjs from '@emailjs/browser';
 
-import { AppConfigService } from '../services/app-config.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ContactService {
-  private readonly appConfig = inject(AppConfigService);
-
   async send(form: HTMLFormElement): Promise<void> {
-    const serviceId = this.appConfig.emailJsServiceId();
-    const templateId = this.appConfig.emailJsTemplateId();
-    const publicKey = this.appConfig.emailJsPublicKey();
+    const serviceId = environment.emailJsServiceId;
+    const templateId = environment.emailJsTemplateId;
+    const publicKey = environment.emailJsPublicKey;
 
     if (!serviceId || !templateId || !publicKey) {
       throw new Error('EmailJS config missing.');
@@ -19,3 +17,4 @@ export class ContactService {
     await emailjs.sendForm(serviceId, templateId, form, { publicKey });
   }
 }
+

@@ -21,6 +21,9 @@ yarn-error.log
 *.sublime-workspace
 environment.ts
 environment.prod.ts
+environment.development.ts
+public/env.json
+AGENTS.md
 
 # Visual Studio Code
 .vscode/

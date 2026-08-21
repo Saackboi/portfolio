@@ -20,14 +20,16 @@ La regla principal es mantener coherencia visual y de experiencia con la plantil
 - Regla: evitar componentes monoliticos; dividir por feature/seccion con responsabilidades claras.
 
 ## 4) Logica de negocio vigente
-### 4.1 Carga de configuracion runtime
-- `AppConfigService` lee `/env.json` al iniciar app (APP_INITIALIZER).
+### 4.1 Variables y configuracion (environment)
+- Se gestiona a traves de `src/environments/environment.ts` (con plantilla `src/environments/environment.example.ts`).
 - Variables esperadas:
+  - `production`
   - `googleSheetsApiUrl`
   - `emailJsServiceId`
   - `emailJsTemplateId`
   - `emailJsPublicKey`
-- Si falta config, la app no revienta: degrada con fallback seguro.
+- Si falta alguna variable (e.g. `googleSheetsApiUrl`), los servicios degradan con fallback seguro sin romper la app.
+
 
 ### 4.2 CMS (Google Sheets) y contenido
 - `PortfolioContentService` consume el JSON del CMS una sola vez por sesion (`loadedState`).
