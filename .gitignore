@@ -24,6 +24,8 @@ environment.prod.ts
 environment.development.ts
 public/env.json
 AGENTS.md
+scripts/
+
 
 # Visual Studio Code
 .vscode/
