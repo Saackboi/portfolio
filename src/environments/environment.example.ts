@@ -1,6 +1,14 @@
 export const environment = {
   production: false,
-  googleSheetsApiUrl: '',
+  firebase: {
+    apiKey: '',
+    authDomain: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: '',
+    appId: '',
+    measurementId: ''
+  },
   emailJsServiceId: '',
   emailJsTemplateId: '',
   emailJsPublicKey: ''
