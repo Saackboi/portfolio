@@ -1,8 +1,8 @@
-<!-- Hash links target the single-page sections. -->
+<!-- Game-menu style section switching navigation -->
 <nav class="top-nav">
   <div class="top-nav__container">
     <div class="top-nav__row">
-      <div class="top-nav__brand">
+      <div class="top-nav__brand" (click)="navigateTo('inicio', $event)" role="button" tabindex="0">
         <div class="top-nav__logo">
           <img
             alt="Logo Kevin"
@@ -13,17 +13,37 @@
         <span class="top-nav__title">KOJI</span>
       </div>
       <div class="top-nav__links">
-        <a class="top-nav__link top-nav__link--secondary" href="#inicio">Inicio</a>
-        <a class="top-nav__link top-nav__link--primary" href="#sobre-mi">Sobre Mí</a>
-        <a class="top-nav__link top-nav__link--secondary" href="#proyectos">Proyectos</a>
-        <a class="top-nav__link top-nav__link--primary" href="#contacto">Contacto</a>
+        <button
+          type="button"
+          class="top-nav__link"
+          [class.top-nav__link--active]="activeSection() === 'inicio'"
+          (click)="navigateTo('inicio', $event)"
+        >
+          Inicio
+        </button>
+        <button
+          type="button"
+          class="top-nav__link"
+          [class.top-nav__link--active]="activeSection() === 'sobre-mi'"
+          (click)="navigateTo('sobre-mi', $event)"
+        >
+          Sobre Mí
+        </button>
+        <button
+          type="button"
+          class="top-nav__link"
+          [class.top-nav__link--active]="activeSection() === 'proyectos'"
+          (click)="navigateTo('proyectos', $event)"
+        >
+          Proyectos
+        </button>
       </div>
       <div class="top-nav__actions">
         <button
           class="top-nav__toggle"
           type="button"
           aria-label="Alternar modo oscuro"
-          (click)="toggleTheme()"
+          (click)="toggleTheme($event)"
         >
           <span class="material-symbols-outlined top-nav__toggle-icon">settings_brightness</span>
         </button>
@@ -36,14 +56,43 @@
           <span class="material-symbols-outlined top-nav__toggle-icon">menu</span>
         </button>
       </div>
+
     </div>
   </div>
   @if (isMenuOpen()) {
     <div class="top-nav__panel">
-      <a class="top-nav__panel-link" href="#inicio" (click)="closeMenu()">Inicio</a>
-      <a class="top-nav__panel-link" href="#sobre-mi" (click)="closeMenu()">Sobre Mí</a>
-      <a class="top-nav__panel-link" href="#proyectos" (click)="closeMenu()">Proyectos</a>
-      <a class="top-nav__panel-link" href="#contacto" (click)="closeMenu()">Contacto</a>
+      <button
+        type="button"
+        class="top-nav__panel-link"
+        [class.top-nav__panel-link--active]="activeSection() === 'inicio'"
+        (click)="navigateTo('inicio')"
+      >
+        Inicio
+      </button>
+      <button
+        type="button"
+        class="top-nav__panel-link"
+        [class.top-nav__panel-link--active]="activeSection() === 'sobre-mi'"
+        (click)="navigateTo('sobre-mi')"
+      >
+        Sobre Mí
+      </button>
+      <button
+        type="button"
+        class="top-nav__panel-link"
+        [class.top-nav__panel-link--active]="activeSection() === 'proyectos'"
+        (click)="navigateTo('proyectos')"
+      >
+        Proyectos
+      </button>
+      <button
+        type="button"
+        class="top-nav__panel-link top-nav__panel-link--contact"
+        (click)="openContact()"
+      >
+        Contacto
+      </button>
     </div>
   }
 </nav>
+

@@ -1,14 +1,15 @@
 <!-- Global shell keeps navigation persistent across routes. -->
 @if (isLoading()) {
-  <app-loading-sketch @fadeOverlay />
+  <app-loading-sketch />
 }
 
 @if (!isLoading()) {
   @if (!isDetailRoute()) {
     <app-top-nav />
   }
-  <main [class.pt-20]="!isDetailRoute()" @fadeContent [@routeFade]="routeAnimation(outlet)">
+  <main [class.pt-20]="!isDetailRoute()">
     <!-- Feature routes render here. -->
-    <router-outlet #outlet="outlet" />
+    <router-outlet />
   </main>
 }
+

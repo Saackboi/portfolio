@@ -19,11 +19,13 @@
             Enfocado en el ciclo de vida del software, la gestión de bases de datos SQL y el despliegue de aplicaciones.
           </p>
         </div>
-        <app-skill-chart [skills]="skills()" />
       </div>
+
       <div class="hero__cta">
-        <a class="hero__cta-link" href="#proyectos">Ver Proyectos</a>
+        <button type="button" class="hero__cta-link cursor-pointer" (click)="goToProjects($event)">Ver Proyectos</button>
       </div>
+
+
     </div>
     <div class="hero__visual">
       <div class="hero__frame">

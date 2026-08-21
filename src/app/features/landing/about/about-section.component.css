@@ -2,7 +2,7 @@
 
 /* Section wrapper mirrors the template layout and spacing. */
 .about {
-  @apply py-24 bg-secondary/10 dark:bg-black/40 relative overflow-hidden;
+  @apply py-8 md:py-12 bg-secondary/10 dark:bg-black/40 relative overflow-hidden min-h-full flex flex-col justify-center;
 }
 
 .about__container {
@@ -10,8 +10,9 @@
 }
 
 .about__heading {
-  @apply mb-20 rotate-1;
+  @apply mb-8 rotate-1;
 }
+
 
 .about__title {
   font-family: var(--font-display);
@@ -48,9 +49,9 @@
 .about__callout {
   font-family: var(--font-display);
   @apply absolute -left-12 bottom-0 bg-white text-black p-4 border-2 border-black rotate-12 z-20 text-xl uppercase shadow-[4px_4px_0px_0px_rgba(230,57,70,1)];
-  animation: float-sway 7.5s ease-in-out infinite alternate;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 
 .about__callout:hover {
   transform: translateY(-4px) rotate(13deg);

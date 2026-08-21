@@ -7,18 +7,19 @@
 
 .social-board__title {
   font-family: var(--font-display);
-  @apply text-3xl text-black mb-4 border-b-4 border-black pb-2 text-center;
+  @apply text-2xl text-black dark:text-white mb-2 border-b-4 border-black dark:border-white pb-2 text-center uppercase;
 }
 
 .social-board__list {
-  @apply flex flex-col gap-6 relative;
+  @apply flex flex-col gap-4 relative;
 }
 
 .social-board__button {
-  @apply relative z-10 p-6 border-4 overflow-hidden flex items-center justify-between;
+  @apply relative z-10 p-3 sm:p-4 border-4 overflow-hidden flex items-center justify-between;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   transform: rotate(var(--tilt, 0deg));
 }
+
 
 .social-board__button--dark {
   @apply bg-black text-white border-white shadow-[8px_8px_0px_0px_rgba(93,237,132,1)];
@@ -45,21 +46,22 @@
 }
 
 .social-board__button--left {
-  @apply -rotate-3;
-  --tilt: -3deg;
+  @apply -rotate-1;
+  --tilt: -1deg;
 }
 
 .social-board__button--right {
-  @apply rotate-2 -mt-4;
+  @apply rotate-1;
   z-index: 20;
-  --tilt: 2deg;
+  --tilt: 1deg;
 }
 
 .social-board__button--neutral {
-  @apply -rotate-1 -mt-4;
+  @apply rotate-0;
   z-index: 30;
-  --tilt: -1deg;
+  --tilt: 0deg;
 }
+
 
 .social-board__button:hover {
   transform: translateY(-2px) rotate(calc(var(--tilt, 0deg) + 0.5deg));

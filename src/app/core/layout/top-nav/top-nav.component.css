@@ -40,21 +40,49 @@
 
 .top-nav__link {
   font-family: var(--font-display);
-  @apply text-lg uppercase px-2 transition-all;
+  @apply text-lg uppercase px-3 py-1 transition-colors cursor-pointer text-black dark:text-white border-2 border-transparent;
 }
 
-.top-nav__link--secondary {
-  @apply hover:bg-secondary hover:text-black;
+.top-nav__link:hover {
+  @apply bg-secondary text-black -rotate-1 border-black dark:border-white;
 }
 
-.top-nav__link--primary {
-  @apply hover:bg-primary hover:text-white;
+.top-nav__link--active {
+  @apply bg-black text-white dark:bg-primary dark:text-black -rotate-2 border-2 border-black dark:border-white shadow-[3px_3px_0px_0px_rgba(230,57,70,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)];
+}
+
+.top-nav__link--contact {
+  @apply border-2 border-black dark:border-primary bg-accent/20 hover:bg-accent hover:text-black;
+}
+
+.top-nav__panel {
+  @apply md:hidden bg-white dark:bg-darkblue border-b-4 border-black dark:border-primary p-4 flex flex-col gap-3;
+}
+
+.top-nav__panel-link {
+  font-family: var(--font-display);
+  @apply text-xl uppercase p-3 text-left border-2 border-black dark:border-white text-black dark:text-white transition-colors;
+}
+
+
+.top-nav__panel-link:hover,
+.top-nav__panel-link--active {
+  @apply bg-primary text-white dark:bg-primary dark:text-black -rotate-1 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)];
+}
+
+.top-nav__panel-link--contact {
+  @apply bg-accent text-black font-bold;
 }
 
 .top-nav__toggle {
-  @apply p-2 border-2 border-black dark:border-white hover:bg-secondary transition-colors;
+  @apply p-2 border-2 border-black dark:border-white hover:bg-secondary transition-colors cursor-pointer;
+}
+
+.top-nav__mobile-toggle {
+  @apply md:hidden p-2 border-2 border-black dark:border-white hover:bg-secondary transition-colors cursor-pointer;
 }
 
 .top-nav__toggle-icon {
   @apply dark:text-white text-black;
 }
+

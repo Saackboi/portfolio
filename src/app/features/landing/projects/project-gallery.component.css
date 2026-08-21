@@ -2,7 +2,7 @@
 
 /* Polaroid gallery section mirrors the template layout. */
 .projects {
-  @apply py-24 bg-white dark:bg-darkblue relative;
+  @apply py-8 md:py-12 bg-white dark:bg-darkblue relative min-h-full flex flex-col justify-center;
 }
 
 .projects__container {
@@ -10,8 +10,9 @@
 }
 
 .projects__heading {
-  @apply text-center mb-24 relative;
+  @apply text-center mb-10 relative;
 }
+
 
 .projects__title {
   font-family: var(--font-display);
