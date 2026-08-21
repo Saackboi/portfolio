@@ -2,13 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
+import { environment } from '../../../environments/environment';
 import { SheetsPayload } from '../models/portfolio-content.model';
-import { AppConfigService } from './app-config.service';
 
 @Injectable({ providedIn: 'root' })
 export class PortfolioContentService {
   private readonly http = inject(HttpClient);
-  private readonly appConfig = inject(AppConfigService);
   private readonly emptyPayload: SheetsPayload = { projects: [], techStack: [] };
 
   private readonly data = signal<SheetsPayload>(this.emptyPayload);
@@ -34,7 +33,7 @@ export class PortfolioContentService {
 
     this.loadingState.set(true);
     const start = Date.now();
-    const url = this.appConfig.googleSheetsApiUrl();
+    const url = environment.googleSheetsApiUrl;
     if (!url) {
       this.data.set(this.emptyPayload);
       await this.ensureMinimumDelay(start, minDurationMs);
@@ -62,3 +61,4 @@ export class PortfolioContentService {
     }
   }
 }
+
