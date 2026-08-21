@@ -3,6 +3,7 @@ export type TapeTone = 'yellow' | 'primary' | 'blue';
 export type ProjectTilt = 'left' | 'right' | 'neutral';
 
 export type ProjectCard = {
+  order?: number;
   title: string;
   subtitle?: string;
   tagline?: string;
@@ -28,13 +29,17 @@ export type TechTone = 'primary' | 'secondary' | 'accent' | 'ink' | 'paper' | 'l
 export type BadgeTone = 'ink' | 'primary' | 'secondary' | 'accent' | 'paper' | 'muted';
 
 export type TechCategory = {
+  order?: number;
   title: string;
   tone: TechTone;
   badges: string[];
   badgeTones: BadgeTone[];
 };
 
-export type SheetsPayload = {
+export type PortfolioPayload = {
   projects: ProjectCard[];
   techStack: TechCategory[];
 };
+
+export type SheetsPayload = PortfolioPayload;
+

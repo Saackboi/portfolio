@@ -24,18 +24,19 @@ La regla principal es mantener coherencia visual y de experiencia con la plantil
 - Se gestiona a traves de `src/environments/environment.ts` (con plantilla `src/environments/environment.example.ts`).
 - Variables esperadas:
   - `production`
-  - `googleSheetsApiUrl`
+  - `firebase`: `{ apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId, measurementId }`
   - `emailJsServiceId`
   - `emailJsTemplateId`
   - `emailJsPublicKey`
-- Si falta alguna variable (e.g. `googleSheetsApiUrl`), los servicios degradan con fallback seguro sin romper la app.
+- Si falta alguna variable o falla la conexion, los servicios degradan con fallback seguro sin romper la app.
 
-
-### 4.2 CMS (Google Sheets) y contenido
-- `PortfolioContentService` consume el JSON del CMS una sola vez por sesion (`loadedState`).
+### 4.2 Base de datos y contenido (Firebase Firestore)
+- `PortfolioContentService` consume las colecciones `projects` y `techStack` desde Cloud Firestore mediante el SDK `firebase/firestore/lite`.
+- Se consulta una sola vez por sesion (`loadedState`) aplicando orden ascendente por el campo `order`.
 - Expone signals/computed: `projects`, `techStack`, `loading`.
-- Si falla URL o request: retorna payload vacio (no crash).
+- Si falla la conexion o request: retorna payload vacio (no crash).
 - Tiene delay minimo de carga para evitar parpadeo de UI.
+
 
 ### 4.3 Navegacion y rutas
 - Rutas activas:

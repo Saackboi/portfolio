@@ -46,8 +46,9 @@ export class ShellComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    void this.portfolioContent.load(300);
+    void this.portfolioContent.load(0);
     this.isDetailRoute.set(this.router.url.startsWith('/projects/'));
+
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
       const isDetail = (event as NavigationEnd).urlAfterRedirects.startsWith('/projects/');
       this.isDetailRoute.set(isDetail);
