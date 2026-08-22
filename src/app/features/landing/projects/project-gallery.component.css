@@ -1,58 +1,379 @@
-@reference "../../../../styles.css";
-
-/* Polaroid gallery section mirrors the template layout. */
 .projects {
-  @apply py-8 md:py-12 bg-white dark:bg-darkblue relative min-h-full flex flex-col justify-center;
+  width: 100%;
+  min-height: calc(100dvh - 4.5rem);
+  padding: 1.5rem 1rem 2.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.projects__noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  background-image: url("/assets/backgrounds/bg-noise.svg");
 }
 
 .projects__container {
-  @apply container mx-auto px-4;
+  width: 100%;
+  max-width: 92rem;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+  z-index: 10;
 }
 
 .projects__heading {
-  @apply text-center mb-10 relative;
+  text-align: center;
+  position: relative;
+  flex-shrink: 0;
 }
-
 
 .projects__title {
   font-family: var(--font-display);
-  @apply text-8xl uppercase text-black dark:text-white -rotate-2;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  text-transform: uppercase;
+  color: #ffffff;
+  transform: rotate(-1deg);
+  display: inline-block;
+  line-height: 1;
 }
 
 .projects__title-shadow {
-  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-24 bg-primary/20 -z-10 rotate-3;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(2deg);
+  width: clamp(16rem, 28vw, 24rem);
+  height: clamp(2.5rem, 4vw, 3.5rem);
+  background-color: rgba(230, 57, 70, 0.4);
+  z-index: -10;
+  pointer-events: none;
 }
 
 .projects__subtitle {
-  @apply text-xl font-bold max-w-2xl mx-auto mt-4 text-gray-600 dark:text-gray-400;
+  font-size: clamp(0.85rem, 1.5vw, 1.15rem);
+  font-weight: 700;
+  max-width: 40rem;
+  margin: 0.5rem auto 0;
+  color: #a3a3a3;
   text-transform: uppercase;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.02em;
 }
 
-.projects__grid {
-  @apply flex flex-wrap justify-center gap-12;
+/* Character Selector Stage */
+.projects__stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 88rem;
+  flex-shrink: 0;
+  margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-  .projects__title {
-    @apply text-5xl;
-  }
+.projects__nav-btn {
+  z-index: 30;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #ffffff;
+  color: #000000;
+  border: 4px solid #000000;
+  box-shadow: 4px 4px 0px 0px rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.15s, background-color 0.15s, color 0.15s;
+}
 
-  .projects__subtitle {
-    @apply text-lg;
-  }
+.projects__nav-btn span {
+  font-size: 2.25rem;
+  font-weight: 900;
+}
 
-  .projects__grid {
-    @apply flex-col items-center gap-8;
-  }
+.projects__nav-btn:hover {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  transform: scale(1.1);
+}
 
-  .projects__title-shadow {
-    @apply w-64 h-16;
+.projects__nav-btn:active {
+  transform: scale(0.95);
+}
+
+.projects__nav-btn--prev {
+  transform: rotate(-2deg);
+}
+
+.projects__nav-btn--next {
+  transform: rotate(2deg);
+}
+
+/* Track & Cards */
+.projects__track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 5rem);
+  flex: 1;
+  position: relative;
+  padding: 1rem 0.5rem;
+  perspective: 1200px;
+}
+
+/* Clean Real Polaroid / Poster Card */
+.polaroid-card {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0.85rem 0.85rem 1.25rem;
+  border: 2px solid #e5e7eb;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s, opacity 0.35s;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  box-sizing: border-box;
+  transform-origin: top center;
+}
+
+/* Stacked Sheets Behind Active Card */
+.polaroid-card__sheet-layer {
+  position: absolute;
+  inset: 0;
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.polaroid-card__sheet-layer--bottom {
+  transform: rotate(-3.5deg) translate(-4px, 4px);
+  background-color: #f3f4f6;
+}
+
+.polaroid-card__sheet-layer--middle {
+  transform: rotate(3deg) translate(4px, 3px);
+  background-color: #fcfcfc;
+}
+
+/* Metal Paperclip */
+.polaroid-card__clip {
+  position: absolute;
+  top: -16px;
+  right: 16px;
+  width: 22px;
+  height: 48px;
+  z-index: 25;
+  pointer-events: none;
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.35));
+}
+
+.polaroid-card__clip-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Database Masking Tape Tones */
+.polaroid-card__tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 110px;
+  height: 26px;
+  opacity: 0.92;
+  z-index: 15;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.polaroid-card__tape--yellow {
+  background-color: rgba(250, 204, 21, 0.92);
+}
+
+.polaroid-card__tape--primary {
+  background-color: rgba(230, 57, 70, 0.92);
+}
+
+.polaroid-card__tape--blue {
+  background-color: rgba(96, 165, 250, 0.92);
+}
+
+/* Image - 100% True Colors, Clean */
+.polaroid-card__image-box {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  background-color: #f3f4f6;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  position: relative;
+}
+
+.polaroid-card__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none;
+}
+
+/* Red Confidential Stamp */
+.polaroid-card__stamp {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  border: 2px solid #e63946;
+  color: #e63946;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  transform: rotate(-6deg);
+  background-color: rgba(255, 255, 255, 0.92);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+/* Caption */
+.polaroid-card__caption {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.polaroid-card__dossier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.polaroid-card__title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  color: #111827;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.polaroid-card__code-badge {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4b5563;
+  background-color: #f3f4f6;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid #d1d5db;
+}
+
+.polaroid-card__description {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #4b5563;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.polaroid-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.4rem;
+  padding-top: 0.35rem;
+  border-top: 1px dashed #d1d5db;
+}
+
+.polaroid-card__code {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.polaroid-card__year {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.polaroid-card__cta-hint {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Active Center Card - 3D Peel Lift from Wall */
+.polaroid-card--active {
+  width: clamp(280px, 28vw, 420px);
+  max-width: 90vw;
+  transform: rotateX(4deg) translateY(-4px) rotate(-0.5deg);
+  z-index: 25;
+  box-shadow: 0 24px 36px -8px rgba(0, 0, 0, 0.75), 0 10px 16px -4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.polaroid-card--active:hover {
+  transform: rotateX(8deg) translateY(-12px) scale(1.03) rotate(0deg);
+  box-shadow: 0 32px 48px -10px rgba(0, 0, 0, 0.9), 0 16px 24px -5px rgba(0, 0, 0, 0.55);
+}
+
+/* Flanking Side Cards */
+.polaroid-card--left {
+  display: none;
+  width: clamp(220px, 21vw, 310px);
+  opacity: 0.5;
+  transform: scale(0.85) rotate(-3deg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.polaroid-card--right {
+  display: none;
+  width: clamp(220px, 21vw, 310px);
+  opacity: 0.5;
+  transform: scale(0.85) rotate(3deg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
+  z-index: 10;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .polaroid-card--left,
+  .polaroid-card--right {
+    display: flex;
   }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
-  .projects__title {
-    @apply text-6xl;
-  }
+.polaroid-card--left:hover,
+.polaroid-card--right:hover {
+  opacity: 0.85;
+  transform: scale(0.88) rotate(0deg);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.65);
 }

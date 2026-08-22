@@ -1,1 +1,111 @@
 @reference "../../../../styles.css";
+
+.hero {
+  @apply w-full min-h-[calc(100dvh-4.5rem)] flex items-center justify-center py-6 sm:py-10 px-4 relative;
+}
+
+.hero__container {
+  @apply max-w-7xl mx-auto w-full grid md:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10;
+}
+
+.hero__intro {
+  @apply md:col-span-7 flex flex-col justify-center gap-6 sm:gap-8;
+}
+
+.hero__headline {
+  @apply relative;
+}
+
+.hero__bubble {
+  @apply absolute bg-white text-black p-2 border-2 border-black text-sm md:text-base z-30;
+  font-family: var(--font-display);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+}
+
+.hero__bubble--left {
+  @apply -top-8 left-4 rotate-[-6deg];
+}
+
+.hero__bubble--right {
+  @apply -top-6 right-8 rotate-[4deg];
+}
+
+.hero__title-panel {
+  @apply bg-black text-white p-6 sm:p-8 border-4 border-primary shadow-[8px_8px_0px_0px_rgba(230,57,70,1)] -rotate-1;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  @apply text-2xl sm:text-3xl lg:text-4xl uppercase tracking-tight text-gray-300;
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  @apply text-4xl sm:text-6xl lg:text-7xl uppercase text-secondary block mt-2;
+  letter-spacing: -0.03em;
+}
+
+.hero__bio-card {
+  @apply bg-white dark:bg-black text-black dark:text-white p-4 sm:p-5 border-3 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(93,237,132,1)] rotate-1 max-w-xl;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero__bio-card:hover {
+  transform: translateY(-4px) rotate(1deg);
+  box-shadow: 10px 10px 0 0 rgba(93, 237, 132, 1);
+}
+
+.hero__bio-text {
+  font-family: var(--font-body);
+  @apply text-sm sm:text-base leading-relaxed;
+}
+
+.hero__cta {
+  @apply pt-2;
+}
+
+.hero__cta-link {
+  font-family: var(--font-display);
+  @apply inline-block bg-black text-white text-xl sm:text-2xl uppercase px-10 py-4 border-4 border-white shadow-[8px_8px_0px_0px_rgba(230,57,70,1)] hover:bg-primary hover:text-white hover:scale-105 transition-all cursor-pointer;
+}
+
+.hero__cta-link:hover {
+  transform: translateY(-3px) rotate(-1deg) scale(1.02);
+  box-shadow: 12px 12px 0 0 rgba(230, 57, 70, 1);
+}
+
+.hero__visual {
+  @apply md:col-span-5 flex items-center justify-center;
+}
+
+.hero__frame {
+  @apply relative w-full aspect-square max-w-sm sm:max-w-md mx-auto p-4 bg-black border-4 border-black dark:border-white rotate-3 overflow-hidden shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:shadow-[10px_10px_0px_0px_rgba(230,57,70,1)];
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero__frame:hover {
+  transform: rotate(2deg) translateY(-4px);
+  box-shadow: 14px 14px 0 0 rgba(230, 57, 70, 1);
+}
+
+.hero__image {
+  @apply w-full h-full object-cover;
+}
+
+.hero__frame-border {
+  @apply absolute inset-0 border-[16px] border-black/20 pointer-events-none;
+}
+
+.hero__error {
+  @apply absolute top-4 left-4 text-white text-3xl opacity-50 select-none;
+  font-family: var(--font-display);
+}
+
+.hero__mode-tag {
+  @apply absolute bottom-4 right-4 bg-primary text-white px-5 py-1.5 text-xl rotate-[-12deg] border-3 border-black shadow-lg;
+  font-family: var(--font-display);
+}
+
+.hero__scanline {
+  @apply absolute top-1/2 left-0 w-full h-1 bg-secondary/50 -rotate-12 blur-sm pointer-events-none;
+}

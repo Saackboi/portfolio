@@ -1,13 +1,13 @@
 import { Injectable, NgZone, inject } from '@angular/core';
 import {
   ParallaxLayer,
+  animateCarouselSlide,
   animateModalClose,
   animateModalOpen,
   animateScreenEnter,
   comicPop,
   isReducedMotion,
   jellyTap,
-  makeDraggable,
   retroJitter,
   setupParallax
 } from '../animations';
@@ -26,10 +26,6 @@ export class GsapAnimationService {
     this.ngZone.runOutsideAngular(() => animateScreenEnter(container));
   }
 
-  animateScreenEnter(container: HTMLElement): void {
-    this.screenEnter(container);
-  }
-
   comicPop(element: HTMLElement, delay = 0): void {
     this.ngZone.runOutsideAngular(() => comicPop(element, delay));
   }
@@ -46,23 +42,15 @@ export class GsapAnimationService {
     this.ngZone.runOutsideAngular(() => animateModalOpen(overlay, dialog));
   }
 
-  animateModalOpen(overlay: HTMLElement, dialog: HTMLElement): void {
-    this.modalOpen(overlay, dialog);
-  }
-
   modalClose(overlay: HTMLElement, dialog: HTMLElement, onComplete: () => void): void {
     this.ngZone.runOutsideAngular(() => animateModalClose(overlay, dialog, onComplete));
   }
 
-  animateModalClose(overlay: HTMLElement, dialog: HTMLElement, onComplete: () => void): void {
-    this.modalClose(overlay, dialog, onComplete);
-  }
-
-  makeDraggable(element: HTMLElement, boundsElement?: HTMLElement): () => void {
-    return makeDraggable(element, boundsElement);
-  }
-
   setupParallax(container: HTMLElement, layers: ParallaxLayer[]): () => void {
     return setupParallax(container, layers);
+  }
+
+  carouselSlide(track: HTMLElement, direction: number = 1): void {
+    this.ngZone.runOutsideAngular(() => animateCarouselSlide(track, direction));
   }
 }

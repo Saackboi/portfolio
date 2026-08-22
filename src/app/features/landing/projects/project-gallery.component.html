@@ -1,18 +1,147 @@
 <section class="projects" id="proyectos">
+  <div class="projects__noise"></div>
   <div class="projects__container">
+    <!-- Header -->
     <div class="projects__heading">
       <h2 class="projects__title">Proyectos</h2>
       <div class="projects__title-shadow"></div>
       <p class="projects__subtitle">
-        Muestra de soluciones enfocadas en la arquitectura de sistemas, la escalabilidad y el ciclo de vida del
-        software.
+        Selecciona un proyecto para ver arquitectura y detalles.
       </p>
     </div>
 
-    <div class="projects__grid">
-      @for (project of projects(); track project.code) {
-      <app-project-card [project]="project" />
-      }
-    </div>
+    @if (activeProject(); as active) {
+      <!-- Character-Selector Carousel Stage -->
+      <div class="projects__stage">
+        <!-- Navigation Arrow Left -->
+        <button
+          type="button"
+          class="projects__nav-btn projects__nav-btn--prev"
+          (click)="prev($event)"
+          aria-label="Proyecto anterior"
+        >
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+
+        <!-- Carousel Track -->
+        <div class="projects__track">
+          <!-- Left Card (Previous) -->
+          @if (prevProject(); as prevP) {
+            <article
+              class="polaroid-card polaroid-card--left"
+              (click)="prev($event)"
+              role="button"
+              tabindex="0"
+              [attr.aria-label]="'Seleccionar ' + prevP.title"
+            >
+              <div class="polaroid-card__tape" [class]="tapeClass(prevP.tapeTone)"></div>
+              <div class="polaroid-card__image-box">
+                <img
+                  [alt]="prevP.title"
+                  class="polaroid-card__photo"
+                  [ngSrc]="prevP.image"
+                  fill
+                  sizes="25vw"
+                />
+              </div>
+              <div class="polaroid-card__caption">
+                <h3 class="polaroid-card__title">{{ prevP.title }}</h3>
+                <div class="polaroid-card__meta">
+                  <span class="polaroid-card__code">{{ prevP.code }}</span>
+                  <span class="polaroid-card__year">{{ prevP.year }}</span>
+                </div>
+              </div>
+            </article>
+          }
+
+          <!-- Center Card (Active Hero - Stacked Dossier with Clip & Stamp) -->
+          <a
+            [routerLink]="['/projects', active.slug]"
+            class="polaroid-card polaroid-card--active"
+            [attr.aria-label]="'Ver proyecto ' + active.title"
+          >
+            <!-- Background stacked sheets for depth -->
+            <div class="polaroid-card__sheet-layer polaroid-card__sheet-layer--bottom"></div>
+            <div class="polaroid-card__sheet-layer polaroid-card__sheet-layer--middle"></div>
+
+            <!-- Tape with DB color -->
+            <div class="polaroid-card__tape" [class]="tapeClass(active.tapeTone)"></div>
+
+            <!-- Paperclip in top right corner -->
+            <div class="polaroid-card__clip">
+              <svg viewBox="0 0 32 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="polaroid-card__clip-svg">
+                <path d="M12 18V46C12 51.5 16 55 21 55C26 55 30 51.5 30 46V14C30 7 24 2 17 2C10 2 4 7 4 14V48" stroke="#9ca3af" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <!-- Image Area -->
+            <div class="polaroid-card__image-box">
+              <img
+                [alt]="active.title"
+                class="polaroid-card__photo"
+                [ngSrc]="active.image"
+                fill
+                sizes="(min-width: 1024px) 35vw, (min-width: 768px) 50vw, 85vw"
+                priority
+              />
+              <!-- Red Confidential / Dossier Stamp -->
+              <div class="polaroid-card__stamp">CONFIDENTIAL</div>
+            </div>
+
+            <!-- Dossier Caption -->
+            <div class="polaroid-card__caption">
+              <div class="polaroid-card__dossier-header">
+                <h3 class="polaroid-card__title">{{ active.title }}</h3>
+                <span class="polaroid-card__code-badge">{{ active.code }}</span>
+              </div>
+              <p class="polaroid-card__description">{{ active.description }}</p>
+              <div class="polaroid-card__meta">
+                <span class="polaroid-card__year">YEAR: {{ active.year }}</span>
+                <span class="polaroid-card__cta-hint">VER EXPEDIENTE →</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Right Card (Next) -->
+          @if (nextProject(); as nextP) {
+            <article
+              class="polaroid-card polaroid-card--right"
+              (click)="next($event)"
+              role="button"
+              tabindex="0"
+              [attr.aria-label]="'Seleccionar ' + nextP.title"
+            >
+              <div class="polaroid-card__tape" [class]="tapeClass(nextP.tapeTone)"></div>
+              <div class="polaroid-card__image-box">
+                <img
+                  [alt]="nextP.title"
+                  class="polaroid-card__photo"
+                  [ngSrc]="nextP.image"
+                  fill
+                  sizes="25vw"
+                />
+              </div>
+              <div class="polaroid-card__caption">
+                <h3 class="polaroid-card__title">{{ nextP.title }}</h3>
+                <div class="polaroid-card__meta">
+                  <span class="polaroid-card__code">{{ nextP.code }}</span>
+                  <span class="polaroid-card__year">{{ nextP.year }}</span>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+
+        <!-- Navigation Arrow Right -->
+        <button
+          type="button"
+          class="projects__nav-btn projects__nav-btn--next"
+          (click)="next($event)"
+          aria-label="Proyecto siguiente"
+        >
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </div>
+    }
   </div>
 </section>

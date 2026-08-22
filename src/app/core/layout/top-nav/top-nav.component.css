@@ -14,8 +14,9 @@
 }
 
 .top-nav__row {
-  @apply flex justify-between items-center h-20;
+  @apply flex justify-between items-center h-16 md:h-18;
 }
+
 
 .top-nav__brand {
   @apply flex-shrink-0 flex items-center gap-3;

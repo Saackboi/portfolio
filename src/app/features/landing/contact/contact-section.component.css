@@ -1,7 +1,7 @@
 @reference "../../../../styles.css";
 
 .contact {
-  @apply py-2 md:py-4 bg-transparent relative;
+  @apply py-1 md:py-2 bg-transparent relative;
 }
 
 .contact__noise {
@@ -14,24 +14,24 @@
 }
 
 .contact__heading {
-  @apply text-center mb-6;
+  @apply text-center mb-3;
 }
 
 .contact__title {
   font-family: var(--font-display);
-  @apply text-4xl sm:text-5xl uppercase text-white bg-black dark:bg-black inline-block px-8 py-2 border-4 border-primary shadow-[6px_6px_0px_0px_rgba(230,57,70,1)] -rotate-1;
+  @apply text-3xl sm:text-4xl uppercase text-white bg-black dark:bg-black inline-block px-6 py-1 border-3 border-primary shadow-[4px_4px_0px_0px_rgba(230,57,70,1)] -rotate-1;
 }
 
 .contact__subtitle {
-  @apply text-sm sm:text-base font-bold text-gray-800 dark:text-gray-200 mt-3 max-w-xl mx-auto block uppercase tracking-tight;
+  @apply text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200 mt-1 max-w-lg mx-auto block uppercase tracking-tight;
 }
 
 .contact__grid {
-  @apply grid md:grid-cols-2 gap-8 items-stretch w-full mt-4;
+  @apply grid md:grid-cols-2 gap-4 lg:gap-6 items-stretch w-full mt-2;
 }
 
 .contact__left {
-  @apply flex flex-col justify-between gap-4 h-full;
+  @apply flex flex-col justify-between gap-3 h-full;
 }
 
 .contact__right {
@@ -39,19 +39,19 @@
 }
 
 .contact__board {
-  @apply bg-white dark:bg-darkblue p-6 border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)] flex-1 flex flex-col justify-center;
+  @apply bg-white dark:bg-darkblue p-4 border-3 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,0.2)] flex-1 flex flex-col justify-center;
 }
 
 .contact__notes {
-  @apply grid grid-cols-1 sm:grid-cols-2 gap-4 w-full;
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-3 w-full;
 }
 
 @media (max-width: 768px) {
   .contact__title {
-    @apply text-3xl;
+    @apply text-2xl;
   }
 
   .contact__grid {
-    @apply grid-cols-1 gap-6;
+    @apply grid-cols-1 gap-4;
   }
 }

@@ -1,48 +1,46 @@
 @reference "../../../../../styles.css";
 
-/* Social board uses 3D-style buttons from the template. */
 .social-board {
-  @apply flex flex-col gap-6 relative;
+  @apply flex flex-col gap-3 relative;
 }
 
 .social-board__title {
   font-family: var(--font-display);
-  @apply text-2xl text-black dark:text-white mb-2 border-b-4 border-black dark:border-white pb-2 text-center uppercase;
+  @apply text-lg text-black dark:text-white mb-1 border-b-2 border-black dark:border-white pb-1 text-center uppercase tracking-tight;
 }
 
 .social-board__list {
-  @apply flex flex-col gap-4 relative;
+  @apply flex flex-col gap-2.5 relative;
 }
 
 .social-board__button {
-  @apply relative z-10 p-3 sm:p-4 border-4 overflow-hidden flex items-center justify-between;
+  @apply relative z-10 p-2.5 border-3 overflow-hidden flex items-center justify-between;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   transform: rotate(var(--tilt, 0deg));
 }
 
-
 .social-board__button--dark {
-  @apply bg-black text-white border-white shadow-[8px_8px_0px_0px_rgba(93,237,132,1)];
+  @apply bg-black text-white border-white shadow-[4px_4px_0px_0px_rgba(93,237,132,1)];
 }
 
 .social-board__button--dark:hover {
-  box-shadow: 12px 12px 0 0 rgba(93, 237, 132, 1);
+  box-shadow: 6px 6px 0 0 rgba(93, 237, 132, 1);
 }
 
 .social-board__button--secondary {
-  @apply bg-secondary text-black border-black shadow-[8px_8px_0px_0px_rgba(230,57,70,1)];
+  @apply bg-secondary text-black border-black shadow-[4px_4px_0px_0px_rgba(230,57,70,1)];
 }
 
 .social-board__button--secondary:hover {
-  box-shadow: 12px 12px 0 0 rgba(230, 57, 70, 1);
+  box-shadow: 6px 6px 0 0 rgba(230, 57, 70, 1);
 }
 
 .social-board__button--accent {
-  @apply bg-accent text-black border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
+  @apply bg-accent text-black border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
 }
 
 .social-board__button--accent:hover {
-  box-shadow: 12px 12px 0 0 rgba(0, 0, 0, 1);
+  box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 1);
 }
 
 .social-board__button--left {
@@ -62,92 +60,37 @@
   --tilt: 0deg;
 }
 
-
 .social-board__button:hover {
   transform: translateY(-2px) rotate(calc(var(--tilt, 0deg) + 0.5deg));
 }
 
 .social-board__button-left {
-  @apply flex items-center gap-4;
+  @apply flex items-center gap-3;
 }
 
 .social-board__button-left i {
-  @apply text-5xl;
+  @apply text-3xl;
+  transition: transform 0.2s ease;
 }
 
 .social-board__label {
   font-family: var(--font-display);
-  @apply text-3xl uppercase tracking-tighter;
+  @apply text-xl uppercase tracking-tight;
   transition: transform 0.2s ease;
 }
 
 .social-board__arrow {
-  @apply text-4xl transition-transform;
+  @apply text-2xl transition-transform;
 }
 
 .social-board__button:hover .social-board__arrow {
-  transform: translateX(8px);
+  transform: translateX(4px);
 }
 
 .social-board__button:hover .social-board__label {
-  transform: translateY(-2px) rotate(-1deg);
+  transform: translateY(-1px) rotate(-1deg);
 }
 
 .social-board__button:hover .social-board__button-left i {
-  transform: translateY(-2px) rotate(2deg);
-}
-
-.social-board__button-left i {
-  transition: transform 0.2s ease;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .social-board__button,
-  .social-board__arrow {
-    transition: none;
-  }
-
-  .social-board__label,
-  .social-board__button-left i {
-    transition: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .social-board__list {
-    @apply gap-4;
-  }
-
-  .social-board__button {
-    @apply p-4 gap-3;
-  }
-
-  .social-board__button--right,
-  .social-board__button--neutral {
-    margin-top: 0;
-  }
-
-  .social-board__button--left {
-    --tilt: -2deg;
-  }
-
-  .social-board__button--right {
-    --tilt: 1.5deg;
-  }
-
-  .social-board__button--neutral {
-    --tilt: -0.5deg;
-  }
-
-  .social-board__button-left i {
-    @apply text-3xl;
-  }
-
-  .social-board__label {
-    @apply text-xl;
-  }
-
-  .social-board__arrow {
-    @apply text-3xl;
-  }
+  transform: translateY(-1px) rotate(2deg);
 }
