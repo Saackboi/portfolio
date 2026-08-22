@@ -4,6 +4,7 @@ import { isReducedMotion } from './reduced-motion';
 export interface ParallaxLayer {
   element: HTMLElement;
   depth: number;
+  tilt?: boolean;
 }
 
 export function setupParallax(container: HTMLElement, layers: ParallaxLayer[]): () => void {
@@ -16,28 +17,44 @@ export function setupParallax(container: HTMLElement, layers: ParallaxLayer[]): 
     const relX = (event.clientX - rect.left) / rect.width - 0.5;
     const relY = (event.clientY - rect.top) / rect.height - 0.5;
 
-    layers.forEach(({ element, depth }) => {
+    layers.forEach(({ element, depth, tilt }) => {
       if (!element) return;
-      gsap.to(element, {
+      const vars: gsap.TweenVars = {
         x: relX * depth,
         y: relY * depth,
-        duration: 0.4,
-        ease: 'power1.out',
+        duration: 0.45,
+        ease: 'power2.out',
         overwrite: 'auto'
-      });
+      };
+
+      if (tilt) {
+        vars['rotateY'] = relX * 12;
+        vars['rotateX'] = -relY * 12;
+        vars['transformPerspective'] = 800;
+      }
+
+
+      gsap.to(element, vars);
     });
   };
 
   const onMouseLeave = () => {
-    layers.forEach(({ element }) => {
+    layers.forEach(({ element, tilt }) => {
       if (!element) return;
-      gsap.to(element, {
+      const vars: gsap.TweenVars = {
         x: 0,
         y: 0,
-        duration: 0.5,
-        ease: 'elastic.out(1, 0.5)',
+        duration: 0.6,
+        ease: 'power2.out',
         overwrite: 'auto'
-      });
+      };
+
+      if (tilt) {
+        vars.rotateY = 0;
+        vars.rotateX = 0;
+      }
+
+      gsap.to(element, vars);
     });
   };
 

@@ -1,4 +1,5 @@
 <section class="about" id="sobre-mi">
+  <div class="about__noise"></div>
   <div class="about__container">
     <div class="about__heading">
       <h2 class="about__title">Sobre Mí</h2>
@@ -7,12 +8,44 @@
       </p>
     </div>
 
+    <!-- Mobile Segmented Tab Selector -->
+    <div class="about__tabs" role="tablist" aria-label="Secciones de Sobre Mí">
+      <button
+        type="button"
+        role="tab"
+        [attr.aria-selected]="activeTab() === 'bio'"
+        class="about__tab-btn"
+        [class.about__tab-btn--active]="activeTab() === 'bio'"
+        (click)="setTab('bio', $event)"
+      >
+        <span class="material-symbols-outlined about__tab-icon">person</span>
+        <span>PERFIL DEV</span>
+      </button>
+      <button
+        type="button"
+        role="tab"
+        [attr.aria-selected]="activeTab() === 'stack'"
+        class="about__tab-btn"
+        [class.about__tab-btn--active]="activeTab() === 'stack'"
+        (click)="setTab('stack', $event)"
+      >
+        <span class="material-symbols-outlined about__tab-icon">bolt</span>
+        <span>TECH STACK</span>
+      </button>
+    </div>
+
+    <!-- Main Content Grid -->
     <div class="about__grid">
-      <div class="about__column about__column--left">
-        <div class="about__callout">"DEBUG OR DIE"</div>
+      <div
+        class="about__column about__column--left"
+        [class.about__column--hidden]="activeTab() !== 'bio'"
+      >
         <app-know-me />
       </div>
-      <div class="about__column about__column--right">
+      <div
+        class="about__column about__column--right"
+        [class.about__column--hidden]="activeTab() !== 'stack'"
+      >
         <app-tech-stack />
       </div>
     </div>

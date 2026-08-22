@@ -46,12 +46,35 @@
   @apply grid grid-cols-1 sm:grid-cols-2 gap-3 w-full;
 }
 
+/* Mobile: Form first + compact horizontal social bar below */
 @media (max-width: 768px) {
   .contact__title {
-    @apply text-2xl;
+    @apply text-2xl px-4 py-0.5;
+  }
+
+  .contact__subtitle {
+    @apply text-xs px-2;
   }
 
   .contact__grid {
-    @apply grid-cols-1 gap-4;
+    @apply flex flex-col gap-3.5;
+  }
+
+  /* Form appears first on mobile for instant UX */
+  .contact__right {
+    @apply order-1 w-full;
+  }
+
+  /* Social board and notes appear neatly below the form */
+  .contact__left {
+    @apply order-2 w-full gap-2.5;
+  }
+
+  .contact__board {
+    @apply p-2.5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)];
+  }
+
+  .contact__notes {
+    @apply grid grid-cols-2 gap-2;
   }
 }

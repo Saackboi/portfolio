@@ -4,8 +4,7 @@ import {
   Component,
   ElementRef,
   OnDestroy,
-  inject,
-  viewChild
+  inject
 } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 
@@ -31,21 +30,18 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     const heroSection = el.querySelector('.hero') as HTMLElement | null;
 
     if (heroSection) {
-      const titlePanel = el.querySelector('.hero__title-panel') as HTMLElement | null;
-      const bioCard = el.querySelector('.hero__bio-card') as HTMLElement | null;
-      const frame = el.querySelector('.hero__frame') as HTMLElement | null;
-      const modeTag = el.querySelector('.hero__mode-tag') as HTMLElement | null;
-      const bubbles = Array.from(el.querySelectorAll('.hero__bubble')) as HTMLElement[];
+      const bgArtwork = el.querySelector('.hero__artwork--bg') as HTMLElement | null;
+      const bodyArtwork = el.querySelector('.hero__artwork--body') as HTMLElement | null;
+      const errorGlow = el.querySelector('.hero__error-glow') as HTMLElement | null;
+      const intro = el.querySelector('.hero__intro') as HTMLElement | null;
 
-
+      // Optical Multi-Plane Depth Hierarchy
       const layers = [
-        ...(titlePanel ? [{ element: titlePanel, depth: 16 }] : []),
-        ...(bioCard ? [{ element: bioCard, depth: 26 }] : []),
-        ...(frame ? [{ element: frame, depth: 22 }] : []),
-        ...(modeTag ? [{ element: modeTag, depth: 38 }] : []),
-        ...bubbles.map((b, i) => ({ element: b, depth: 32 + i * 8 }))
+        ...(bgArtwork ? [{ element: bgArtwork, depth: 6 }] : []),
+        ...(intro ? [{ element: intro, depth: 8 }] : []),
+        ...(errorGlow ? [{ element: errorGlow, depth: 18 }] : []),
+        ...(bodyArtwork ? [{ element: bodyArtwork, depth: 38 }] : [])
       ];
-
 
       this.cleanupParallax = this.gsapAnimation.setupParallax(heroSection, layers);
     }
@@ -62,6 +58,3 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     this.sectionNav.setSection('proyectos');
   }
 }
-
-
-

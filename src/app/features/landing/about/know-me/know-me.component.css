@@ -1,161 +1,114 @@
 @reference "../../../../../styles.css";
 
-/* Notepad block mirrors the template styling. */
 .know-me {
-  @apply relative -rotate-1;
+  @apply relative;
 }
 
 .know-me__panel {
-  @apply bg-white dark:bg-gray-800 p-10 border-2 border-black dark:border-primary relative shadow-2xl;
-  animation: float-gentle 7s ease-in-out infinite alternate;
+  @apply bg-white dark:bg-[#151515] p-6 sm:p-8 border-3 border-black dark:border-white/90 relative shadow-[8px_8px_0px_0px_rgba(230,57,70,1)];
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  clip-path: var(--clip-torn-edge);
 }
 
 .know-me__panel:hover {
-  transform: translateY(-4px) rotate(-1deg);
-  box-shadow: 12px 12px 0 0 rgba(93, 237, 132, 1);
+  transform: translateY(-2px);
+  box-shadow: 10px 10px 0 0 rgba(230, 57, 70, 1), 0 0 20px rgba(230, 57, 70, 0.4);
+}
+
+.know-me__header {
+  @apply flex items-center justify-between pb-3 mb-4 border-b-2 border-black/20 dark:border-white/20;
+}
+
+.know-me__terminal-dots {
+  @apply flex items-center gap-1.5;
+}
+
+.know-me__dot {
+  @apply w-2.5 h-2.5 rounded-full border border-black/40;
+}
+
+.know-me__dot--red {
+  @apply bg-[#e63946];
+}
+
+.know-me__dot--yellow {
+  @apply bg-[#ff9f1c];
+}
+
+.know-me__dot--green {
+  @apply bg-[#5ded84];
+}
+
+.know-me__tag {
+  font-family: var(--font-display);
+  @apply text-xs uppercase tracking-widest text-black/60 dark:text-white/50;
 }
 
 .know-me__tape {
-  background: rgba(93, 237, 132, 0.4);
-  transform: rotate(-15deg);
-  @apply w-24 h-8 absolute -top-4 -left-4 border border-black/10 z-20;
-  animation: float-soft 6.5s ease-in-out infinite alternate;
-  transition: transform 0.2s ease;
+  background: rgba(93, 237, 132, 0.6);
+  @apply w-20 h-6 absolute -top-3 -left-3 border border-black/20 z-20 -rotate-12 pointer-events-none;
 }
 
 .know-me__tape--right {
-  background: rgba(230, 57, 70, 0.4);
-  transform: rotate(10deg);
-  @apply w-20 h-7 absolute -bottom-4 -right-4 border border-black/10 z-20;
-  animation-duration: 8s;
-  transition: transform 0.2s ease;
-}
-
-.know-me__tape:hover {
-  transform: translateY(-2px) rotate(-13deg);
-}
-
-.know-me__tape--right:hover {
-  transform: translateY(-2px) rotate(12deg);
+  background: rgba(230, 57, 70, 0.6);
+  @apply w-16 h-5 absolute -bottom-2.5 -right-2.5 border border-black/20 z-20 rotate-6 pointer-events-none;
 }
 
 .know-me__title {
   font-family: var(--font-display);
-  @apply text-4xl mb-6 uppercase flex items-center gap-2 text-primary;
+  @apply text-2xl sm:text-3xl mb-4 uppercase flex items-center gap-2 text-black dark:text-white;
 }
 
 .know-me__icon {
-  @apply text-4xl;
+  @apply text-2xl sm:text-3xl text-primary;
 }
 
 .know-me__body {
-  @apply space-y-6 text-xl font-bold leading-tight text-gray-800 dark:text-gray-200;
-  text-transform: uppercase;
-  letter-spacing: -0.05em;
+  @apply space-y-4 text-sm sm:text-base font-medium leading-relaxed text-gray-800 dark:text-gray-300;
 }
 
 .know-me__highlight {
-  @apply bg-secondary text-black px-1;
-}
-
-.know-me__highlight--primary {
-  @apply bg-primary text-white px-1;
+  @apply text-black dark:text-[#5ded84] bg-secondary/30 dark:bg-transparent font-bold underline decoration-2 decoration-primary underline-offset-2;
 }
 
 .know-me__manifesto {
-  @apply mt-8 bg-black/5 dark:bg-white/5 border-2 border-dashed border-black dark:border-white p-4 rotate-[-2deg] relative;
+  @apply mt-6 bg-black/5 dark:bg-black/40 border-2 border-dashed border-black/40 dark:border-[#5ded84]/60 p-4 relative;
 }
 
 .know-me__manifesto-title {
   font-family: var(--font-display);
-  @apply text-lg text-primary mb-2 uppercase;
+  @apply text-sm text-primary dark:text-[#5ded84] mb-2 uppercase tracking-wide;
 }
 
 .know-me__manifesto-list {
-  @apply text-sm space-y-2 uppercase font-bold italic;
+  @apply text-xs sm:text-sm space-y-2 uppercase font-bold text-gray-900 dark:text-gray-200;
 }
 
-.know-me__workflow {
-  @apply mt-8 border-t-2 border-dashed border-black dark:border-white pt-6;
+.know-me__manifesto-list li {
+  @apply flex items-center gap-1.5;
 }
 
-.know-me__workflow-title {
-  font-family: var(--font-display);
-  @apply text-lg mb-4 text-black dark:text-white uppercase;
-}
-
-.know-me__workflow-row {
-  @apply flex items-center justify-between text-center gap-2 text-black dark:text-white;
-}
-
-.know-me__workflow-step {
-  font-family: var(--font-display);
-  @apply p-2 border-2 border-black dark:border-white text-xs;
-}
-
-.know-me__workflow-step--secondary {
-  @apply bg-secondary/20;
-}
-
-.know-me__workflow-step--primary {
-  @apply bg-primary/20;
-}
-
-.know-me__workflow-step--success {
-  @apply bg-green-400/20;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .know-me__panel,
-  .know-me__tape,
-  .know-me__tape--right {
-    animation: none;
-  }
-
-  .know-me__panel {
-    transition: none;
-  }
-
-  .know-me__tape,
-  .know-me__tape--right {
-    transition: none;
-  }
+.know-me__bullet {
+  @apply text-sm sm:text-base text-primary dark:text-[#5ded84] shrink-0;
 }
 
 @media (max-width: 768px) {
-  .know-me {
-    transform: rotate(-0.5deg);
-  }
-
   .know-me__panel {
-    @apply p-6;
+    @apply p-5 shadow-[5px_5px_0px_0px_rgba(230,57,70,1)];
   }
 
   .know-me__title {
-    @apply text-3xl;
+    @apply text-xl mb-3;
   }
 
   .know-me__body {
-    @apply text-lg;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .know-me {
-    transform: rotate(-0.5deg);
+    @apply text-xs sm:text-sm space-y-3;
   }
 
-  .know-me__panel {
-    @apply p-6;
+  .know-me__manifesto {
+    @apply mt-4 p-3;
   }
 
-  .know-me__title {
-    @apply text-3xl;
-  }
-
-  .know-me__body {
-    @apply text-lg;
+  .know-me__manifesto-list {
+    @apply text-xs;
   }
 }

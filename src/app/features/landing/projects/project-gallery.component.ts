@@ -31,6 +31,9 @@ export class ProjectGalleryComponent {
   protected readonly projects = this.portfolioContent.projects;
   protected readonly selectedIndex = signal<number>(0);
 
+  private touchStartX = 0;
+  private touchStartY = 0;
+
   protected readonly totalCount = computed(() => this.projects().length);
 
   protected readonly activeProject = computed<ProjectCard | undefined>(() => {
@@ -92,6 +95,31 @@ export class ProjectGalleryComponent {
   handleArrowRight(): void {
     if (this.sectionNav.activeSection() === 'proyectos' && !this.sectionNav.isContactOpen()) {
       this.next();
+    }
+  }
+
+  @HostListener('touchstart', ['$event'])
+  handleTouchStart(event: TouchEvent): void {
+    if (event.touches.length > 0) {
+      this.touchStartX = event.touches[0].clientX;
+      this.touchStartY = event.touches[0].clientY;
+    }
+  }
+
+  @HostListener('touchend', ['$event'])
+  handleTouchEnd(event: TouchEvent): void {
+    if (event.changedTouches.length > 0) {
+      const deltaX = event.changedTouches[0].clientX - this.touchStartX;
+      const deltaY = event.changedTouches[0].clientY - this.touchStartY;
+
+      // Ensure horizontal swipe is dominant over vertical scroll
+      if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX < 0) {
+          this.next();
+        } else {
+          this.prev();
+        }
+      }
     }
   }
 

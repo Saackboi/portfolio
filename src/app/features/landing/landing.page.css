@@ -1,14 +1,11 @@
 @reference "../../../styles.css";
 
 :host {
-  display: block;
-  width: 100%;
-  min-height: calc(100dvh - 4.5rem);
-  background-color: #1a1a1a;
+  @apply block w-full min-h-[calc(100dvh-4.5rem)] bg-background-light dark:bg-background-dark;
 }
 
 .game-viewport {
-  @apply relative w-full min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-4.5rem)] flex flex-col bg-[#1a1a1a];
+  @apply relative w-full min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-4.5rem)] flex flex-col bg-background-light dark:bg-background-dark;
 }
 
 .screen-view {
@@ -16,18 +13,36 @@
   animation: screen-pop 240ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-/* Floating Action Button for Contact */
+/* Floating Action Button for Contact (Integrated Arcade Tactical Style) */
 .contact-fab {
-  @apply fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-accent text-black font-bold px-4 py-3 border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:scale-105 hover:-rotate-2 transition-all cursor-pointer;
+  @apply fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2.5 bg-black text-white dark:bg-black dark:text-white font-bold px-4 py-2.5 sm:px-5 sm:py-3 border-2 sm:border-3 border-black dark:border-primary transition-all cursor-pointer select-none;
+  font-family: var(--font-display);
+  box-shadow: 4px 4px 0px 0px rgba(230, 57, 70, 1);
+}
+
+:host-context(.dark) .contact-fab {
+  box-shadow: 4px 4px 0px 0px rgba(230, 57, 70, 1), 0 0 12px rgba(230, 57, 70, 0.35);
+}
+
+.contact-fab:hover {
+  @apply bg-zinc-900;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 6px 6px 0px 0px rgba(230, 57, 70, 1), 0 0 20px rgba(230, 57, 70, 0.6);
+}
+
+.contact-fab__status-dot {
+  @apply w-2.5 h-2.5 rounded-full bg-[#5ded84] shrink-0;
+  box-shadow: 0 0 8px #5ded84;
+  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .contact-fab__badge {
   font-family: var(--font-display);
-  @apply text-base tracking-wider hidden sm:inline-block uppercase;
+  @apply text-sm sm:text-base tracking-wider uppercase inline-block;
 }
 
 .contact-fab__icon {
-  @apply text-2xl font-bold;
+  @apply text-lg sm:text-xl text-primary font-bold;
 }
 
 /* Contact Modal Overlay */
@@ -37,17 +52,28 @@
 }
 
 .contact-overlay__container {
-  @apply relative w-[94vw] max-w-5xl bg-card-dark border-4 border-white shadow-[10px_10px_0px_0px_rgba(255,255,255,0.2)] p-4 sm:p-8 my-auto text-white;
+  @apply relative w-[94vw] max-w-5xl bg-white dark:bg-card-dark border-4 border-black dark:border-white shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:shadow-[10px_10px_0px_0px_rgba(255,255,255,0.2)] p-4 sm:p-8 my-auto text-black dark:text-white;
   animation: modal-pop 240ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 .contact-overlay__close {
   font-family: var(--font-display);
-  @apply absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-9 h-9 bg-white text-black text-lg font-bold border-2 border-white hover:bg-primary hover:text-white hover:scale-105 transition-all flex items-center justify-center cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)];
+  @apply absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-9 h-9 bg-black text-white dark:bg-white dark:text-black text-lg font-bold border-2 border-black dark:border-white hover:bg-primary hover:text-white hover:scale-105 transition-all flex items-center justify-center cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)];
 }
 
 .contact-overlay__content {
   @apply w-full;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
 }
 
 @keyframes screen-pop {

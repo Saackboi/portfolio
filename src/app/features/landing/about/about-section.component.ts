@@ -1,7 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal
+} from '@angular/core';
 
+import { GsapAnimationService } from '../../../core/services/gsap-animation.service';
 import { KnowMeComponent } from './know-me/know-me.component';
 import { TechStackComponent } from './tech-stack/tech-stack.component';
+
+export type AboutTab = 'bio' | 'stack';
 
 @Component({
   selector: 'app-about-section',
@@ -10,5 +18,15 @@ import { TechStackComponent } from './tech-stack/tech-stack.component';
   templateUrl: './about-section.component.html',
   styleUrl: './about-section.component.css'
 })
-// Section shell composes the notepad and tech stack panels.
-export class AboutSectionComponent {}
+export class AboutSectionComponent {
+  private readonly gsapAnimation = inject(GsapAnimationService);
+
+  readonly activeTab = signal<AboutTab>('bio');
+
+  setTab(tab: AboutTab, event?: MouseEvent): void {
+    if (event?.currentTarget instanceof HTMLElement) {
+      this.gsapAnimation.jellyTap(event.currentTarget);
+    }
+    this.activeTab.set(tab);
+  }
+}

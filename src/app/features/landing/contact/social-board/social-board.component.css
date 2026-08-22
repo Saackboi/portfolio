@@ -94,3 +94,52 @@
 .social-board__button:hover .social-board__button-left i {
   transform: translateY(-1px) rotate(2deg);
 }
+
+/* Mobile: Compact Horizontal 3-Column Bar */
+@media (max-width: 768px) {
+  .social-board {
+    @apply gap-1.5;
+  }
+
+  .social-board__title {
+    @apply text-xs mb-0.5 pb-0.5;
+  }
+
+  .social-board__list {
+    @apply grid grid-cols-3 gap-2;
+  }
+
+  .social-board__button {
+    @apply p-2 flex flex-col items-center justify-center gap-1 text-center border-2 rotate-0;
+    --tilt: 0deg;
+    box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 1);
+  }
+
+  .social-board__button--dark {
+    box-shadow: 3px 3px 0 0 rgba(93, 237, 132, 1);
+  }
+
+  .social-board__button--secondary {
+    box-shadow: 3px 3px 0 0 rgba(230, 57, 70, 1);
+  }
+
+  .social-board__button--accent {
+    box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 1);
+  }
+
+  .social-board__button-left {
+    @apply flex flex-col items-center gap-0.5;
+  }
+
+  .social-board__button-left i {
+    @apply text-xl;
+  }
+
+  .social-board__label {
+    @apply text-xs tracking-tight leading-none;
+  }
+
+  .social-board__arrow {
+    @apply hidden;
+  }
+}

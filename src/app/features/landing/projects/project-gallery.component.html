@@ -54,16 +54,12 @@
             </article>
           }
 
-          <!-- Center Card (Active Hero - Stacked Dossier with Clip & Stamp) -->
+          <!-- Center Card (Active Hero Polaroid) -->
           <a
             [routerLink]="['/projects', active.slug]"
             class="polaroid-card polaroid-card--active"
             [attr.aria-label]="'Ver proyecto ' + active.title"
           >
-            <!-- Background stacked sheets for depth -->
-            <div class="polaroid-card__sheet-layer polaroid-card__sheet-layer--bottom"></div>
-            <div class="polaroid-card__sheet-layer polaroid-card__sheet-layer--middle"></div>
-
             <!-- Tape with DB color -->
             <div class="polaroid-card__tape" [class]="tapeClass(active.tapeTone)"></div>
 
@@ -84,7 +80,7 @@
                 sizes="(min-width: 1024px) 35vw, (min-width: 768px) 50vw, 85vw"
                 priority
               />
-              <!-- Red Confidential / Dossier Stamp -->
+              <!-- Red Confidential Stamp -->
               <div class="polaroid-card__stamp">CONFIDENTIAL</div>
             </div>
 

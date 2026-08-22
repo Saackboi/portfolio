@@ -34,3 +34,17 @@
 .post-it__text {
   @apply text-xs font-bold text-black uppercase leading-tight;
 }
+
+@media (max-width: 768px) {
+  .post-it {
+    @apply p-2 rotate-0;
+  }
+
+  .post-it__title {
+    @apply text-xs mb-0.5;
+  }
+
+  .post-it__text {
+    @apply text-[10px] leading-snug;
+  }
+}
