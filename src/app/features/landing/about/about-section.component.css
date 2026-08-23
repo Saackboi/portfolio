@@ -1,7 +1,7 @@
 @reference "../../../../styles.css";
 
 .about {
-  @apply w-full min-h-[calc(100dvh-4.5rem)] pt-6 pb-12 sm:pt-8 md:pt-10 bg-background-light dark:bg-[#0a0a0d] relative flex flex-col justify-start md:justify-center overflow-y-auto;
+  @apply w-full min-h-[calc(100dvh-4.5rem)] pt-20 pb-16 sm:pt-22 md:pt-24 bg-background-light dark:bg-[#0a0a0d] relative flex flex-col justify-start overflow-y-auto;
 }
 
 .about__noise {
@@ -17,7 +17,7 @@
 .about__heading {
   position: relative;
   text-align: center;
-  margin-bottom: clamp(1.2rem, 2.5vh, 2rem);
+  margin-bottom: clamp(1.2rem, 2.5vh, 2.2rem);
   flex-shrink: 0;
 }
 
@@ -72,11 +72,11 @@
 
 /* Main Content Grid */
 .about__grid {
-  @apply grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch;
+  @apply grid lg:grid-cols-12 gap-6 lg:gap-8 items-start;
 }
 
 .about__column {
-  @apply relative h-full;
+  @apply relative;
 }
 
 .about__column--left {

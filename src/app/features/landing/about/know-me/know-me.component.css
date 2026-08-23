@@ -8,14 +8,13 @@
 .know-me__panel {
   background-color: #faf8f2;
   background-image: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(244, 241, 230, 1) 100%);
-  padding: 1.6rem 1.85rem;
+  padding: 1.5rem 1.75rem;
   border: 3px solid #000000;
   box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 1);
   position: relative;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 0.85rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -122,22 +121,6 @@
 .know-me__icon {
   font-size: 1.65rem;
   color: var(--color-primary);
-}
-
-.know-me__badge-pill {
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  font-weight: bold;
-  padding: 0.2rem 0.55rem;
-  background-color: rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: #000000;
-}
-
-:host-context(.dark) .know-me__badge-pill {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
 }
 
 /* Bio Text - High Contrast Readability */
