@@ -4,3 +4,6 @@ export * from './modal.animation';
 export * from './parallax.animation';
 export * from './tactile.animation';
 export * from './carousel.animation';
+export * from './project-zoom.animation';
+export * from './desk-entrance.animation';
+export * from './hero-entrance.animation';

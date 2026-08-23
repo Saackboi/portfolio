@@ -3,12 +3,13 @@ import {
   Component,
   ElementRef,
   HostListener,
+  afterNextRender,
   computed,
   inject,
   signal
 } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { GsapAnimationService } from '../../../core/services/gsap-animation.service';
 import { PortfolioContentService } from '../../../core/services/portfolio-content.service';
@@ -18,7 +19,7 @@ import { ProjectCard } from '../../../core/models/portfolio-content.model';
 @Component({
   selector: 'app-project-gallery',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgOptimizedImage, RouterLink],
+  imports: [NgOptimizedImage],
   templateUrl: './project-gallery.component.html',
   styleUrl: './project-gallery.component.css'
 })
@@ -27,14 +28,27 @@ export class ProjectGalleryComponent {
   private readonly sectionNav = inject(SectionNavigationService);
   private readonly gsapAnimation = inject(GsapAnimationService);
   private readonly host = inject(ElementRef<HTMLElement>);
+  private readonly router = inject(Router);
+
+  constructor() {
+    afterNextRender(() => {
+      this.gsapAnimation.deskEntrance(this.host.nativeElement);
+    });
+  }
 
   protected readonly projects = this.portfolioContent.projects;
   protected readonly selectedIndex = signal<number>(0);
+  protected readonly isOpening = signal<boolean>(false);
+  protected readonly openingSlug = signal<string>('');
+  protected readonly isBlackoutActive = signal<boolean>(false);
 
   private touchStartX = 0;
   private touchStartY = 0;
 
   protected readonly totalCount = computed(() => this.projects().length);
+  protected readonly formattedIndex = computed(() => String(this.selectedIndex() + 1).padStart(2, '0'));
+  protected readonly formattedTotal = computed(() => String(this.totalCount()).padStart(2, '0'));
+  protected readonly progressPercent = computed(() => this.totalCount() ? Math.round(((this.selectedIndex() + 1) / this.totalCount()) * 100) : 0);
 
   protected readonly activeProject = computed<ProjectCard | undefined>(() => {
     const list = this.projects();
@@ -74,6 +88,27 @@ export class ProjectGalleryComponent {
         this.gsapAnimation.carouselSlide(track, direction);
       }
     }, 10);
+  }
+
+  openProject(slug: string | undefined, event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.isOpening() || !slug) return;
+
+    this.isOpening.set(true);
+    this.openingSlug.set(slug);
+
+    const activeCard = this.host.nativeElement.querySelector('.polaroid-frame--active') as HTMLElement | null;
+    const blackout = this.host.nativeElement.querySelector('.projects__blackout') as HTMLElement | null;
+    const viewport = this.host.nativeElement.querySelector('.projects__viewport') as HTMLElement | null;
+
+    if (activeCard && blackout) {
+      this.gsapAnimation.projectZoom(activeCard, blackout, viewport, () => {
+        void this.router.navigate(['/projects', slug]);
+      });
+    } else {
+      void this.router.navigate(['/projects', slug]);
+    }
   }
 
   next(event?: MouseEvent): void {
@@ -124,6 +159,6 @@ export class ProjectGalleryComponent {
   }
 
   protected tapeClass(tone?: string): string {
-    return `polaroid-card__tape--${tone ?? 'yellow'}`;
+    return `polaroid-frame__tape--${tone ?? 'yellow'}`;
   }
 }

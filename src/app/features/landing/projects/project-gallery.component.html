@@ -10,134 +10,106 @@
       </p>
     </div>
 
-    @if (activeProject(); as active) {
-      <!-- Character-Selector Carousel Stage -->
-      <div class="projects__stage">
-        <!-- Navigation Arrow Left -->
-        <button
-          type="button"
-          class="projects__nav-btn projects__nav-btn--prev"
-          (click)="prev($event)"
-          aria-label="Proyecto anterior"
+    <!-- Continuous Sliding Carousel Stage -->
+    <div class="projects__stage">
+      <!-- Navigation Arrow Left -->
+      <button
+        type="button"
+        class="projects__nav-btn projects__nav-btn--prev"
+        (click)="prev($event)"
+        aria-label="Proyecto anterior"
+      >
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+
+      <!-- Carousel Viewport & Track -->
+      <div class="projects__viewport">
+        <div
+          class="projects__track"
+          [style.--active-index]="selectedIndex()"
         >
-          <span class="material-symbols-outlined">chevron_left</span>
-        </button>
-
-        <!-- Carousel Track -->
-        <div class="projects__track">
-          <!-- Left Card (Previous) -->
-          @if (prevProject(); as prevP) {
+          @for (p of projects(); track p.title; let i = $index) {
             <article
-              class="polaroid-card polaroid-card--left"
-              (click)="prev($event)"
-              role="button"
-              tabindex="0"
-              [attr.aria-label]="'Seleccionar ' + prevP.title"
+              class="polaroid-frame"
+              [class.polaroid-frame--active]="i === selectedIndex()"
+              [class.polaroid-frame--left]="i < selectedIndex()"
+              [class.polaroid-frame--right]="i > selectedIndex()"
+              [class.polaroid-frame--opening]="isOpening() && p.slug === openingSlug()"
+              (click)="i === selectedIndex() ? openProject(p.slug, $event) : selectProject(i, i > selectedIndex() ? 1 : -1, $event)"
+              [attr.aria-label]="p.title"
             >
-              <div class="polaroid-card__tape" [class]="tapeClass(prevP.tapeTone)"></div>
-              <div class="polaroid-card__image-box">
+              <!-- Masking Tape Top-Left -->
+              <div class="polaroid-frame__tape polaroid-frame__tape--tl" [class]="tapeClass(p.tapeTone)"></div>
+
+              <!-- Masking Tape Bottom-Right -->
+              <div class="polaroid-frame__tape polaroid-frame__tape--br" [class]="tapeClass(p.tapeTone)"></div>
+
+              <!-- Inner Photo Frame -->
+              <div class="polaroid-frame__photo-box">
                 <img
-                  [alt]="prevP.title"
-                  class="polaroid-card__photo"
-                  [ngSrc]="prevP.image"
+                  [alt]="p.title"
+                  class="polaroid-frame__photo"
+                  [ngSrc]="p.image"
                   fill
-                  sizes="25vw"
+                  [priority]="i === 0"
+                  sizes="(min-width: 1024px) 38vw, (min-width: 768px) 55vw, 84vw"
                 />
+                <div class="polaroid-frame__photo-glare"></div>
               </div>
-              <div class="polaroid-card__caption">
-                <h3 class="polaroid-card__title">{{ prevP.title }}</h3>
-                <div class="polaroid-card__meta">
-                  <span class="polaroid-card__code">{{ prevP.code }}</span>
-                  <span class="polaroid-card__year">{{ prevP.year }}</span>
+
+              <!-- Iconic Polaroid Bottom Chin -->
+              <div class="polaroid-frame__chin">
+                <div class="polaroid-frame__meta">
+                  <h3 class="polaroid-frame__title">{{ p.title }}</h3>
+                  @if (p.description) {
+                    <p class="polaroid-frame__description">{{ p.description }}</p>
+                  }
+                  <span class="polaroid-frame__code">{{ p.code }} • {{ p.year }}</span>
                 </div>
-              </div>
-            </article>
-          }
 
-          <!-- Center Card (Active Hero Polaroid) -->
-          <a
-            [routerLink]="['/projects', active.slug]"
-            class="polaroid-card polaroid-card--active"
-            [attr.aria-label]="'Ver proyecto ' + active.title"
-          >
-            <!-- Tape with DB color -->
-            <div class="polaroid-card__tape" [class]="tapeClass(active.tapeTone)"></div>
-
-            <!-- Paperclip in top right corner -->
-            <div class="polaroid-card__clip">
-              <svg viewBox="0 0 32 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="polaroid-card__clip-svg">
-                <path d="M12 18V46C12 51.5 16 55 21 55C26 55 30 51.5 30 46V14C30 7 24 2 17 2C10 2 4 7 4 14V48" stroke="#9ca3af" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-
-            <!-- Image Area -->
-            <div class="polaroid-card__image-box">
-              <img
-                [alt]="active.title"
-                class="polaroid-card__photo"
-                [ngSrc]="active.image"
-                fill
-                sizes="(min-width: 1024px) 35vw, (min-width: 768px) 50vw, 85vw"
-                priority
-              />
-              <!-- Red Confidential Stamp -->
-              <div class="polaroid-card__stamp">CONFIDENTIAL</div>
-            </div>
-
-            <!-- Dossier Caption -->
-            <div class="polaroid-card__caption">
-              <div class="polaroid-card__dossier-header">
-                <h3 class="polaroid-card__title">{{ active.title }}</h3>
-                <span class="polaroid-card__code-badge">{{ active.code }}</span>
-              </div>
-              <p class="polaroid-card__description">{{ active.description }}</p>
-              <div class="polaroid-card__meta">
-                <span class="polaroid-card__year">YEAR: {{ active.year }}</span>
-                <span class="polaroid-card__cta-hint">VER EXPEDIENTE →</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Right Card (Next) -->
-          @if (nextProject(); as nextP) {
-            <article
-              class="polaroid-card polaroid-card--right"
-              (click)="next($event)"
-              role="button"
-              tabindex="0"
-              [attr.aria-label]="'Seleccionar ' + nextP.title"
-            >
-              <div class="polaroid-card__tape" [class]="tapeClass(nextP.tapeTone)"></div>
-              <div class="polaroid-card__image-box">
-                <img
-                  [alt]="nextP.title"
-                  class="polaroid-card__photo"
-                  [ngSrc]="nextP.image"
-                  fill
-                  sizes="25vw"
-                />
-              </div>
-              <div class="polaroid-card__caption">
-                <h3 class="polaroid-card__title">{{ nextP.title }}</h3>
-                <div class="polaroid-card__meta">
-                  <span class="polaroid-card__code">{{ nextP.code }}</span>
-                  <span class="polaroid-card__year">{{ nextP.year }}</span>
-                </div>
+                @if (i === selectedIndex()) {
+                  <button
+                    type="button"
+                    class="polaroid-frame__cta"
+                    (click)="openProject(p.slug, $event)"
+                    [attr.aria-label]="'Ver proyecto ' + p.title"
+                  >
+                    VER PROYECTO →
+                  </button>
+                }
               </div>
             </article>
           }
         </div>
-
-        <!-- Navigation Arrow Right -->
-        <button
-          type="button"
-          class="projects__nav-btn projects__nav-btn--next"
-          (click)="next($event)"
-          aria-label="Proyecto siguiente"
-        >
-          <span class="material-symbols-outlined">chevron_right</span>
-        </button>
       </div>
-    }
+
+      <!-- Navigation Arrow Right -->
+      <button
+        type="button"
+        class="projects__nav-btn projects__nav-btn--next"
+        (click)="next($event)"
+        aria-label="Proyecto siguiente"
+      >
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
+    </div>
+
+    <!-- HUD Counter & Progress Bar -->
+    <div class="projects__hud">
+      <span class="projects__hud-counter">
+        <strong>{{ formattedIndex() }}</strong> / {{ formattedTotal() }}
+      </span>
+      <div class="projects__hud-track">
+        <div class="projects__hud-bar" [style.width.%]="progressPercent()"></div>
+      </div>
+      <span class="projects__hud-percent">{{ progressPercent() }}%</span>
+    </div>
   </div>
+
+  <!-- Cinematic Blackout Flash Overlay -->
+  <div
+    class="projects__blackout"
+    [class.projects__blackout--active]="isBlackoutActive()"
+    aria-hidden="true"
+  ></div>
 </section>

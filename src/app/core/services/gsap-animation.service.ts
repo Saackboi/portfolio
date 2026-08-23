@@ -2,8 +2,11 @@ import { Injectable, NgZone, inject } from '@angular/core';
 import {
   ParallaxLayer,
   animateCarouselSlide,
+  animateDeskEntrance,
+  animateHeroEntrance,
   animateModalClose,
   animateModalOpen,
+  animateProjectZoom,
   animateScreenEnter,
   comicPop,
   isReducedMotion,
@@ -24,6 +27,14 @@ export class GsapAnimationService {
 
   screenEnter(container: HTMLElement): void {
     this.ngZone.runOutsideAngular(() => animateScreenEnter(container));
+  }
+
+  heroEntrance(container: HTMLElement): void {
+    this.ngZone.runOutsideAngular(() => animateHeroEntrance(container));
+  }
+
+  deskEntrance(container: HTMLElement): void {
+    this.ngZone.runOutsideAngular(() => animateDeskEntrance(container));
   }
 
   comicPop(element: HTMLElement, delay = 0): void {
@@ -47,10 +58,23 @@ export class GsapAnimationService {
   }
 
   setupParallax(container: HTMLElement, layers: ParallaxLayer[]): () => void {
-    return setupParallax(container, layers);
+    let cleanup: () => void = () => {};
+    this.ngZone.runOutsideAngular(() => {
+      cleanup = setupParallax(container, layers);
+    });
+    return cleanup;
   }
 
   carouselSlide(track: HTMLElement, direction: number = 1): void {
     this.ngZone.runOutsideAngular(() => animateCarouselSlide(track, direction));
+  }
+
+  projectZoom(
+    card: HTMLElement,
+    blackout: HTMLElement,
+    viewport: HTMLElement | null,
+    onComplete: () => void
+  ): void {
+    this.ngZone.runOutsideAngular(() => animateProjectZoom(card, blackout, viewport, onComplete));
   }
 }
