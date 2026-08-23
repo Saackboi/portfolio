@@ -4,7 +4,7 @@ import { isReducedMotion } from './reduced-motion';
 export function animateDeskEntrance(container: HTMLElement): void {
   if (!container || isReducedMotion()) return;
 
-  const header = container.querySelector('.projects__header') as HTMLElement | null;
+  const header = container.querySelector('.projects__heading') as HTMLElement | null;
   const cards = container.querySelectorAll('.polaroid-frame');
   const tapes = container.querySelectorAll('.polaroid-frame--active .polaroid-frame__tape');
   const cta = container.querySelector('.polaroid-frame--active .polaroid-frame__cta') as HTMLElement | null;

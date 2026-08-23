@@ -1,76 +1,64 @@
 import gsap from 'gsap';
+import { isReducedMotion } from './reduced-motion';
 
 export function animateCarouselSlide(
   track: HTMLElement,
-  direction: number = 1
+  _direction: number = 1
 ): void {
-  if (!track) return;
+  if (!track || isReducedMotion()) return;
 
-  const activeCard = track.querySelector('.polaroid-card--active') as HTMLElement | null;
-  const leftCard = track.querySelector('.polaroid-card--left') as HTMLElement | null;
-  const rightCard = track.querySelector('.polaroid-card--right') as HTMLElement | null;
+  const activeCard = track.querySelector('.polaroid-frame--active') as HTMLElement | null;
+  if (!activeCard) return;
 
-  const cards = [leftCard, activeCard, rightCard].filter(Boolean) as HTMLElement[];
-  if (cards.length === 0) return;
+  const activeTapes = activeCard.querySelectorAll('.polaroid-frame__tape');
+  const activeCta = activeCard.querySelector('.polaroid-frame__cta') as HTMLElement | null;
 
-  gsap.killTweensOf(cards);
+  const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
-  const startX = direction > 0 ? 60 : -60;
-  const startRotateY = direction > 0 ? 12 : -12;
-
-  // Animate the cards with 3D slide and smooth settle
-  if (activeCard) {
-    gsap.fromTo(
-      activeCard,
+  // 1. Masking tapes slap/snap onto the corners from above with elastic bounce
+  if (activeTapes.length > 0) {
+    gsap.killTweensOf(activeTapes);
+    tl.fromTo(
+      activeTapes,
       {
-        x: startX,
-        rotateY: startRotateY,
-        scale: 0.94,
-        opacity: 0.7
+        opacity: 0,
+        scale: 1.6,
+        y: -14
       },
       {
-        x: 0,
-        rotateY: 0,
+        opacity: 0.85,
         scale: 1,
+        y: 0,
+        duration: 0.28,
+        ease: 'back.out(2.4)',
+        stagger: 0.06,
+        clearProps: 'scale,y'
+      },
+      0.08
+    );
+  }
+
+  // 2. CTA button stamps/pops onto the bottom chin with comic tactile punch
+  if (activeCta) {
+    gsap.killTweensOf(activeCta);
+    tl.fromTo(
+      activeCta,
+      {
+        opacity: 0,
+        scale: 1.45,
+        y: -8,
+        rotation: -2
+      },
+      {
         opacity: 1,
-        duration: 0.35,
-        ease: 'power2.out',
-        clearProps: 'x,rotateY,scale,opacity'
-      }
-    );
-  }
-
-  if (leftCard) {
-    gsap.fromTo(
-      leftCard,
-      {
-        x: startX * 0.7,
-        opacity: 0.3
+        scale: 1,
+        y: 0,
+        rotation: 0,
+        duration: 0.26,
+        ease: 'back.out(2.2)',
+        clearProps: 'all'
       },
-      {
-        x: 0,
-        opacity: 0.5,
-        duration: 0.35,
-        ease: 'power2.out',
-        clearProps: 'x,opacity'
-      }
-    );
-  }
-
-  if (rightCard) {
-    gsap.fromTo(
-      rightCard,
-      {
-        x: startX * 0.7,
-        opacity: 0.3
-      },
-      {
-        x: 0,
-        opacity: 0.5,
-        duration: 0.35,
-        ease: 'power2.out',
-        clearProps: 'x,opacity'
-      }
+      0.14
     );
   }
 }

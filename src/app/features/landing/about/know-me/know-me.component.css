@@ -2,36 +2,59 @@
 
 .know-me {
   position: relative;
+  width: 100%;
+}
+
+/* 2-Column Grid: Left Dossier Card, Right Torn Paper Sheet */
+.know-me__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+  .know-me__layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* --- Left Column: Dossier Card --- */
+.know-me__dossier {
+  position: relative;
   height: 100%;
 }
 
 .know-me__panel {
   background-color: #faf8f2;
   background-image: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(244, 241, 230, 1) 100%);
-  padding: 1.5rem 1.75rem;
+  padding: 1.75rem 2rem;
   border: 3px solid #000000;
-  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 1);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28), 7px 7px 0px 0px rgba(0, 0, 0, 1);
   position: relative;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  justify-content: space-between;
+  gap: 1.25rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 :host-context(.dark) .know-me__panel {
   background-color: #121216;
   background-image: radial-gradient(circle at 50% 0%, rgba(32, 32, 42, 0.7) 0%, rgba(18, 18, 22, 1) 100%);
-  border-color: rgba(255, 255, 255, 0.85);
-  box-shadow: 7px 7px 0px 0px var(--color-primary);
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 7px 7px 0px 0px var(--color-primary);
 }
 
 .know-me__panel:hover {
   transform: translateY(-2px);
-  box-shadow: 9px 9px 0px 0px rgba(0, 0, 0, 1);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.35), 9px 9px 0px 0px rgba(0, 0, 0, 1);
 }
 
 :host-context(.dark) .know-me__panel:hover {
-  box-shadow: 9px 9px 0px 0px var(--color-primary), 0 0 16px rgba(230, 57, 70, 0.35);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.95), 9px 9px 0px 0px var(--color-primary), 0 0 16px rgba(230, 57, 70, 0.35);
 }
 
 /* Dossier Header */
@@ -40,7 +63,6 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 0.75rem;
-  margin-bottom: 1rem;
   border-bottom: 2px solid rgba(0, 0, 0, 0.15);
 }
 
@@ -93,19 +115,16 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Title Row */
+/* Title */
 .know-me__title-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.1rem;
 }
 
 .know-me__title {
   font-family: var(--font-display);
-  font-size: 1.55rem;
+  font-size: 1.6rem;
   line-height: 1.2;
   text-transform: uppercase;
   display: flex;
@@ -123,12 +142,12 @@
   color: var(--color-primary);
 }
 
-/* Bio Text - High Contrast Readability */
+/* Bio Text */
 .know-me__body {
   display: flex;
   flex-direction: column;
-  gap: 0.95rem;
-  font-size: 0.95rem;
+  gap: 0.9rem;
+  font-size: 0.96rem;
   line-height: 1.7;
   color: #18181b;
   font-weight: 500;
@@ -152,138 +171,297 @@
   border-bottom-color: #5ded84;
 }
 
-/* Dev Manifesto */
-.know-me__manifesto {
-  margin-top: 1.35rem;
-  background: rgba(0, 0, 0, 0.03);
-  border: 2px dashed rgba(0, 0, 0, 0.35);
-  padding: 1rem 1.1rem;
-  position: relative;
+.know-me__education {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: #3f3f46;
+  padding-top: 0.45rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.15);
+  margin: 0;
 }
 
-:host-context(.dark) .know-me__manifesto {
-  background: rgba(0, 0, 0, 0.45);
-  border-color: rgba(93, 237, 132, 0.4);
+:host-context(.dark) .know-me__education {
+  color: #d4d4d8;
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+.know-me__education-icon {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+:host-context(.dark) .know-me__education-icon {
+  color: #5ded84;
+}
+
+/* ORIZON Brand Presence Button (Clean, Minimalist, Georgia Serif) */
+.know-me__orizon-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.6rem 0.9rem;
+  background-color: #eaf3de;
+  border: 2px solid #27500a;
+  box-shadow: 3px 3px 0px 0px #173404;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+:host-context(.dark) .know-me__orizon-btn {
+  background-color: #0d1e11;
+  border-color: #27500a;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.85);
+}
+
+.know-me__orizon-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 4.5px 4.5px 0px 0px #173404;
+}
+
+:host-context(.dark) .know-me__orizon-btn:hover {
+  border-color: #97c459;
+  box-shadow: 4.5px 4.5px 0px 0px #97c459, 0 0 10px rgba(151, 196, 89, 0.25);
+}
+
+.know-me__orizon-btn:hover .know-me__orizon-arrow {
+  transform: translate(2px, -2px);
+}
+
+.know-me__orizon-logo-box {
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  flex-shrink: 0;
+}
+
+.know-me__orizon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.know-me__orizon-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  flex: 1;
+}
+
+.know-me__orizon-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.12rem;
+  letter-spacing: 0.03em;
+  color: #173404;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+:host-context(.dark) .know-me__orizon-title {
+  color: #eaf3de;
+}
+
+.know-me__orizon-slogan {
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #27500a;
+  letter-spacing: 0.01em;
+}
+
+:host-context(.dark) .know-me__orizon-slogan {
+  color: #97c459;
+}
+
+.know-me__orizon-arrow {
+  font-size: 1.2rem;
+  color: #27500a;
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+:host-context(.dark) .know-me__orizon-arrow {
+  color: #97c459;
+}
+
+/* --- Right Column: Enlarged Authentic Torn Lined Paper Sheet --- */
+.know-me__torn-sheet-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(0.8deg);
+  transition: transform 0.25s ease;
+}
+
+.know-me__torn-sheet-container:hover {
+  transform: rotate(0deg) scale(1.015);
+}
+
+.know-me__torn-paper {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  min-height: 480px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.4)) drop-shadow(6px 6px 0px rgba(0, 0, 0, 0.85));
+}
+
+:host-context(.dark) .know-me__torn-paper {
+  filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.95)) drop-shadow(6px 6px 0px #5ded84);
+}
+
+.know-me__torn-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+/* Internal Printable Area strictly bounded within the white lined notebook */
+.know-me__torn-content {
+  position: relative;
+  z-index: 10;
+  width: 66%;
+  height: 66%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 0.25rem 0;
 }
 
 .know-me__manifesto-header {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
-  margin-bottom: 0.65rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.25);
 }
 
 .know-me__manifesto-icon {
-  font-size: 1.15rem;
-  color: var(--color-primary);
-}
-
-:host-context(.dark) .know-me__manifesto-icon {
-  color: #5ded84;
+  font-size: 1.45rem;
+  color: #b91c1c;
 }
 
 .know-me__manifesto-title {
   font-family: var(--font-display);
-  font-size: 0.88rem;
+  font-size: 1.15rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--color-primary);
+  letter-spacing: 0.05em;
+  color: #18181b;
+  margin: 0;
+  text-shadow: none;
 }
 
-:host-context(.dark) .know-me__manifesto-title {
-  color: #5ded84;
+/* 2x2 Grid of Sticky Cards with Big Icons */
+.know-me__stickers-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin: auto 0;
 }
 
-.know-me__manifesto-list {
+.know-me__sticker {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.know-me__manifesto-item {
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  padding: 0.4rem 0.75rem;
-  display: flex;
   align-items: center;
-  gap: 0.45rem;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  justify-content: center;
+  text-align: center;
+  padding: 0.85rem 0.6rem;
+  gap: 0.35rem;
+  border: 1.5px solid #000000;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.85);
+  transition: transform 0.15s ease;
   user-select: none;
 }
 
-.know-me__manifesto-item:hover {
-  transform: translateY(-2px) scale(1.015);
+.know-me__sticker:hover {
+  transform: translateY(-2px) scale(1.03);
 }
 
-.know-me__manifesto-item--red {
+.know-me__sticker-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.know-me__sticker-text {
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  line-height: 1.25;
+  color: #18181b;
+  font-weight: 700;
+}
+
+.know-me__sticker--red {
   background-color: #fee2e2;
-  color: #991b1b;
-  border: 2px solid #b91c1c;
-  box-shadow: 2px 2px 0px 0px #b91c1c;
-  transform: rotate(-0.5deg);
+  border-color: #b91c1c;
+  transform: rotate(-1.2deg);
 }
+.know-me__sticker--red .know-me__sticker-icon { color: #991b1b; }
 
-:host-context(.dark) .know-me__manifesto-item--red {
-  background-color: #1f1114;
-  color: #fca5a5;
-  border-color: #ef4444;
-  box-shadow: 2px 2px 0px 0px #ef4444;
-}
-
-.know-me__manifesto-item--green {
+.know-me__sticker--green {
   background-color: #dcfce7;
-  color: #166534;
-  border: 2px solid #15803d;
-  box-shadow: 2px 2px 0px 0px #15803d;
-  transform: rotate(0.4deg);
+  border-color: #15803d;
+  transform: rotate(1deg);
 }
+.know-me__sticker--green .know-me__sticker-icon { color: #166534; }
 
-:host-context(.dark) .know-me__manifesto-item--green {
-  background-color: #0d2015;
-  color: #86efac;
-  border-color: #22c55e;
-  box-shadow: 2px 2px 0px 0px #22c55e;
-}
-
-.know-me__manifesto-item--yellow {
+.know-me__sticker--yellow {
   background-color: #fef9c3;
-  color: #854d0e;
-  border: 2px solid #a16207;
-  box-shadow: 2px 2px 0px 0px #a16207;
-  transform: rotate(-0.3deg);
+  border-color: #a16207;
+  transform: rotate(-0.8deg);
 }
+.know-me__sticker--yellow .know-me__sticker-icon { color: #854d0e; }
 
-:host-context(.dark) .know-me__manifesto-item--yellow {
-  background-color: #231c0e;
-  color: #fde047;
-  border-color: #eab308;
-  box-shadow: 2px 2px 0px 0px #eab308;
-}
-
-.know-me__manifesto-item--purple {
+.know-me__sticker--purple {
   background-color: #f3e8ff;
-  color: #6b21a8;
-  border: 2px solid #7e22ce;
-  box-shadow: 2px 2px 0px 0px #7e22ce;
-  transform: rotate(0.6deg);
+  border-color: #7e22ce;
+  transform: rotate(1.4deg);
+}
+.know-me__sticker--purple .know-me__sticker-icon { color: #6b21a8; }
+
+.know-me__torn-footer {
+  width: 100%;
+  padding-top: 0.35rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
-:host-context(.dark) .know-me__manifesto-item--purple {
-  background-color: #1c1228;
-  color: #d8b4fe;
-  border-color: #a855f7;
-  box-shadow: 2px 2px 0px 0px #a855f7;
+.know-me__torn-motto {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #3f3f46;
+  text-shadow: none;
 }
 
-.know-me__bullet {
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-
-/* Masking Tape Accents */
+/* Masking Tape Accents on Left Dossier Card */
 .know-me__tape {
   position: absolute;
   width: 4.75rem;
@@ -310,6 +488,99 @@
 
 @media (max-width: 640px) {
   .know-me__panel {
-    padding: 1.25rem;
+    padding: 1.15rem 1rem;
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+    border-width: 2px;
+  }
+
+  :host-context(.dark) .know-me__panel {
+    box-shadow: 4px 4px 0px 0px var(--color-primary);
+  }
+
+  .know-me__title {
+    font-size: 1.35rem;
+  }
+
+  .know-me__body {
+    font-size: 0.88rem;
+    line-height: 1.58;
+    gap: 0.65rem;
+  }
+
+  .know-me__orizon-btn {
+    padding: 0.5rem 0.75rem;
+    gap: 0.65rem;
+    box-shadow: 2.5px 2.5px 0px 0px #173404;
+  }
+
+  .know-me__orizon-logo-box {
+    width: 36px;
+    height: 36px;
+  }
+
+  .know-me__orizon-title {
+    font-size: 1rem;
+  }
+
+  .know-me__orizon-slogan {
+    font-size: 0.68rem;
+  }
+
+  .know-me__torn-paper {
+    max-width: 100%;
+    min-height: 360px;
+    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.85));
+  }
+
+  :host-context(.dark) .know-me__torn-paper {
+    filter: drop-shadow(4px 4px 0px #5ded84);
+  }
+
+  .know-me__torn-content {
+    width: 74%;
+    height: 74%;
+    padding: 0.2rem 0;
+  }
+
+  .know-me__manifesto-title {
+    font-size: 0.95rem;
+  }
+
+  .know-me__stickers-grid {
+    gap: 0.45rem;
+    margin: 0.25rem 0;
+  }
+
+  .know-me__sticker {
+    padding: 0.55rem 0.35rem;
+    box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.85);
+  }
+
+  .know-me__sticker-icon {
+    font-size: 1.45rem;
+  }
+
+  .know-me__sticker-text {
+    font-size: 0.62rem;
+    line-height: 1.2;
+  }
+
+  .know-me__torn-motto {
+    font-size: 0.72rem;
+  }
+
+  .know-me__tape {
+    width: 3.5rem;
+    height: 1.1rem;
+  }
+
+  .know-me__tape--top {
+    top: -6px;
+    left: -4px;
+  }
+
+  .know-me__tape--bottom {
+    bottom: -6px;
+    right: -4px;
   }
 }
