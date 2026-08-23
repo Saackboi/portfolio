@@ -1,6 +1,53 @@
 <div class="loading-sketch">
+  <div class="loading-sketch__noise"></div>
   <div class="loading-sketch__content">
-    <div class="loading-sketch__spinner"></div>
-    <p class="loading-sketch__text">{{ phrase() }}</p>
+    
+    <!-- Outer Spinner with Animated Eye in Center -->
+    <div class="loading-sketch__eye-container">
+      <div class="loading-sketch__spinner-outer"></div>
+      <div class="loading-sketch__spinner-inner"></div>
+
+      <!-- Animated Eye -->
+      <div class="loading-sketch__eye">
+        <svg class="loading-sketch__eye-svg" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+          <!-- Eye Sclera Background -->
+          <path
+            class="loading-sketch__eye-bg"
+            d="M 6,30 Q 50,-4 94,30 Q 50,64 6,30 Z"
+          />
+
+          <!-- Moving Iris & Pupil (Look Left, Look Right, Center) -->
+          <g class="loading-sketch__iris-group">
+            <circle class="loading-sketch__iris" cx="50" cy="30" r="15" />
+            <circle class="loading-sketch__iris-ring" cx="50" cy="30" r="11" />
+            <circle class="loading-sketch__pupil" cx="50" cy="30" r="7" />
+            <circle class="loading-sketch__glint" cx="45" cy="24" r="3.2" />
+            <circle class="loading-sketch__glint-sub" cx="54" cy="35" r="1.6" />
+          </g>
+
+          <!-- Top & Bottom Eyelids (Opening, Blinking & Closing) -->
+          <path
+            class="loading-sketch__eyelid loading-sketch__eyelid--top"
+            d="M 0,30 Q 50,-10 100,30 L 100,0 L 0,0 Z"
+          />
+          <path
+            class="loading-sketch__eyelid loading-sketch__eyelid--bottom"
+            d="M 0,30 Q 50,70 100,30 L 100,60 L 0,60 Z"
+          />
+
+          <!-- Eye Contour Outline -->
+          <path
+            class="loading-sketch__eye-contour"
+            d="M 6,30 Q 50,-4 94,30 Q 50,64 6,30 Z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Phrase (Smaller, terminal formatted) -->
+    <div class="loading-sketch__phrase-box">
+      <span class="loading-sketch__status-dot"></span>
+      <p class="loading-sketch__text">{{ phrase() }}</p>
+    </div>
   </div>
 </div>
