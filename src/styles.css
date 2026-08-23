@@ -1,6 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
 @import "tailwindcss";
 
 /* Use class-based dark mode to match the template. */
@@ -71,10 +70,16 @@
     );
   }
 
+  html {
+    scrollbar-gutter: stable;
+    overflow-x: hidden;
+  }
+
   body {
     font-family: var(--font-body);
     background-color: var(--color-background-light);
-    background-image: url("/assets/backgrounds/bg-paper-fibers.png");
+    background-image: url("/assets/backgrounds/bg-paper-fibers.webp");
+    overflow-x: hidden;
   }
 }
 
