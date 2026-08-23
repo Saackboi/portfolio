@@ -10,7 +10,13 @@
             src="assets/shared/nav-logo.webp"
           />
         </div>
-        <span class="top-nav__title">KOJI</span>
+        <div class="top-nav__brand-text">
+          <span class="top-nav__title">KOJI</span>
+          <span class="top-nav__status-badge">
+            <span class="top-nav__status-dot"></span>
+            SYS_ONLINE
+          </span>
+        </div>
       </div>
       <div class="top-nav__links">
         <button
@@ -19,7 +25,8 @@
           [class.top-nav__link--active]="activeSection() === 'inicio'"
           (click)="navigateTo('inicio', $event)"
         >
-          Inicio
+          <span class="top-nav__link-num">01</span>
+          <span>Inicio</span>
         </button>
         <button
           type="button"
@@ -27,7 +34,8 @@
           [class.top-nav__link--active]="activeSection() === 'sobre-mi'"
           (click)="navigateTo('sobre-mi', $event)"
         >
-          Sobre Mí
+          <span class="top-nav__link-num">02</span>
+          <span>Sobre Mí</span>
         </button>
         <button
           type="button"
@@ -35,7 +43,8 @@
           [class.top-nav__link--active]="activeSection() === 'proyectos'"
           (click)="navigateTo('proyectos', $event)"
         >
-          Proyectos
+          <span class="top-nav__link-num">03</span>
+          <span>Proyectos</span>
         </button>
       </div>
       <div class="top-nav__actions">

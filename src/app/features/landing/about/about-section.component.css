@@ -14,49 +14,54 @@
 }
 
 .about__heading {
-  @apply mb-4 sm:mb-6 md:mb-8 text-center md:text-left flex flex-col items-center md:items-start;
-}
-
-.about__heading-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.2rem 0.65rem;
-  background-color: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  margin-bottom: 0.45rem;
-  transform: rotate(-1deg);
-  box-shadow: 2px 2px 0 0 var(--color-primary);
-}
-
-.about__heading-dot {
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 9999px;
-  background-color: #5ded84;
-  box-shadow: 0 0 6px #5ded84;
-}
-
-.about__heading-code {
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  color: #ffffff;
-  letter-spacing: 0.06em;
+  position: relative;
+  text-align: center;
+  margin-bottom: clamp(1.2rem, 3vh, 2.2rem);
+  flex-shrink: 0;
 }
 
 .about__title {
   font-family: var(--font-display);
-  @apply text-3xl sm:text-5xl lg:text-6xl uppercase bg-black text-white inline-block px-5 sm:px-8 py-1.5 sm:py-2 border-3 sm:border-4 border-primary shadow-[6px_6px_0px_0px_rgba(230,57,70,1)] -rotate-1;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+  text-transform: uppercase;
+  color: #000000;
+  transform: rotate(-1deg);
+  display: inline-block;
+  line-height: 1;
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.about__title:hover {
-  transform: rotate(0deg) scale(1.02);
-  box-shadow: 8px 8px 0px 0px rgba(230, 57, 70, 1);
+:host-context(.dark) .about__title {
+  color: #ffffff;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.95), 0 0 20px rgba(230, 57, 70, 0.6);
+}
+
+.about__title-shadow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(2deg);
+  width: clamp(14rem, 24vw, 22rem);
+  height: clamp(2.25rem, 3.5vw, 3.25rem);
+  background-color: rgba(230, 57, 70, 0.5);
+  z-index: -10;
+  pointer-events: none;
 }
 
 .about__subtitle {
-  @apply text-gray-800 dark:text-gray-300 mt-2 sm:mt-3 max-w-2xl text-xs sm:text-base md:text-lg font-bold uppercase tracking-tight;
+  font-size: clamp(0.8rem, 1.3vw, 1.02rem);
+  font-weight: 700;
+  max-width: 38rem;
+  margin: 0.35rem auto 0;
+  color: #111827;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+:host-context(.dark) .about__subtitle {
+  color: #ffffff;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.85);
 }
 
 /* Tabs: Hidden on desktop / tablet by default */
