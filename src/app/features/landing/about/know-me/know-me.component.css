@@ -1,114 +1,315 @@
 @reference "../../../../../styles.css";
 
 .know-me {
-  @apply relative;
+  position: relative;
 }
 
 .know-me__panel {
-  @apply bg-white dark:bg-[#151515] p-6 sm:p-8 border-3 border-black dark:border-white/90 relative shadow-[8px_8px_0px_0px_rgba(230,57,70,1)];
+  background-color: #fbfaf6;
+  background-image: url("/assets/backgrounds/bg-paper-fibers.webp");
+  padding: 1.5rem 1.75rem;
+  border: 3px solid #000000;
+  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 1);
+  position: relative;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+:host-context(.dark) .know-me__panel {
+  background-color: #17171a;
+  background-image: url("/assets/backgrounds/bg-paper-fibers.webp");
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 7px 7px 0px 0px var(--color-primary);
 }
 
 .know-me__panel:hover {
   transform: translateY(-2px);
-  box-shadow: 10px 10px 0 0 rgba(230, 57, 70, 1), 0 0 20px rgba(230, 57, 70, 0.4);
+  box-shadow: 9px 9px 0px 0px rgba(0, 0, 0, 1);
 }
 
+:host-context(.dark) .know-me__panel:hover {
+  box-shadow: 9px 9px 0px 0px var(--color-primary), 0 0 16px rgba(230, 57, 70, 0.35);
+}
+
+/* Dossier Header */
 .know-me__header {
-  @apply flex items-center justify-between pb-3 mb-4 border-b-2 border-black/20 dark:border-white/20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+:host-context(.dark) .know-me__header {
+  border-bottom-color: rgba(255, 255, 255, 0.15);
 }
 
 .know-me__terminal-dots {
-  @apply flex items-center gap-1.5;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .know-me__dot {
-  @apply w-2.5 h-2.5 rounded-full border border-black/40;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.know-me__dot--red {
-  @apply bg-[#e63946];
+.know-me__dot--red { background-color: #e63946; }
+.know-me__dot--yellow { background-color: #ff9f1c; }
+.know-me__dot--green { background-color: #5ded84; }
+
+.know-me__meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.know-me__dot--yellow {
-  @apply bg-[#ff9f1c];
-}
-
-.know-me__dot--green {
-  @apply bg-[#5ded84];
+.know-me__stamp {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  color: #5ded84;
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 1px solid #5ded84;
+  padding: 0.1rem 0.35rem;
+  letter-spacing: 0.05em;
+  transform: rotate(-2deg);
 }
 
 .know-me__tag {
   font-family: var(--font-display);
-  @apply text-xs uppercase tracking-widest text-black/60 dark:text-white/50;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.6);
 }
 
-.know-me__tape {
-  background: rgba(93, 237, 132, 0.6);
-  @apply w-20 h-6 absolute -top-3 -left-3 border border-black/20 z-20 -rotate-12 pointer-events-none;
+:host-context(.dark) .know-me__tag {
+  color: rgba(255, 255, 255, 0.6);
 }
 
-.know-me__tape--right {
-  background: rgba(230, 57, 70, 0.6);
-  @apply w-16 h-5 absolute -bottom-2.5 -right-2.5 border border-black/20 z-20 rotate-6 pointer-events-none;
+/* Title Row */
+.know-me__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .know-me__title {
   font-family: var(--font-display);
-  @apply text-2xl sm:text-3xl mb-4 uppercase flex items-center gap-2 text-black dark:text-white;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #000000;
+}
+
+:host-context(.dark) .know-me__title {
+  color: #ffffff;
 }
 
 .know-me__icon {
-  @apply text-2xl sm:text-3xl text-primary;
+  font-size: 1.6rem;
+  color: var(--color-primary);
 }
 
+.know-me__badge-pill {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  background-color: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000000;
+}
+
+:host-context(.dark) .know-me__badge-pill {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Bio Text */
 .know-me__body {
-  @apply space-y-4 text-sm sm:text-base font-medium leading-relaxed text-gray-800 dark:text-gray-300;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #27272a;
+}
+
+:host-context(.dark) .know-me__body {
+  color: #d4d4d8;
 }
 
 .know-me__highlight {
-  @apply text-black dark:text-[#5ded84] bg-secondary/30 dark:bg-transparent font-bold underline decoration-2 decoration-primary underline-offset-2;
+  color: #000000;
+  background-color: rgba(93, 237, 132, 0.35);
+  padding: 0 0.2rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-primary);
 }
 
+:host-context(.dark) .know-me__highlight {
+  color: #5ded84;
+  background-color: transparent;
+}
+
+/* Dev Manifesto */
 .know-me__manifesto {
-  @apply mt-6 bg-black/5 dark:bg-black/40 border-2 border-dashed border-black/40 dark:border-[#5ded84]/60 p-4 relative;
+  margin-top: 1.25rem;
+  background: rgba(0, 0, 0, 0.04);
+  border: 2px dashed rgba(0, 0, 0, 0.35);
+  padding: 0.9rem 1rem;
+  position: relative;
+}
+
+:host-context(.dark) .know-me__manifesto {
+  background: rgba(0, 0, 0, 0.45);
+  border-color: rgba(93, 237, 132, 0.4);
+}
+
+.know-me__manifesto-header {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.6rem;
+}
+
+.know-me__manifesto-icon {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+}
+
+:host-context(.dark) .know-me__manifesto-icon {
+  color: #5ded84;
 }
 
 .know-me__manifesto-title {
   font-family: var(--font-display);
-  @apply text-sm text-primary dark:text-[#5ded84] mb-2 uppercase tracking-wide;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-primary);
+}
+
+:host-context(.dark) .know-me__manifesto-title {
+  color: #5ded84;
 }
 
 .know-me__manifesto-list {
-  @apply text-xs sm:text-sm space-y-2 uppercase font-bold text-gray-900 dark:text-gray-200;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.know-me__manifesto-list li {
-  @apply flex items-center gap-1.5;
+.know-me__manifesto-item {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.8);
+  transition: transform 0.15s ease;
+  user-select: none;
+}
+
+.know-me__manifesto-item:hover {
+  transform: translateY(-1px) scale(1.01);
+}
+
+.know-me__manifesto-item--red {
+  background-color: #fee2e2;
+  color: #991b1b;
+  transform: rotate(-0.5deg);
+}
+
+:host-context(.dark) .know-me__manifesto-item--red {
+  background-color: rgba(220, 38, 38, 0.25);
+  color: #fca5a5;
+  border-color: rgba(220, 38, 38, 0.4);
+}
+
+.know-me__manifesto-item--green {
+  background-color: #dcfce7;
+  color: #166534;
+  transform: rotate(0.4deg);
+}
+
+:host-context(.dark) .know-me__manifesto-item--green {
+  background-color: rgba(34, 197, 94, 0.25);
+  color: #86efac;
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.know-me__manifesto-item--yellow {
+  background-color: #fef9c3;
+  color: #854d0e;
+  transform: rotate(-0.3deg);
+}
+
+:host-context(.dark) .know-me__manifesto-item--yellow {
+  background-color: rgba(234, 179, 8, 0.25);
+  color: #fde047;
+  border-color: rgba(234, 179, 8, 0.4);
+}
+
+.know-me__manifesto-item--purple {
+  background-color: #f3e8ff;
+  color: #6b21a8;
+  transform: rotate(0.6deg);
+}
+
+:host-context(.dark) .know-me__manifesto-item--purple {
+  background-color: rgba(168, 85, 247, 0.25);
+  color: #d8b4fe;
+  border-color: rgba(168, 85, 247, 0.4);
 }
 
 .know-me__bullet {
-  @apply text-sm sm:text-base text-primary dark:text-[#5ded84] shrink-0;
+  font-size: 0.95rem;
+  flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
+/* Masking Tape Accents */
+.know-me__tape {
+  position: absolute;
+  width: 4.5rem;
+  height: 1.35rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.know-me__tape--top {
+  background: rgba(244, 218, 126, 0.85);
+  top: -9px;
+  left: -8px;
+  transform: rotate(-10deg);
+}
+
+.know-me__tape--bottom {
+  background: rgba(230, 57, 70, 0.7);
+  bottom: -8px;
+  right: -8px;
+  transform: rotate(6deg);
+}
+
+@media (max-width: 640px) {
   .know-me__panel {
-    @apply p-5 shadow-[5px_5px_0px_0px_rgba(230,57,70,1)];
-  }
-
-  .know-me__title {
-    @apply text-xl mb-3;
-  }
-
-  .know-me__body {
-    @apply text-xs sm:text-sm space-y-3;
-  }
-
-  .know-me__manifesto {
-    @apply mt-4 p-3;
-  }
-
-  .know-me__manifesto-list {
-    @apply text-xs;
+    padding: 1.15rem;
   }
 }

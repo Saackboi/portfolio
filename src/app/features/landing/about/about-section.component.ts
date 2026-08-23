@@ -1,6 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  afterNextRender,
   inject,
   signal
 } from '@angular/core';
@@ -20,6 +22,13 @@ export type AboutTab = 'bio' | 'stack';
 })
 export class AboutSectionComponent {
   private readonly gsapAnimation = inject(GsapAnimationService);
+  private readonly host = inject(ElementRef<HTMLElement>);
+
+  constructor() {
+    afterNextRender(() => {
+      this.gsapAnimation.aboutEntrance(this.host.nativeElement);
+    });
+  }
 
   readonly activeTab = signal<AboutTab>('bio');
 

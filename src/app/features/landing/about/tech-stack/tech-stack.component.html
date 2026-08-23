@@ -1,19 +1,28 @@
 <div class="tech-stack">
+  <div class="tech-stack__tape tech-stack__tape--top"></div>
   <div class="tech-stack__panel">
+    <!-- Header -->
     <div class="tech-stack__header">
       <div class="tech-stack__header-left">
-        <span class="material-symbols-outlined tech-stack__header-icon">memory</span>
+        <span class="material-symbols-outlined tech-stack__header-icon">terminal</span>
         <h3 class="tech-stack__title">Tech Stack Arsenal</h3>
       </div>
-      <span class="tech-stack__badge-count">v2.5 // PRODUCTION READY</span>
+      <div class="tech-stack__header-right">
+        <span class="tech-stack__status-indicator"></span>
+        <span class="tech-stack__badge-count">v2.5 // VERIFIED</span>
+      </div>
     </div>
 
+    <!-- Category Grid -->
     <div class="tech-stack__grid">
       @for (category of categories(); track category.title) {
-        <div class="tech-stack__category">
-          <h4 [class]="'tech-stack__category-title tech-stack__category-title--' + category.tone">
-            {{ category.title }}
-          </h4>
+        <div class="tech-stack__category" [class]="'tech-stack__category--' + category.tone">
+          <div class="tech-stack__category-header">
+            <h4 [class]="'tech-stack__category-title tech-stack__category-title--' + category.tone">
+              {{ category.title }}
+            </h4>
+            <span class="tech-stack__category-tag">MODULE_0{{ $index + 1 }}</span>
+          </div>
           <div class="tech-stack__badges">
             @for (badge of category.badges; track badge; let index = $index) {
               <span
@@ -29,4 +38,5 @@
       }
     </div>
   </div>
+  <div class="tech-stack__tape tech-stack__tape--bottom"></div>
 </div>

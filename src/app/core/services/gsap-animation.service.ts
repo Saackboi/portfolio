@@ -1,6 +1,7 @@
 import { Injectable, NgZone, inject } from '@angular/core';
 import {
   ParallaxLayer,
+  animateAboutEntrance,
   animateCarouselSlide,
   animateDeskEntrance,
   animateHeroEntrance,
@@ -31,6 +32,10 @@ export class GsapAnimationService {
 
   heroEntrance(container: HTMLElement): void {
     this.ngZone.runOutsideAngular(() => animateHeroEntrance(container));
+  }
+
+  aboutEntrance(container: HTMLElement): void {
+    this.ngZone.runOutsideAngular(() => animateAboutEntrance(container));
   }
 
   deskEntrance(container: HTMLElement): void {

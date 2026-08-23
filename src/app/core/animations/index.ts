@@ -7,3 +7,4 @@ export * from './carousel.animation';
 export * from './project-zoom.animation';
 export * from './desk-entrance.animation';
 export * from './hero-entrance.animation';
+export * from './about-entrance.animation';
