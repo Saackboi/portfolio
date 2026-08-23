@@ -7,7 +7,7 @@
           <img
             alt="Logo Kevin"
             class="top-nav__logo-image"
-            src="assets/shared/nav-logo.png"
+            src="assets/shared/nav-logo.webp"
           />
         </div>
         <span class="top-nav__title">KOJI</span>
@@ -42,18 +42,18 @@
         <button
           class="top-nav__toggle"
           type="button"
-          aria-label="Alternar modo oscuro"
+          [attr.aria-label]="isDark() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
           (click)="toggleTheme($event)"
         >
-          <span class="material-symbols-outlined top-nav__toggle-icon">settings_brightness</span>
+          <span class="material-symbols-outlined top-nav__toggle-icon">{{ isDark() ? 'light_mode' : 'dark_mode' }}</span>
         </button>
         <button
           class="top-nav__mobile-toggle"
           type="button"
-          aria-label="Abrir menu"
+          [attr.aria-label]="isMenuOpen() ? 'Cerrar menu' : 'Abrir menu'"
           (click)="toggleMenu()"
         >
-          <span class="material-symbols-outlined top-nav__toggle-icon">menu</span>
+          <span class="material-symbols-outlined top-nav__toggle-icon">{{ isMenuOpen() ? 'close' : 'menu' }}</span>
         </button>
       </div>
 
