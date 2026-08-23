@@ -16,11 +16,18 @@ import { AboutSectionComponent } from './about/about-section.component';
 import { ContactSectionComponent } from './contact/contact-section.component';
 import { HeroComponent } from './hero/hero.component';
 import { ProjectGalleryComponent } from './projects/project-gallery.component';
+import { ProjectDetailModalComponent } from './projects/project-detail-modal/project-detail-modal.component';
 
 @Component({
   selector: 'app-landing-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HeroComponent, AboutSectionComponent, ProjectGalleryComponent, ContactSectionComponent],
+  imports: [
+    HeroComponent,
+    AboutSectionComponent,
+    ProjectGalleryComponent,
+    ContactSectionComponent,
+    ProjectDetailModalComponent
+  ],
   templateUrl: './landing.page.html',
   styleUrl: './landing.page.css'
 })
@@ -31,6 +38,7 @@ export class LandingPage implements OnInit {
 
   protected readonly activeSection = this.sectionNav.activeSection;
   protected readonly isContactOpen = this.sectionNav.isContactOpen;
+  protected readonly activeProjectSlug = this.sectionNav.activeProjectSlug;
 
   private readonly host = inject(ElementRef<HTMLElement>);
 
@@ -76,6 +84,10 @@ export class LandingPage implements OnInit {
     } else {
       this.sectionNav.closeContact();
     }
+  }
+
+  closeProjectModal(): void {
+    this.sectionNav.closeProject();
   }
 
 

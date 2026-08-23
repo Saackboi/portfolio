@@ -143,19 +143,61 @@
 }
 
 .hero__cta {
-  @apply pt-2;
+  @apply pt-2 flex flex-wrap items-center gap-4;
 }
 
 .hero__cta-link {
   font-family: var(--font-display);
-  @apply inline-block bg-black text-white text-lg sm:text-xl uppercase px-8 py-3.5 border-3 border-black dark:border-white transition-all;
+  @apply inline-flex items-center justify-center gap-2 bg-black text-white text-base sm:text-lg uppercase px-6 py-3 border-3 border-black dark:border-white transition-all;
   box-shadow: 4px 4px 0px 0px rgba(230, 57, 70, 1), 0 0 16px rgba(230, 57, 70, 0.5);
+  text-decoration: none;
+}
+
+.hero__cta-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.hero__cta-arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.hero__cta-link:hover .hero__cta-arrow {
+  transform: translateX(3px);
 }
 
 .hero__cta-link:hover {
   @apply bg-primary text-white;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 6px 6px 0px 0px rgba(230, 57, 70, 1), 0 0 24px rgba(230, 57, 70, 0.8);
+}
+
+.hero__cta-link--cv {
+  background-color: #ffd60a;
+  color: #000000;
+  border-color: #000000;
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+
+:host-context(.dark) .hero__cta-link--cv {
+  border-color: #ffffff;
+  box-shadow: 4px 4px 0px 0px #ffffff;
+}
+
+.hero__cta-link--cv:hover {
+  background-color: #5ded84;
+  color: #000000;
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+
+:host-context(.dark) .hero__cta-link--cv:hover {
+  box-shadow: 6px 6px 0px 0px #5ded84;
+}
+
+.hero__cta-link--cv:hover .hero__cta-arrow {
+  transform: translate(2px, -2px);
 }
 
 /* Tablet Portrait Specific Rules (iPad Air / Mini: 768px - 1024px) */

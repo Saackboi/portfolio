@@ -12,11 +12,8 @@ export function animateProjectZoom(
     return;
   }
 
-  // Remove mask clipping during zoom
   if (viewport) {
     viewport.style.overflow = 'visible';
-    viewport.style.maskImage = 'none';
-    viewport.style.webkitMaskImage = 'none';
   }
 
   const tl = gsap.timeline({
@@ -25,27 +22,23 @@ export function animateProjectZoom(
     }
   });
 
-  // 1. Grab & Anticipation: micro-lift
+  // Fast GPU-accelerated transition without rasterizing 15x bitmap sizes
   tl.to(card, {
-    scale: 1.08,
-    y: -16,
-    rotation: -1,
-    duration: 0.12,
+    scale: 1.05,
+    y: -8,
+    duration: 0.08,
     ease: 'power2.out',
     zIndex: 9999
   })
-  // 2. Cinematic Zoom: rapid ultra-fluid engulfment
   .to(card, {
-    scale: 15,
-    y: 0,
-    rotation: 0,
-    duration: 0.28,
-    ease: 'power4.in'
+    scale: 2.2,
+    opacity: 0,
+    duration: 0.16,
+    ease: 'power3.in'
   }, '-=0.02')
-  // 3. Blackout shutter flash
   .to(blackout, {
     opacity: 1,
-    duration: 0.15,
-    ease: 'power2.inOut'
-  }, '-=0.15');
+    duration: 0.12,
+    ease: 'power1.inOut'
+  }, '-=0.10');
 }

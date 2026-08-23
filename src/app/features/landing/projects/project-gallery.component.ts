@@ -5,11 +5,13 @@ import {
   HostListener,
   afterNextRender,
   computed,
+  effect,
   inject,
   signal
 } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { Router } from '@angular/router';
+import gsap from 'gsap';
 
 import { GsapAnimationService } from '../../../core/services/gsap-animation.service';
 import { PortfolioContentService } from '../../../core/services/portfolio-content.service';
@@ -33,6 +35,31 @@ export class ProjectGalleryComponent {
   constructor() {
     afterNextRender(() => {
       this.gsapAnimation.deskEntrance(this.host.nativeElement);
+    });
+
+    effect(() => {
+      const activeSlug = this.sectionNav.activeProjectSlug();
+      if (!activeSlug) {
+        const cards = this.host.nativeElement.querySelectorAll('.polaroid-frame');
+        const blackout = this.host.nativeElement.querySelector('.projects__blackout') as HTMLElement | null;
+        const viewport = this.host.nativeElement.querySelector('.projects__viewport') as HTMLElement | null;
+
+        cards.forEach((c: Element) => {
+          if (c instanceof HTMLElement) {
+            c.style.transition = 'none';
+            gsap.set(c, { clearProps: 'all' });
+            void c.offsetHeight;
+            c.style.transition = '';
+          }
+        });
+
+        if (blackout) {
+          gsap.set(blackout, { clearProps: 'all', opacity: 0 });
+        }
+        if (viewport) {
+          viewport.style.overflow = 'hidden';
+        }
+      }
     });
   }
 
@@ -104,10 +131,27 @@ export class ProjectGalleryComponent {
 
     if (activeCard && blackout) {
       this.gsapAnimation.projectZoom(activeCard, blackout, viewport, () => {
-        void this.router.navigate(['/projects', slug]);
+        this.sectionNav.openProject(slug);
+        this.isOpening.set(false);
+        this.openingSlug.set('');
+
+        // Clean up card instantly while covered by the modal so closing the modal has zero glitches
+        setTimeout(() => {
+          activeCard.style.transition = 'none';
+          gsap.set(activeCard, { clearProps: 'all' });
+          void activeCard.offsetHeight; // Force reflow
+          activeCard.style.transition = '';
+
+          gsap.set(blackout, { clearProps: 'all', opacity: 0 });
+          if (viewport) {
+            viewport.style.overflow = 'hidden';
+          }
+        }, 200);
       });
     } else {
-      void this.router.navigate(['/projects', slug]);
+      this.sectionNav.openProject(slug);
+      this.isOpening.set(false);
+      this.openingSlug.set('');
     }
   }
 

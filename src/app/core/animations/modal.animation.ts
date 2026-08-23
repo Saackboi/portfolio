@@ -9,23 +9,23 @@ export function animateModalOpen(overlay: HTMLElement, dialog: HTMLElement): voi
   tl.fromTo(
     overlay,
     { opacity: 0 },
-    { opacity: 1, duration: 0.16, ease: 'power1.out' }
+    { opacity: 1, duration: 0.15, ease: 'power1.out' }
   ).fromTo(
     dialog,
     {
-      scale: 0.94,
       opacity: 0,
-      y: 15
+      y: 10,
+      scale: 0.98
     },
     {
-      scale: 1,
       opacity: 1,
       y: 0,
-      duration: 0.22,
-      ease: 'back.out(1.5)',
+      scale: 1,
+      duration: 0.18,
+      ease: 'power2.out',
       clearProps: 'transform,opacity'
     },
-    '-=0.06'
+    '-=0.08'
   );
 }
 
@@ -43,18 +43,18 @@ export function animateModalClose(
 
   const tl = gsap.timeline({ onComplete });
   tl.to(dialog, {
-    scale: 0.95,
     opacity: 0,
-    y: 10,
-    duration: 0.14,
+    y: 8,
+    scale: 0.98,
+    duration: 0.12,
     ease: 'power2.in'
   }).to(
     overlay,
     {
       opacity: 0,
-      duration: 0.1,
+      duration: 0.12,
       ease: 'power1.in'
     },
-    '-=0.04'
+    '-=0.08'
   );
 }

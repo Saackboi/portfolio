@@ -9,6 +9,7 @@ export class SectionNavigationService {
 
   readonly activeSection = signal<SectionId>('inicio');
   readonly isContactOpen = signal(false);
+  readonly activeProjectSlug = signal<string | null>(null);
 
   constructor() {
     this.initFromHash();
@@ -24,13 +25,21 @@ export class SectionNavigationService {
       this.isContactOpen.set(true);
       return;
     }
+    if (hash.startsWith('proyecto-')) {
+      const slug = hash.replace('proyecto-', '');
+      this.activeSection.set('proyectos');
+      this.activeProjectSlug.set(slug);
+      return;
+    }
     if (hash === 'sobre-mi' || hash === 'proyectos' || hash === 'inicio') {
       this.activeSection.set(hash as SectionId);
+      this.activeProjectSlug.set(null);
     }
   }
 
   setSection(section: SectionId): void {
     this.activeSection.set(section);
+    this.activeProjectSlug.set(null);
     if (typeof window !== 'undefined') {
       const newUrl = `${window.location.pathname}#${section}`;
       window.history.replaceState(null, '', newUrl);
@@ -47,5 +56,21 @@ export class SectionNavigationService {
 
   toggleContact(): void {
     this.isContactOpen.update((open) => !open);
+  }
+
+  openProject(slug: string): void {
+    this.activeProjectSlug.set(slug);
+    if (typeof window !== 'undefined') {
+      const newUrl = `${window.location.pathname}#proyecto-${slug}`;
+      window.history.replaceState(null, '', newUrl);
+    }
+  }
+
+  closeProject(): void {
+    this.activeProjectSlug.set(null);
+    if (typeof window !== 'undefined') {
+      const newUrl = `${window.location.pathname}#proyectos`;
+      window.history.replaceState(null, '', newUrl);
+    }
   }
 }

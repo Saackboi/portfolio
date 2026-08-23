@@ -48,6 +48,19 @@
         </button>
       </div>
       <div class="top-nav__actions">
+        @if (activeSection() !== 'inicio') {
+          <a
+            href="Kevin_Sanchez_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="top-nav__cv-btn"
+            title="Ver Currículum Vitae (PDF)"
+          >
+            <span class="material-symbols-outlined top-nav__cv-icon">description</span>
+            <span class="top-nav__cv-text">CV</span>
+            <span class="material-symbols-outlined top-nav__cv-arrow">arrow_outward</span>
+          </a>
+        }
         <button
           class="top-nav__toggle"
           type="button"
@@ -94,13 +107,18 @@
       >
         Proyectos
       </button>
-      <button
-        type="button"
-        class="top-nav__panel-link top-nav__panel-link--contact"
-        (click)="openContact()"
-      >
-        Contacto
-      </button>
+      @if (activeSection() !== 'inicio') {
+        <a
+          href="Kevin_Sanchez_CV.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="top-nav__panel-link top-nav__panel-link--cv"
+          (click)="closeMenu()"
+        >
+          <span class="material-symbols-outlined">description</span>
+          <span>VER CV (PDF)</span>
+        </a>
+      }
     </div>
   }
 </nav>
