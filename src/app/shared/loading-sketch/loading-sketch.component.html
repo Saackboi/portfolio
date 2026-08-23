@@ -1,53 +1,93 @@
 <div class="loading-sketch">
   <div class="loading-sketch__noise"></div>
+
+  <!-- Background Electric Lightning Arcs -->
+  <svg class="loading-sketch__lightning-canvas" viewBox="0 0 1000 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Top-Left Lightning Bolt -->
+    <path
+      class="loading-sketch__bolt loading-sketch__bolt--1"
+      d="M 60,30 L 130,105 L 115,130 L 185,200 L 170,225 L 250,285 L 310,310 M 130,105 L 195,125 L 220,165 M 185,200 L 235,215"
+    />
+
+    <!-- Top-Right Lightning Bolt -->
+    <path
+      class="loading-sketch__bolt loading-sketch__bolt--2"
+      d="M 940,40 L 870,115 L 885,140 L 815,210 L 830,235 L 750,295 L 690,320 M 870,115 L 805,135 L 780,175 M 815,210 L 765,225"
+    />
+
+    <!-- Bottom-Left Lightning Bolt -->
+    <path
+      class="loading-sketch__bolt loading-sketch__bolt--3"
+      d="M 90,560 L 160,485 L 145,460 L 220,390 L 205,365 L 285,305 M 160,485 L 230,465 L 255,425 M 220,390 L 270,375"
+    />
+
+    <!-- Bottom-Right Lightning Bolt -->
+    <path
+      class="loading-sketch__bolt loading-sketch__bolt--4"
+      d="M 910,550 L 840,475 L 855,450 L 780,380 L 795,355 L 715,295 M 840,475 L 770,455 L 745,415 M 780,380 L 730,365"
+    />
+
+    <!-- Center Sparks around the Eye -->
+    <path
+      class="loading-sketch__bolt loading-sketch__bolt--center"
+      d="M 390,270 L 415,245 L 410,230 L 440,215 M 610,270 L 585,245 L 590,230 L 560,215 M 430,360 L 455,385 L 450,400 L 480,415 M 570,360 L 545,385 L 550,400 L 520,415"
+    />
+  </svg>
+
   <div class="loading-sketch__content">
-    
-    <!-- Outer Spinner with Animated Eye in Center -->
+    <!-- Animated Anime Eye (Enlarged, Clean & Sharp Vector Definition) -->
     <div class="loading-sketch__eye-container">
-      <div class="loading-sketch__spinner-outer"></div>
-      <div class="loading-sketch__spinner-inner"></div>
-
-      <!-- Animated Eye -->
       <div class="loading-sketch__eye">
-        <svg class="loading-sketch__eye-svg" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
-          <!-- Eye Sclera Background -->
-          <path
-            class="loading-sketch__eye-bg"
-            d="M 6,30 Q 50,-4 94,30 Q 50,64 6,30 Z"
-          />
+        <svg class="loading-sketch__eye-svg" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="eye-clip">
+              <path d="M 8,35 Q 60,-2 112,35 Q 60,72 8,35 Z" />
+            </clipPath>
+          </defs>
 
-          <!-- Moving Iris & Pupil (Look Left, Look Right, Center) -->
-          <g class="loading-sketch__iris-group">
-            <circle class="loading-sketch__iris" cx="50" cy="30" r="15" />
-            <circle class="loading-sketch__iris-ring" cx="50" cy="30" r="11" />
-            <circle class="loading-sketch__pupil" cx="50" cy="30" r="7" />
-            <circle class="loading-sketch__glint" cx="45" cy="24" r="3.2" />
-            <circle class="loading-sketch__glint-sub" cx="54" cy="35" r="1.6" />
+          <!-- Sclera / Eye White (Clipped) -->
+          <g clip-path="url(#eye-clip)">
+            <!-- Sclera Background -->
+            <path class="loading-sketch__eye-bg" d="M 0,0 L 120,0 L 120,70 L 0,70 Z" />
+
+            <!-- Moving Iris & Pupil (Look Left -> Look Right -> Center) -->
+            <g class="loading-sketch__iris-group">
+              <!-- Outer Iris -->
+              <circle class="loading-sketch__iris" cx="60" cy="35" r="20" />
+              <!-- Inner Iris Pattern -->
+              <circle class="loading-sketch__iris-inner" cx="60" cy="35" r="14" />
+              <!-- Pupil -->
+              <circle class="loading-sketch__pupil" cx="60" cy="35" r="9" />
+              <!-- Specular Glints / Highlights -->
+              <circle class="loading-sketch__glint-main" cx="54" cy="27" r="4.2" />
+              <circle class="loading-sketch__glint-sub" cx="66" cy="42" r="2.2" />
+            </g>
+
+            <!-- Eyelids (Opening, Holding & Closing) -->
+            <path
+              class="loading-sketch__eyelid loading-sketch__eyelid--top"
+              d="M -10,35 Q 60,-15 130,35 L 130,-15 L -10,-15 Z"
+            />
+            <path
+              class="loading-sketch__eyelid loading-sketch__eyelid--bottom"
+              d="M -10,35 Q 60,85 130,35 L 130,85 L -10,85 Z"
+            />
           </g>
 
-          <!-- Top & Bottom Eyelids (Opening, Blinking & Closing) -->
+          <!-- Crisp Manga Lash Contour (Top & Bottom) -->
           <path
-            class="loading-sketch__eyelid loading-sketch__eyelid--top"
-            d="M 0,30 Q 50,-10 100,30 L 100,0 L 0,0 Z"
+            class="loading-sketch__eye-top-lash"
+            d="M 6,37 Q 60,-3 114,35"
           />
           <path
-            class="loading-sketch__eyelid loading-sketch__eyelid--bottom"
-            d="M 0,30 Q 50,70 100,30 L 100,60 L 0,60 Z"
-          />
-
-          <!-- Eye Contour Outline -->
-          <path
-            class="loading-sketch__eye-contour"
-            d="M 6,30 Q 50,-4 94,30 Q 50,64 6,30 Z"
+            class="loading-sketch__eye-bottom-lash"
+            d="M 12,37 Q 60,71 108,35"
           />
         </svg>
       </div>
     </div>
 
-    <!-- Phrase (Smaller, terminal formatted) -->
-    <div class="loading-sketch__phrase-box">
-      <span class="loading-sketch__status-dot"></span>
-      <p class="loading-sketch__text">{{ phrase() }}</p>
-    </div>
+    <!-- Clean Typography Text (No box, clean and minimal) -->
+    <p class="loading-sketch__text">{{ phrase() }}</p>
   </div>
 </div>
