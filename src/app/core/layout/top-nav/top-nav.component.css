@@ -6,7 +6,7 @@
 }
 
 .top-nav {
-  @apply fixed w-full z-50 top-0 bg-white/90 dark:bg-darkblue/90 border-b-4 border-black dark:border-primary;
+  @apply fixed w-full z-50 top-0 bg-white/95 dark:bg-darkblue/95 backdrop-blur-md border-b-4 border-black dark:border-primary shadow-sm;
 }
 
 .top-nav__container {
@@ -17,13 +17,12 @@
   @apply flex justify-between items-center h-16 md:h-18;
 }
 
-
 .top-nav__brand {
-  @apply flex-shrink-0 flex items-center gap-3;
+  @apply flex-shrink-0 flex items-center gap-3 cursor-pointer select-none transition-transform hover:scale-105 active:scale-95;
 }
 
 .top-nav__logo {
-  @apply w-12 h-12 bg-primary border-4 border-black rotate-3 flex items-center justify-center overflow-hidden;
+  @apply w-12 h-12 bg-primary border-4 border-black rotate-3 flex items-center justify-center overflow-hidden shadow-[2px_2px_0px_0px_rgba(0,0,0,1)];
 }
 
 .top-nav__logo-image {
@@ -36,16 +35,16 @@
 }
 
 .top-nav__links {
-  @apply hidden md:flex space-x-6;
+  @apply hidden md:flex items-center space-x-3 lg:space-x-5;
 }
 
 .top-nav__link {
   font-family: var(--font-display);
-  @apply text-lg uppercase px-3 py-1 transition-colors cursor-pointer text-black dark:text-white border-2 border-transparent;
+  @apply text-base lg:text-lg uppercase px-3.5 py-1.5 transition-all duration-150 cursor-pointer text-black dark:text-white border-2 border-transparent select-none;
 }
 
 .top-nav__link:hover {
-  @apply bg-secondary text-black -rotate-1 border-black dark:border-white;
+  @apply bg-secondary text-black -rotate-1 border-black dark:border-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)];
 }
 
 .top-nav__link--active {
