@@ -31,15 +31,22 @@
 
 .hero__artwork-image--bg {
   @apply w-full h-full object-cover object-center md:object-right-top;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Foreground Character Layer (Cuerpo) - Desktop Full Scale */
 .hero__artwork--body {
-  @apply absolute top-0 right-0 w-full lg:w-[74%] xl:w-[70%] 2xl:w-[66%] h-full pointer-events-none z-5 overflow-hidden;
+  @apply absolute top-0 right-0 w-full lg:w-[76%] xl:w-[72%] 2xl:w-[68%] h-full pointer-events-none z-5 overflow-hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .hero__artwork-image--body {
   @apply w-full h-full object-cover object-right md:object-right-top;
+  transform: scale(1.15) translateZ(0);
+  transform-origin: 85% 80%;
+  backface-visibility: hidden;
   mix-blend-mode: normal;
 }
 
@@ -168,6 +175,7 @@
   .hero__artwork-image--body {
     object-fit: cover;
     object-position: 52% bottom;
+    transform: none;
   }
 
   .hero__intro {

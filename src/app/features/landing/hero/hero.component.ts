@@ -30,6 +30,9 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     const heroSection = el.querySelector('.hero') as HTMLElement | null;
 
     if (heroSection) {
+      // 1. Trigger Cosmic Warp & Hero Float Entrance Animation
+      this.gsapAnimation.heroEntrance(el);
+
       const bgArtwork = el.querySelector('.hero__artwork--bg') as HTMLElement | null;
       const bodyArtwork = el.querySelector('.hero__artwork--body') as HTMLElement | null;
       const errorGlow = el.querySelector('.hero__error-glow') as HTMLElement | null;
