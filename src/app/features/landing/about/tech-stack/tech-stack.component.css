@@ -2,22 +2,27 @@
 
 .tech-stack {
   position: relative;
+  height: 100%;
 }
 
 .tech-stack__panel {
-  background-color: #fbfaf6;
-  background-image: url("/assets/backgrounds/bg-paper-fibers.webp");
-  padding: 1.5rem 1.75rem;
+  background-color: #faf8f2;
+  background-image: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(244, 241, 230, 1) 100%);
+  padding: 1.6rem 1.85rem;
   border: 3px solid #000000;
   box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 1);
   position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 :host-context(.dark) .tech-stack__panel {
-  background-color: #17171a;
-  background-image: url("/assets/backgrounds/bg-paper-fibers.webp");
-  border-color: rgba(255, 255, 255, 0.9);
+  background-color: #121216;
+  background-image: radial-gradient(circle at 50% 0%, rgba(32, 32, 42, 0.7) 0%, rgba(18, 18, 22, 1) 100%);
+  border-color: rgba(255, 255, 255, 0.85);
   box-shadow: 7px 7px 0px 0px #5ded84;
 }
 
@@ -53,13 +58,13 @@
 }
 
 .tech-stack__header-icon {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: #5ded84;
 }
 
 .tech-stack__title {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   text-transform: uppercase;
   color: #000000;
   letter-spacing: -0.02em;
@@ -76,8 +81,8 @@
 }
 
 .tech-stack__status-indicator {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.55rem;
+  height: 0.55rem;
   border-radius: 9999px;
   background-color: #5ded84;
   box-shadow: 0 0 6px #5ded84;
@@ -85,75 +90,80 @@
 
 .tech-stack__badge-count {
   font-family: var(--font-display);
-  font-size: 0.7rem;
-  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.72rem;
+  color: rgba(0, 0, 0, 0.7);
   letter-spacing: 0.05em;
   background: rgba(0, 0, 0, 0.06);
-  padding: 0.2rem 0.45rem;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 0.2rem 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 :host-context(.dark) .tech-stack__badge-count {
-  color: rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Category Grid */
+/* Symmetrical 2x2 Category Grid */
 .tech-stack__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem;
+}
+
+@media (max-width: 640px) {
+  .tech-stack__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .tech-stack__category {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
-  background-color: rgba(0, 0, 0, 0.03);
-  padding: 0.85rem 1rem;
-  border: 2px solid rgba(0, 0, 0, 0.15);
-  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  gap: 0.75rem;
+  background-color: #ffffff;
+  padding: 0.95rem 1.1rem;
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.85);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 :host-context(.dark) .tech-stack__category {
-  background-color: rgba(0, 0, 0, 0.4);
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.4);
+  background-color: #19191e;
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.6);
 }
 
 .tech-stack__category:hover {
-  transform: translateY(-1px);
-  border-color: rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
 }
 
-:host-context(.dark) .tech-stack__category:hover {
-  border-color: rgba(255, 255, 255, 0.35);
-}
-
-.tech-stack__category--primary { border-left: 4px solid var(--color-primary); }
-.tech-stack__category--secondary { border-left: 4px solid #5ded84; }
-.tech-stack__category--accent { border-left: 4px solid #ff9f1c; }
-.tech-stack__category--ink { border-left: 4px solid #a855f7; }
+.tech-stack__category--primary { border-left: 5px solid var(--color-primary); }
+.tech-stack__category--secondary { border-left: 5px solid #16a34a; }
+:host-context(.dark) .tech-stack__category--secondary { border-left-color: #5ded84; }
+.tech-stack__category--accent { border-left: 5px solid #d97706; }
+:host-context(.dark) .tech-stack__category--accent { border-left-color: #f59e0b; }
+.tech-stack__category--ink { border-left: 5px solid #9333ea; }
+:host-context(.dark) .tech-stack__category--ink { border-left-color: #c084fc; }
 
 .tech-stack__category-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 :host-context(.dark) .tech-stack__category-header {
-  border-bottom-color: rgba(255, 255, 255, 0.08);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
 }
 
 .tech-stack__category-title {
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  font-weight: 700;
 }
 
 .tech-stack__category-title--primary { color: var(--color-primary); }
@@ -167,11 +177,17 @@
 .tech-stack__category-tag {
   font-family: var(--font-body);
   font-size: 0.65rem;
-  font-weight: bold;
+  font-weight: 700;
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+
+:host-context(.dark) .tech-stack__category-tag {
+  color: #ffffff;
   opacity: 0.5;
 }
 
-/* Badges */
+/* High Contrast Badges */
 .tech-stack__badges {
   display: flex;
   flex-wrap: wrap;
@@ -180,70 +196,80 @@
 
 .tech-stack__badge {
   font-family: var(--font-display);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   padding: 0.25rem 0.55rem;
   text-transform: uppercase;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.02em;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   user-select: none;
   cursor: default;
 }
 
 .tech-stack__badge:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.9);
+  transform: translateY(-2px) scale(1.04);
 }
 
 .tech-stack__badge--primary {
   background-color: #fee2e2;
   color: #991b1b;
+  border: 1.5px solid #b91c1c;
+  box-shadow: 2px 2px 0px 0px #b91c1c;
 }
 
 :host-context(.dark) .tech-stack__badge--primary {
-  background-color: rgba(220, 38, 38, 0.25);
+  background-color: #261215;
   color: #fca5a5;
-  border-color: rgba(220, 38, 38, 0.4);
+  border-color: #ef4444;
+  box-shadow: 2px 2px 0px 0px #ef4444;
 }
 
 .tech-stack__badge--secondary {
   background-color: #dcfce7;
   color: #166534;
+  border: 1.5px solid #15803d;
+  box-shadow: 2px 2px 0px 0px #15803d;
 }
 
 :host-context(.dark) .tech-stack__badge--secondary {
-  background-color: rgba(34, 197, 94, 0.25);
+  background-color: #0c2317;
   color: #86efac;
-  border-color: rgba(34, 197, 94, 0.4);
+  border-color: #22c55e;
+  box-shadow: 2px 2px 0px 0px #22c55e;
 }
 
 .tech-stack__badge--accent {
   background-color: #fef9c3;
   color: #854d0e;
+  border: 1.5px solid #a16207;
+  box-shadow: 2px 2px 0px 0px #a16207;
 }
 
 :host-context(.dark) .tech-stack__badge--accent {
-  background-color: rgba(234, 179, 8, 0.25);
+  background-color: #261f0e;
   color: #fde047;
-  border-color: rgba(234, 179, 8, 0.4);
+  border-color: #eab308;
+  box-shadow: 2px 2px 0px 0px #eab308;
 }
 
 .tech-stack__badge--ink {
   background-color: #f3e8ff;
   color: #6b21a8;
+  border: 1.5px solid #7e22ce;
+  box-shadow: 2px 2px 0px 0px #7e22ce;
 }
 
 :host-context(.dark) .tech-stack__badge--ink {
-  background-color: rgba(168, 85, 247, 0.25);
+  background-color: #1e132b;
   color: #d8b4fe;
-  border-color: rgba(168, 85, 247, 0.4);
+  border-color: #a855f7;
+  box-shadow: 2px 2px 0px 0px #a855f7;
 }
 
 /* Tape Accents */
 .tech-stack__tape {
   position: absolute;
-  width: 4.5rem;
-  height: 1.35rem;
+  width: 4.75rem;
+  height: 1.45rem;
   border: 1px solid rgba(0, 0, 0, 0.15);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   pointer-events: none;
@@ -251,14 +277,14 @@
 }
 
 .tech-stack__tape--top {
-  background: rgba(93, 237, 132, 0.7);
+  background: rgba(93, 237, 132, 0.85);
   top: -9px;
   right: -8px;
   transform: rotate(8deg);
 }
 
 .tech-stack__tape--bottom {
-  background: rgba(244, 218, 126, 0.85);
+  background: rgba(244, 218, 126, 0.88);
   bottom: -8px;
   left: -8px;
   transform: rotate(-7deg);
@@ -266,6 +292,6 @@
 
 @media (max-width: 640px) {
   .tech-stack__panel {
-    padding: 1.15rem;
+    padding: 1.25rem;
   }
 }

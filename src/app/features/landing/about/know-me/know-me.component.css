@@ -2,22 +2,27 @@
 
 .know-me {
   position: relative;
+  height: 100%;
 }
 
 .know-me__panel {
-  background-color: #fbfaf6;
-  background-image: url("/assets/backgrounds/bg-paper-fibers.webp");
-  padding: 1.5rem 1.75rem;
+  background-color: #faf8f2;
+  background-image: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(244, 241, 230, 1) 100%);
+  padding: 1.6rem 1.85rem;
   border: 3px solid #000000;
   box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 1);
   position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 :host-context(.dark) .know-me__panel {
-  background-color: #17171a;
-  background-image: url("/assets/backgrounds/bg-paper-fibers.webp");
-  border-color: rgba(255, 255, 255, 0.9);
+  background-color: #121216;
+  background-image: radial-gradient(circle at 50% 0%, rgba(32, 32, 42, 0.7) 0%, rgba(18, 18, 22, 1) 100%);
+  border-color: rgba(255, 255, 255, 0.85);
   box-shadow: 7px 7px 0px 0px var(--color-primary);
 }
 
@@ -71,9 +76,9 @@
   font-family: var(--font-display);
   font-size: 0.65rem;
   color: #5ded84;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.9);
   border: 1px solid #5ded84;
-  padding: 0.1rem 0.35rem;
+  padding: 0.1rem 0.4rem;
   letter-spacing: 0.05em;
   transform: rotate(-2deg);
 }
@@ -82,11 +87,11 @@
   font-family: var(--font-display);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 :host-context(.dark) .know-me__tag {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Title Row */
@@ -96,17 +101,17 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
 }
 
 .know-me__title {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   line-height: 1.2;
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   color: #000000;
 }
 
@@ -115,7 +120,7 @@
 }
 
 .know-me__icon {
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   color: var(--color-primary);
 }
 
@@ -123,7 +128,7 @@
   font-family: var(--font-display);
   font-size: 0.7rem;
   font-weight: bold;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.55rem;
   background-color: rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.2);
   color: #000000;
@@ -135,39 +140,41 @@
   color: #ffffff;
 }
 
-/* Bio Text */
+/* Bio Text - High Contrast Readability */
 .know-me__body {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: #27272a;
+  gap: 0.95rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #18181b;
+  font-weight: 500;
 }
 
 :host-context(.dark) .know-me__body {
-  color: #d4d4d8;
+  color: #f4f4f5;
 }
 
 .know-me__highlight {
   color: #000000;
   background-color: rgba(93, 237, 132, 0.35);
-  padding: 0 0.2rem;
+  padding: 0.05rem 0.3rem;
   font-weight: 700;
   border-bottom: 2px solid var(--color-primary);
 }
 
 :host-context(.dark) .know-me__highlight {
   color: #5ded84;
-  background-color: transparent;
+  background-color: rgba(93, 237, 132, 0.15);
+  border-bottom-color: #5ded84;
 }
 
 /* Dev Manifesto */
 .know-me__manifesto {
-  margin-top: 1.25rem;
-  background: rgba(0, 0, 0, 0.04);
+  margin-top: 1.35rem;
+  background: rgba(0, 0, 0, 0.03);
   border: 2px dashed rgba(0, 0, 0, 0.35);
-  padding: 0.9rem 1rem;
+  padding: 1rem 1.1rem;
   position: relative;
 }
 
@@ -179,12 +186,12 @@
 .know-me__manifesto-header {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
-  margin-bottom: 0.6rem;
+  gap: 0.4rem;
+  margin-bottom: 0.65rem;
 }
 
 .know-me__manifesto-icon {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--color-primary);
 }
 
@@ -194,7 +201,7 @@
 
 .know-me__manifesto-title {
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--color-primary);
@@ -207,7 +214,7 @@
 .know-me__manifesto-list {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.5rem;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -215,79 +222,89 @@
 
 .know-me__manifesto-item {
   font-family: var(--font-display);
-  font-size: 0.75rem;
-  padding: 0.35rem 0.65rem;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 0.78rem;
+  padding: 0.4rem 0.75rem;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.8);
-  transition: transform 0.15s ease;
+  gap: 0.45rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
   user-select: none;
 }
 
 .know-me__manifesto-item:hover {
-  transform: translateY(-1px) scale(1.01);
+  transform: translateY(-2px) scale(1.015);
 }
 
 .know-me__manifesto-item--red {
   background-color: #fee2e2;
   color: #991b1b;
+  border: 2px solid #b91c1c;
+  box-shadow: 2px 2px 0px 0px #b91c1c;
   transform: rotate(-0.5deg);
 }
 
 :host-context(.dark) .know-me__manifesto-item--red {
-  background-color: rgba(220, 38, 38, 0.25);
+  background-color: #1f1114;
   color: #fca5a5;
-  border-color: rgba(220, 38, 38, 0.4);
+  border-color: #ef4444;
+  box-shadow: 2px 2px 0px 0px #ef4444;
 }
 
 .know-me__manifesto-item--green {
   background-color: #dcfce7;
   color: #166534;
+  border: 2px solid #15803d;
+  box-shadow: 2px 2px 0px 0px #15803d;
   transform: rotate(0.4deg);
 }
 
 :host-context(.dark) .know-me__manifesto-item--green {
-  background-color: rgba(34, 197, 94, 0.25);
+  background-color: #0d2015;
   color: #86efac;
-  border-color: rgba(34, 197, 94, 0.4);
+  border-color: #22c55e;
+  box-shadow: 2px 2px 0px 0px #22c55e;
 }
 
 .know-me__manifesto-item--yellow {
   background-color: #fef9c3;
   color: #854d0e;
+  border: 2px solid #a16207;
+  box-shadow: 2px 2px 0px 0px #a16207;
   transform: rotate(-0.3deg);
 }
 
 :host-context(.dark) .know-me__manifesto-item--yellow {
-  background-color: rgba(234, 179, 8, 0.25);
+  background-color: #231c0e;
   color: #fde047;
-  border-color: rgba(234, 179, 8, 0.4);
+  border-color: #eab308;
+  box-shadow: 2px 2px 0px 0px #eab308;
 }
 
 .know-me__manifesto-item--purple {
   background-color: #f3e8ff;
   color: #6b21a8;
+  border: 2px solid #7e22ce;
+  box-shadow: 2px 2px 0px 0px #7e22ce;
   transform: rotate(0.6deg);
 }
 
 :host-context(.dark) .know-me__manifesto-item--purple {
-  background-color: rgba(168, 85, 247, 0.25);
+  background-color: #1c1228;
   color: #d8b4fe;
-  border-color: rgba(168, 85, 247, 0.4);
+  border-color: #a855f7;
+  box-shadow: 2px 2px 0px 0px #a855f7;
 }
 
 .know-me__bullet {
-  font-size: 0.95rem;
+  font-size: 1rem;
   flex-shrink: 0;
 }
 
 /* Masking Tape Accents */
 .know-me__tape {
   position: absolute;
-  width: 4.5rem;
-  height: 1.35rem;
+  width: 4.75rem;
+  height: 1.45rem;
   border: 1px solid rgba(0, 0, 0, 0.15);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   pointer-events: none;
@@ -295,14 +312,14 @@
 }
 
 .know-me__tape--top {
-  background: rgba(244, 218, 126, 0.85);
+  background: rgba(244, 218, 126, 0.88);
   top: -9px;
   left: -8px;
   transform: rotate(-10deg);
 }
 
 .know-me__tape--bottom {
-  background: rgba(230, 57, 70, 0.7);
+  background: rgba(230, 57, 70, 0.78);
   bottom: -8px;
   right: -8px;
   transform: rotate(6deg);
@@ -310,6 +327,6 @@
 
 @media (max-width: 640px) {
   .know-me__panel {
-    padding: 1.15rem;
+    padding: 1.25rem;
   }
 }
