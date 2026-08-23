@@ -1,36 +1,119 @@
 <div class="know-me">
-  <div class="know-me__tape"></div>
-  <div class="know-me__panel">
-    <h3 class="know-me__title">
-      <span class="material-symbols-outlined know-me__icon">terminal</span>
-      ¡Conóceme!
-    </h3>
-    <div class="know-me__body">
-      <p>
-        ¡Hola! Es un placer. Mi nombre es <strong class="know-me__highlight">Kevin Sánchez</strong>, Desarrollador
-        Full-Stack e Ingeniero de Software radicado en Panamá.
-      </p>
-      <p>
-        Me enfoco en construir sistemas robustos gestionando todo el ciclo de vida del proyecto, desde el diseño de la
-        arquitectura hasta el despliegue. Complemento mi experiencia en el sector corporativo como estudiante avanzado
-        en la <strong class="know-me__highlight">Universidad Tecnológica de Panamá</strong>.
-      </p>
-      <p>
-        Más allá del código, implemento principios de DevOps: me enfoco en la automatización de entornos, la
-        virtualización de servicios y el aseguramiento de la conectividad.
-      </p>
+  <div class="know-me__layout">
+    
+    <!-- Left: Developer Dossier Main Card -->
+    <div class="know-me__dossier">
+      <div class="know-me__tape know-me__tape--top"></div>
+
+      <div class="know-me__panel">
+        <!-- Dossier Top Header -->
+        <div class="know-me__header">
+          <div class="know-me__terminal-dots">
+            <span class="know-me__dot know-me__dot--red"></span>
+            <span class="know-me__dot know-me__dot--yellow"></span>
+            <span class="know-me__dot know-me__dot--green"></span>
+          </div>
+          <div class="know-me__meta-tags">
+            <span class="know-me__stamp">VERIFIED</span>
+            <span class="know-me__tag">DEV_DOSSIER.log</span>
+          </div>
+        </div>
+
+        <!-- Title -->
+        <div class="know-me__title-row">
+          <h3 class="know-me__title">
+            <span class="material-symbols-outlined know-me__icon">badge</span>
+            ¡Conóceme!
+          </h3>
+        </div>
+
+        <!-- Bio Body -->
+        <div class="know-me__body">
+          <p>
+            ¡Hola! Mi nombre es <strong class="know-me__highlight">Kevin Sánchez</strong>, Desarrollador Full-Stack.
+          </p>
+          <p>
+            Me especializo en construir sistemas completos para negocios que necesitan algo más que una página web. Tengo experiencia llevando proyectos de inicio a fin, desde entender qué necesita el cliente hasta tener el sistema funcionando y siendo usado por los usuarios.
+          </p>
+          <p>
+            Combino desarrollo con <strong class="know-me__highlight">automatización y buenas prácticas de infraestructura</strong> para que las soluciones sean rápidas, estables y fáciles de mantener. No hago las cosas solo para que se vean bien, las hago para que funcionen bien.
+          </p>
+          <p class="know-me__education">
+            <span class="material-symbols-outlined know-me__education-icon">verified</span>
+            <span>Desarrollo & Gestión de Software — <strong>Universidad Tecnológica de Panamá</strong>.</span>
+          </p>
+        </div>
+
+        <!-- ORIZON Brand Presence Link (Clean & Minimalist) -->
+        <a
+          href="javascript:void(0)"
+          class="know-me__orizon-btn"
+          title="ORIZON — Build Beyond Limits"
+        >
+          <div class="know-me__orizon-logo-box">
+            <img
+              src="assets/about/orizon_logo.webp"
+              alt="ORIZON Logo"
+              class="know-me__orizon-img"
+            />
+          </div>
+          <div class="know-me__orizon-text">
+            <span class="know-me__orizon-title">ORIZON</span>
+            <span class="know-me__orizon-slogan">Build Beyond Limits</span>
+          </div>
+          <span class="material-symbols-outlined know-me__orizon-arrow">arrow_outward</span>
+        </a>
+      </div>
+
+      <div class="know-me__tape know-me__tape--bottom"></div>
     </div>
 
-    <div class="know-me__manifesto">
-      <h4 class="know-me__manifesto-title">Mi Manifiesto Dev:</h4>
-      <ul class="know-me__manifesto-list">
-        <li>• "CÓDIGO LIMPIO, ARQUITECTURA LIMPIA"</li>
-        <li>• "TODO O NADA"</li>
-        <li>• "AUTOMATIZAR TODO"</li>
-        <li>• "EL HARDWARE ES LIMITADO, EL CÓDIGO NO"</li>
-      </ul>
+    <!-- Right: Realistic Torn Lined Paper Note with 2x2 Big Icon Stickers -->
+    <div class="know-me__torn-sheet-container">
+      <!-- Torn Crinkled Lined Paper Frame -->
+      <div class="know-me__torn-paper">
+        <img
+          src="assets/about/torn_paper_sheet.webp"
+          alt="Hoja de cuaderno rasgada"
+          class="know-me__torn-img"
+        />
+
+        <!-- Content printed over the torn lined paper -->
+        <div class="know-me__torn-content">
+          <div class="know-me__manifesto-header">
+            <span class="material-symbols-outlined know-me__manifesto-icon">edit_note</span>
+            <h4 class="know-me__manifesto-title">Manifiesto Dev</h4>
+          </div>
+
+          <!-- 2x2 Grid of Sticky Cards with Big Icons -->
+          <div class="know-me__stickers-grid">
+            <div class="know-me__sticker know-me__sticker--red">
+              <span class="material-symbols-outlined know-me__sticker-icon">cleaning_services</span>
+              <span class="know-me__sticker-text">"Código Limpio, Arquitectura Limpia"</span>
+            </div>
+
+            <div class="know-me__sticker know-me__sticker--green">
+              <span class="material-symbols-outlined know-me__sticker-icon">military_tech</span>
+              <span class="know-me__sticker-text">"Todo o Nada"</span>
+            </div>
+
+            <div class="know-me__sticker know-me__sticker--yellow">
+              <span class="material-symbols-outlined know-me__sticker-icon">smart_toy</span>
+              <span class="know-me__sticker-text">"Automatizar Todo"</span>
+            </div>
+
+            <div class="know-me__sticker know-me__sticker--purple">
+              <span class="material-symbols-outlined know-me__sticker-icon">memory</span>
+              <span class="know-me__sticker-text">"El Hardware es Limitado, el Código No"</span>
+            </div>
+          </div>
+
+          <div class="know-me__torn-footer">
+            <span class="know-me__torn-motto">Enfoque en soluciones simples, sólidas y mantenibles.</span>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
-  <div class="know-me__tape know-me__tape--right"></div>
 </div>

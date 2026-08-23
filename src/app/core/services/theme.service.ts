@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,8 @@ import { Injectable, inject } from '@angular/core';
 export class ThemeService {
   private readonly document = inject(DOCUMENT);
   private readonly storageKey = 'theme';
+
+  readonly isDark = signal<boolean>(true);
 
   init(): void {
     const stored = this.readStoredTheme();
@@ -24,6 +26,7 @@ export class ThemeService {
   }
 
   private applyTheme(isDark: boolean): void {
+    this.isDark.set(isDark);
     this.document.documentElement.classList.toggle('dark', isDark);
     this.document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
     this.storeTheme(isDark ? 'dark' : 'light');

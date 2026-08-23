@@ -1,6 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
 @import "tailwindcss";
 
 /* Use class-based dark mode to match the template. */
@@ -49,60 +48,38 @@
       42% 0%,
       45% 2%,
       48% 0%,
-      51% 2%,
-      54% 0%,
-      57% 2%,
-      60% 0%,
-      63% 2%,
-      66% 0%,
-      69% 2%,
-      72% 0%,
-      75% 2%,
-      78% 0%,
-      81% 2%,
-      84% 0%,
-      87% 2%,
-      90% 0%,
-      93% 2%,
-      96% 0%,
-      99% 2%,
-      100% 0%,
+      52% 2%,
+      55% 0%,
+      58% 2%,
+      61% 0%,
+      64% 2%,
+      67% 0%,
+      70% 2%,
+      73% 0%,
+      76% 2%,
+      79% 0%,
+      82% 2%,
+      85% 0%,
+      88% 2%,
+      91% 0%,
+      94% 2%,
+      97% 0%,
+      100% 2%,
       100% 100%,
       0% 100%
     );
   }
 
-  @keyframes float-soft {
-    0% {
-      transform: translateY(0) rotate(0deg);
-    }
-    100% {
-      transform: translateY(-6px) rotate(1deg);
-    }
-  }
-
-  @keyframes float-gentle {
-    0% {
-      transform: translateY(0) rotate(0deg);
-    }
-    100% {
-      transform: translateY(-10px) rotate(-1deg);
-    }
-  }
-
-  @keyframes float-sway {
-    0% {
-      transform: translateY(0) rotate(0deg);
-    }
-    100% {
-      transform: translateY(-8px) rotate(2deg);
-    }
+  html {
+    scrollbar-gutter: stable;
+    overflow-x: hidden;
   }
 
   body {
     font-family: var(--font-body);
     background-color: var(--color-background-light);
-    background-image: url("/assets/backgrounds/bg-paper-fibers.png");
+    background-image: url("/assets/backgrounds/bg-paper-fibers.webp");
+    overflow-x: hidden;
   }
 }
 
@@ -143,7 +120,20 @@
     border: 4px solid #ffffff;
     box-shadow: 8px 8px 0 0 rgba(230, 57, 70, 1);
   }
+
+  .stop-motion-jitter:hover {
+    animation: stop-motion-shake 0.22s steps(4) infinite;
+  }
 }
+
+@keyframes stop-motion-shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-2px, 1px) rotate(-1.5deg); }
+  50% { transform: translate(2px, -1px) rotate(1.5deg); }
+  75% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
 
 @layer components {
   .top-nav {
@@ -219,8 +209,9 @@
   }
 
   .hero {
-    @apply relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-background-dark pt-20;
+    @apply relative min-h-[calc(100dvh-5rem)] flex items-center justify-center overflow-hidden bg-white dark:bg-background-dark py-4 md:py-8;
   }
+
 
   .hero__noise {
     @apply absolute inset-0 opacity-30 mix-blend-multiply pointer-events-none;
@@ -243,7 +234,6 @@
     @apply absolute bg-white text-black p-2 border-2 border-black text-sm md:text-base z-30;
     font-family: var(--font-display);
     clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
-    animation: float-soft 8s ease-in-out infinite alternate;
   }
 
   .hero__bubble--left {
@@ -252,7 +242,6 @@
 
   .hero__bubble--right {
     @apply -top-8 right-10 rotate-12;
-    animation-duration: 9.5s;
   }
 
   .hero__title-panel {
@@ -274,7 +263,6 @@
 
   .hero__bio-card {
     @apply bg-white dark:bg-black p-6 border-2 border-black dark:border-white rotate-1 max-w-sm shadow-[8px_8px_0px_0px_rgba(93,237,132,1)];
-    animation: float-gentle 7s ease-in-out infinite alternate;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
@@ -334,8 +322,8 @@
   .hero__mode-tag {
     @apply absolute bottom-4 right-4 bg-primary text-white px-6 py-2 text-2xl rotate-[-12deg] border-4 border-black shadow-lg;
     font-family: var(--font-display);
-    animation: float-sway 6.5s ease-in-out infinite alternate;
   }
+
 
   .hero__scanline {
     @apply absolute top-1/2 left-0 w-full h-1 bg-secondary/50 -rotate-12 blur-sm;

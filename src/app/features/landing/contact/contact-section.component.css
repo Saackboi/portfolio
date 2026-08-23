@@ -1,91 +1,80 @@
 @reference "../../../../styles.css";
 
-/* Contact section keeps the template layout and noise overlay. */
 .contact {
-  @apply py-24 bg-primary relative;
+  @apply py-1 md:py-2 bg-transparent relative;
 }
 
 .contact__noise {
-  @apply absolute inset-0 opacity-20 pointer-events-none;
+  @apply absolute inset-0 opacity-10 pointer-events-none;
   background-image: url("/assets/backgrounds/bg-noise.svg");
 }
 
 .contact__container {
-  @apply container mx-auto px-4 relative z-10;
+  @apply w-full px-0 relative z-10;
 }
 
 .contact__heading {
-  @apply text-center mb-16 rotate-1;
+  @apply text-center mb-3;
 }
 
 .contact__title {
   font-family: var(--font-display);
-  @apply text-7xl uppercase mb-4 text-black bg-white inline-block px-10 py-2 border-4 border-black;
-  animation: float-sway 7s ease-in-out infinite alternate;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.contact__title:hover {
-  transform: translateY(-2px) rotate(0.5deg);
-  box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 1);
+  @apply text-3xl sm:text-4xl uppercase text-white bg-black dark:bg-black inline-block px-6 py-1 border-3 border-primary shadow-[4px_4px_0px_0px_rgba(230,57,70,1)] -rotate-1;
 }
 
 .contact__subtitle {
-  @apply text-2xl font-bold text-black mt-6 max-w-2xl mx-auto bg-secondary inline-block px-4;
-  text-transform: uppercase;
-  letter-spacing: -0.05em;
+  @apply text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200 mt-1 max-w-lg mx-auto block uppercase tracking-tight;
 }
 
 .contact__grid {
-  @apply grid md:grid-cols-2 gap-8 items-start max-w-6xl mx-auto;
+  @apply grid md:grid-cols-2 gap-4 lg:gap-6 items-stretch w-full mt-2;
+}
+
+.contact__left {
+  @apply flex flex-col justify-between gap-3 h-full;
+}
+
+.contact__right {
+  @apply h-full flex flex-col justify-between;
 }
 
 .contact__board {
-  @apply bg-white p-8 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.contact__board:hover {
-  transform: translateY(-3px) rotate(-0.5deg);
-  box-shadow: 14px 14px 0 0 rgba(0, 0, 0, 1);
+  @apply bg-white dark:bg-darkblue p-4 border-3 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,0.2)] flex-1 flex flex-col justify-center;
 }
 
 .contact__notes {
-  @apply flex flex-wrap gap-4 mt-8;
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-3 w-full;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .contact__title,
-  .contact__board {
-    animation: none;
-  }
-
-  .contact__title,
-  .contact__board {
-    transition: none;
-  }
-}
-
+/* Mobile: Form first + compact horizontal social bar below */
 @media (max-width: 768px) {
   .contact__title {
-    @apply text-5xl;
+    @apply text-2xl px-4 py-0.5;
   }
 
   .contact__subtitle {
-    @apply text-lg;
+    @apply text-xs px-2;
   }
 
   .contact__grid {
-    @apply grid-cols-1;
+    @apply flex flex-col gap-3.5;
   }
 
+  /* Form appears first on mobile for instant UX */
   .contact__right {
-    @apply mt-8;
+    @apply order-1 w-full;
   }
-}
 
-@media (min-width: 769px) and (max-width: 1024px) {
-  .contact__title {
-    @apply text-6xl;
+  /* Social board and notes appear neatly below the form */
+  .contact__left {
+    @apply order-2 w-full gap-2.5;
+  }
+
+  .contact__board {
+    @apply p-2.5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)];
+  }
+
+  .contact__notes {
+    @apply grid grid-cols-2 gap-2;
   }
 }

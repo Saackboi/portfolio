@@ -1,17 +1,208 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  afterNextRender,
+  computed,
+  effect,
+  inject,
+  signal
+} from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
+import { Router } from '@angular/router';
+import gsap from 'gsap';
 
-import { ProjectCardComponent } from './project-card/project-card.component';
+import { GsapAnimationService } from '../../../core/services/gsap-animation.service';
 import { PortfolioContentService } from '../../../core/services/portfolio-content.service';
+import { SectionNavigationService } from '../../../core/services/section-navigation.service';
+import { ProjectCard } from '../../../core/models/portfolio-content.model';
 
 @Component({
   selector: 'app-project-gallery',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ProjectCardComponent],
+  imports: [NgOptimizedImage],
   templateUrl: './project-gallery.component.html',
   styleUrl: './project-gallery.component.css'
 })
 export class ProjectGalleryComponent {
   private readonly portfolioContent = inject(PortfolioContentService);
+  private readonly sectionNav = inject(SectionNavigationService);
+  private readonly gsapAnimation = inject(GsapAnimationService);
+  private readonly host = inject(ElementRef<HTMLElement>);
+  private readonly router = inject(Router);
+
+  constructor() {
+    afterNextRender(() => {
+      this.gsapAnimation.deskEntrance(this.host.nativeElement);
+    });
+
+    effect(() => {
+      const activeSlug = this.sectionNav.activeProjectSlug();
+      if (!activeSlug) {
+        const cards = this.host.nativeElement.querySelectorAll('.polaroid-frame');
+        const blackout = this.host.nativeElement.querySelector('.projects__blackout') as HTMLElement | null;
+        const viewport = this.host.nativeElement.querySelector('.projects__viewport') as HTMLElement | null;
+
+        cards.forEach((c: Element) => {
+          if (c instanceof HTMLElement) {
+            c.style.transition = 'none';
+            gsap.set(c, { clearProps: 'all' });
+            void c.offsetHeight;
+            c.style.transition = '';
+          }
+        });
+
+        if (blackout) {
+          gsap.set(blackout, { clearProps: 'all', opacity: 0 });
+        }
+        if (viewport) {
+          viewport.style.overflow = 'hidden';
+        }
+      }
+    });
+  }
 
   protected readonly projects = this.portfolioContent.projects;
+  protected readonly selectedIndex = signal<number>(0);
+  protected readonly isOpening = signal<boolean>(false);
+  protected readonly openingSlug = signal<string>('');
+  protected readonly isBlackoutActive = signal<boolean>(false);
+
+  private touchStartX = 0;
+  private touchStartY = 0;
+
+  protected readonly totalCount = computed(() => this.projects().length);
+  protected readonly formattedIndex = computed(() => String(this.selectedIndex() + 1).padStart(2, '0'));
+  protected readonly formattedTotal = computed(() => String(this.totalCount()).padStart(2, '0'));
+  protected readonly progressPercent = computed(() => this.totalCount() ? Math.round(((this.selectedIndex() + 1) / this.totalCount()) * 100) : 0);
+
+  protected readonly activeProject = computed<ProjectCard | undefined>(() => {
+    const list = this.projects();
+    if (!list.length) return undefined;
+    const idx = Math.max(0, Math.min(this.selectedIndex(), list.length - 1));
+    return list[idx];
+  });
+
+  protected readonly prevProject = computed<ProjectCard | undefined>(() => {
+    const list = this.projects();
+    if (list.length <= 1) return undefined;
+    const idx = (this.selectedIndex() - 1 + list.length) % list.length;
+    return list[idx];
+  });
+
+  protected readonly nextProject = computed<ProjectCard | undefined>(() => {
+    const list = this.projects();
+    if (list.length <= 1) return undefined;
+    const idx = (this.selectedIndex() + 1) % list.length;
+    return list[idx];
+  });
+
+  selectProject(index: number, direction: number = 1, event?: MouseEvent): void {
+    const total = this.totalCount();
+    if (total === 0) return;
+
+    if (event?.currentTarget instanceof HTMLElement) {
+      this.gsapAnimation.jellyTap(event.currentTarget);
+    }
+
+    const newIndex = (index + total) % total;
+    this.selectedIndex.set(newIndex);
+
+    setTimeout(() => {
+      const track = this.host.nativeElement.querySelector('.projects__track') as HTMLElement | null;
+      if (track) {
+        this.gsapAnimation.carouselSlide(track, direction);
+      }
+    }, 10);
+  }
+
+  openProject(slug: string | undefined, event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.isOpening() || !slug) return;
+
+    this.isOpening.set(true);
+    this.openingSlug.set(slug);
+
+    const activeCard = this.host.nativeElement.querySelector('.polaroid-frame--active') as HTMLElement | null;
+    const blackout = this.host.nativeElement.querySelector('.projects__blackout') as HTMLElement | null;
+    const viewport = this.host.nativeElement.querySelector('.projects__viewport') as HTMLElement | null;
+
+    if (activeCard && blackout) {
+      this.gsapAnimation.projectZoom(activeCard, blackout, viewport, () => {
+        this.sectionNav.openProject(slug);
+        this.isOpening.set(false);
+        this.openingSlug.set('');
+
+        // Clean up card instantly while covered by the modal so closing the modal has zero glitches
+        setTimeout(() => {
+          activeCard.style.transition = 'none';
+          gsap.set(activeCard, { clearProps: 'all' });
+          void activeCard.offsetHeight; // Force reflow
+          activeCard.style.transition = '';
+
+          gsap.set(blackout, { clearProps: 'all', opacity: 0 });
+          if (viewport) {
+            viewport.style.overflow = 'hidden';
+          }
+        }, 200);
+      });
+    } else {
+      this.sectionNav.openProject(slug);
+      this.isOpening.set(false);
+      this.openingSlug.set('');
+    }
+  }
+
+  next(event?: MouseEvent): void {
+    this.selectProject(this.selectedIndex() + 1, 1, event);
+  }
+
+  prev(event?: MouseEvent): void {
+    this.selectProject(this.selectedIndex() - 1, -1, event);
+  }
+
+  @HostListener('window:keydown.ArrowLeft')
+  handleArrowLeft(): void {
+    if (this.sectionNav.activeSection() === 'proyectos' && !this.sectionNav.isContactOpen()) {
+      this.prev();
+    }
+  }
+
+  @HostListener('window:keydown.ArrowRight')
+  handleArrowRight(): void {
+    if (this.sectionNav.activeSection() === 'proyectos' && !this.sectionNav.isContactOpen()) {
+      this.next();
+    }
+  }
+
+  @HostListener('touchstart', ['$event'])
+  handleTouchStart(event: TouchEvent): void {
+    if (event.touches.length > 0) {
+      this.touchStartX = event.touches[0].clientX;
+      this.touchStartY = event.touches[0].clientY;
+    }
+  }
+
+  @HostListener('touchend', ['$event'])
+  handleTouchEnd(event: TouchEvent): void {
+    if (event.changedTouches.length > 0) {
+      const deltaX = event.changedTouches[0].clientX - this.touchStartX;
+      const deltaY = event.changedTouches[0].clientY - this.touchStartY;
+
+      // Ensure horizontal swipe is dominant over vertical scroll
+      if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX < 0) {
+          this.next();
+        } else {
+          this.prev();
+        }
+      }
+    }
+  }
+
+  protected tapeClass(tone?: string): string {
+    return `polaroid-frame__tape--${tone ?? 'yellow'}`;
+  }
 }

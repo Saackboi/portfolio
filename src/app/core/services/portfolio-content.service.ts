@@ -2,7 +2,6 @@ import { computed, Injectable, signal } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { collection, getDocs, getFirestore, orderBy, query } from 'firebase/firestore/lite';
 
-
 import { environment } from '../../../environments/environment';
 import { PortfolioPayload, ProjectCard, TechCategory } from '../models/portfolio-content.model';
 
@@ -40,7 +39,19 @@ export class PortfolioContentService {
       // 1. Obtener proyectos ordenados
       const projectsQuery = query(collection(this.db, 'projects'), orderBy('order', 'asc'));
       const projectsSnap = await getDocs(projectsQuery);
-      const projects = projectsSnap.docs.map(doc => doc.data() as ProjectCard);
+
+      const toWebp = (url?: string) => (url ? url.replace(/\.(png|jpg|jpeg|jfif)$/i, '.webp') : '');
+
+      const projects = projectsSnap.docs.map(doc => {
+        const p = doc.data() as ProjectCard;
+        return {
+          ...p,
+          image: toWebp(p.image),
+          heroImage: toWebp(p.heroImage),
+          archImage: toWebp(p.archImage),
+          gallery: p.gallery?.map(g => ({ ...g, src: toWebp(g.src) })) || []
+        };
+      });
 
       // 2. Obtener stack tecnológico ordenado
       const techQuery = query(collection(this.db, 'techStack'), orderBy('order', 'asc'));
@@ -63,7 +74,6 @@ export class PortfolioContentService {
     }
   }
 
-
   private async ensureMinimumDelay(startTime: number, minDurationMs: number): Promise<void> {
     const elapsed = Date.now() - startTime;
     if (elapsed < minDurationMs) {
@@ -71,5 +81,3 @@ export class PortfolioContentService {
     }
   }
 }
-
-

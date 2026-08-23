@@ -1,14 +1,28 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  afterNextRender,
+  inject
+} from '@angular/core';
 
+import { GsapAnimationService } from '../../../core/services/gsap-animation.service';
 import { KnowMeComponent } from './know-me/know-me.component';
-import { TechStackComponent } from './tech-stack/tech-stack.component';
 
 @Component({
   selector: 'app-about-section',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [KnowMeComponent, TechStackComponent],
+  imports: [KnowMeComponent],
   templateUrl: './about-section.component.html',
   styleUrl: './about-section.component.css'
 })
-// Section shell composes the notepad and tech stack panels.
-export class AboutSectionComponent {}
+export class AboutSectionComponent {
+  private readonly gsapAnimation = inject(GsapAnimationService);
+  private readonly host = inject(ElementRef<HTMLElement>);
+
+  constructor() {
+    afterNextRender(() => {
+      this.gsapAnimation.aboutEntrance(this.host.nativeElement);
+    });
+  }
+}

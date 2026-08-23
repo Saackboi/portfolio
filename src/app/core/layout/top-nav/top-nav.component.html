@@ -1,49 +1,125 @@
-<!-- Hash links target the single-page sections. -->
+<!-- Game-menu style section switching navigation -->
 <nav class="top-nav">
   <div class="top-nav__container">
     <div class="top-nav__row">
-      <div class="top-nav__brand">
+      <div class="top-nav__brand" (click)="navigateTo('inicio', $event)" role="button" tabindex="0">
         <div class="top-nav__logo">
           <img
             alt="Logo Kevin"
             class="top-nav__logo-image"
-            src="assets/shared/nav-logo.png"
+            src="assets/shared/nav-logo.webp"
           />
         </div>
-        <span class="top-nav__title">KOJI</span>
+        <div class="top-nav__brand-text">
+          <span class="top-nav__title">KOJI</span>
+          <span class="top-nav__status-badge">
+            <span class="top-nav__status-dot"></span>
+            SYS_ONLINE
+          </span>
+        </div>
       </div>
       <div class="top-nav__links">
-        <a class="top-nav__link top-nav__link--secondary" href="#inicio">Inicio</a>
-        <a class="top-nav__link top-nav__link--primary" href="#sobre-mi">Sobre Mí</a>
-        <a class="top-nav__link top-nav__link--secondary" href="#proyectos">Proyectos</a>
-        <a class="top-nav__link top-nav__link--primary" href="#contacto">Contacto</a>
+        <button
+          type="button"
+          class="top-nav__link"
+          [class.top-nav__link--active]="activeSection() === 'inicio'"
+          (click)="navigateTo('inicio', $event)"
+        >
+          <span class="top-nav__link-num">01</span>
+          <span>Inicio</span>
+        </button>
+        <button
+          type="button"
+          class="top-nav__link"
+          [class.top-nav__link--active]="activeSection() === 'sobre-mi'"
+          (click)="navigateTo('sobre-mi', $event)"
+        >
+          <span class="top-nav__link-num">02</span>
+          <span>Sobre Mí</span>
+        </button>
+        <button
+          type="button"
+          class="top-nav__link"
+          [class.top-nav__link--active]="activeSection() === 'proyectos'"
+          (click)="navigateTo('proyectos', $event)"
+        >
+          <span class="top-nav__link-num">03</span>
+          <span>Proyectos</span>
+        </button>
       </div>
       <div class="top-nav__actions">
+        @if (activeSection() !== 'inicio') {
+          <a
+            href="Kevin_Sanchez_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="top-nav__cv-btn"
+            title="Ver Currículum Vitae (PDF)"
+          >
+            <span class="material-symbols-outlined top-nav__cv-icon">description</span>
+            <span class="top-nav__cv-text">CV</span>
+            <span class="material-symbols-outlined top-nav__cv-arrow">arrow_outward</span>
+          </a>
+        }
         <button
           class="top-nav__toggle"
           type="button"
-          aria-label="Alternar modo oscuro"
-          (click)="toggleTheme()"
+          [attr.aria-label]="isDark() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+          (click)="toggleTheme($event)"
         >
-          <span class="material-symbols-outlined top-nav__toggle-icon">settings_brightness</span>
+          <span class="material-symbols-outlined top-nav__toggle-icon">{{ isDark() ? 'light_mode' : 'dark_mode' }}</span>
         </button>
         <button
           class="top-nav__mobile-toggle"
           type="button"
-          aria-label="Abrir menu"
+          [attr.aria-label]="isMenuOpen() ? 'Cerrar menu' : 'Abrir menu'"
           (click)="toggleMenu()"
         >
-          <span class="material-symbols-outlined top-nav__toggle-icon">menu</span>
+          <span class="material-symbols-outlined top-nav__toggle-icon">{{ isMenuOpen() ? 'close' : 'menu' }}</span>
         </button>
       </div>
+
     </div>
   </div>
   @if (isMenuOpen()) {
     <div class="top-nav__panel">
-      <a class="top-nav__panel-link" href="#inicio" (click)="closeMenu()">Inicio</a>
-      <a class="top-nav__panel-link" href="#sobre-mi" (click)="closeMenu()">Sobre Mí</a>
-      <a class="top-nav__panel-link" href="#proyectos" (click)="closeMenu()">Proyectos</a>
-      <a class="top-nav__panel-link" href="#contacto" (click)="closeMenu()">Contacto</a>
+      <button
+        type="button"
+        class="top-nav__panel-link"
+        [class.top-nav__panel-link--active]="activeSection() === 'inicio'"
+        (click)="navigateTo('inicio')"
+      >
+        Inicio
+      </button>
+      <button
+        type="button"
+        class="top-nav__panel-link"
+        [class.top-nav__panel-link--active]="activeSection() === 'sobre-mi'"
+        (click)="navigateTo('sobre-mi')"
+      >
+        Sobre Mí
+      </button>
+      <button
+        type="button"
+        class="top-nav__panel-link"
+        [class.top-nav__panel-link--active]="activeSection() === 'proyectos'"
+        (click)="navigateTo('proyectos')"
+      >
+        Proyectos
+      </button>
+      @if (activeSection() !== 'inicio') {
+        <a
+          href="Kevin_Sanchez_CV.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="top-nav__panel-link top-nav__panel-link--cv"
+          (click)="closeMenu()"
+        >
+          <span class="material-symbols-outlined">description</span>
+          <span>VER CV (PDF)</span>
+        </a>
+      }
     </div>
   }
 </nav>
+

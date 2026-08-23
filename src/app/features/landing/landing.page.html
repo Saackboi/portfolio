@@ -1,4 +1,58 @@
-<app-hero />
-<app-about-section />
-<app-project-gallery />
-<app-contact-section />
+<div class="game-viewport">
+  @switch (activeSection()) {
+    @case ('inicio') {
+      <div #screenView class="screen-view">
+        <app-hero />
+      </div>
+    }
+    @case ('sobre-mi') {
+      <div #screenView class="screen-view">
+        <app-about-section />
+      </div>
+    }
+    @case ('proyectos') {
+      <div #screenView class="screen-view">
+        <app-project-gallery />
+      </div>
+    }
+  }
+
+  <!-- Contact Floating Action Button (FAB) -->
+  <button
+    type="button"
+    class="contact-fab"
+    (click)="openContact($event)"
+    aria-label="Abrir modal de contacto"
+  >
+    <span class="contact-fab__status-dot"></span>
+    <span class="contact-fab__badge">HABLEMOS</span>
+    <span class="material-symbols-outlined contact-fab__icon">mail</span>
+  </button>
+
+  <!-- Contact Modal Overlay -->
+  @if (isContactOpen()) {
+    <div #contactOverlay class="contact-overlay" (click)="onBackdropClick($event)">
+      <div #contactDialog class="contact-overlay__container">
+        <button
+          type="button"
+          class="contact-overlay__close"
+          (click)="closeContact()"
+          aria-label="Cerrar contacto"
+        >
+          ✕
+        </button>
+        <div class="contact-overlay__content">
+          <app-contact-section />
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Project Detail Dossier Modal -->
+  @if (activeProjectSlug(); as slug) {
+    <app-project-detail-modal
+      [slug]="slug"
+      (closeModal)="closeProjectModal()"
+    />
+  }
+</div>

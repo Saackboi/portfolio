@@ -1,18 +1,115 @@
 <section class="projects" id="proyectos">
+  <div class="projects__noise"></div>
   <div class="projects__container">
+    <!-- Header -->
     <div class="projects__heading">
       <h2 class="projects__title">Proyectos</h2>
       <div class="projects__title-shadow"></div>
       <p class="projects__subtitle">
-        Muestra de soluciones enfocadas en la arquitectura de sistemas, la escalabilidad y el ciclo de vida del
-        software.
+        Selecciona un proyecto para ver arquitectura y detalles.
       </p>
     </div>
 
-    <div class="projects__grid">
-      @for (project of projects(); track project.code) {
-      <app-project-card [project]="project" />
-      }
+    <!-- Continuous Sliding Carousel Stage -->
+    <div class="projects__stage">
+      <!-- Navigation Arrow Left -->
+      <button
+        type="button"
+        class="projects__nav-btn projects__nav-btn--prev"
+        (click)="prev($event)"
+        aria-label="Proyecto anterior"
+      >
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+
+      <!-- Carousel Viewport & Track -->
+      <div class="projects__viewport">
+        <div
+          class="projects__track"
+          [style.--active-index]="selectedIndex()"
+        >
+          @for (p of projects(); track p.title; let i = $index) {
+            <article
+              class="polaroid-frame"
+              [class.polaroid-frame--active]="i === selectedIndex()"
+              [class.polaroid-frame--left]="i < selectedIndex()"
+              [class.polaroid-frame--right]="i > selectedIndex()"
+              [class.polaroid-frame--opening]="isOpening() && p.slug === openingSlug()"
+              (click)="i === selectedIndex() ? openProject(p.slug, $event) : selectProject(i, i > selectedIndex() ? 1 : -1, $event)"
+              [attr.aria-label]="p.title"
+            >
+              <!-- Masking Tape Top-Left -->
+              <div class="polaroid-frame__tape polaroid-frame__tape--tl" [class]="tapeClass(p.tapeTone)"></div>
+
+              <!-- Masking Tape Bottom-Right -->
+              <div class="polaroid-frame__tape polaroid-frame__tape--br" [class]="tapeClass(p.tapeTone)"></div>
+
+              <!-- Inner Photo Frame -->
+              <div class="polaroid-frame__photo-box">
+                <img
+                  [alt]="p.title"
+                  class="polaroid-frame__photo"
+                  [ngSrc]="p.image"
+                  fill
+                  [priority]="i === 0"
+                  sizes="(min-width: 1024px) 38vw, (min-width: 768px) 55vw, 84vw"
+                />
+                <div class="polaroid-frame__photo-glare"></div>
+              </div>
+
+              <!-- Iconic Polaroid Bottom Chin -->
+              <div class="polaroid-frame__chin">
+                <div class="polaroid-frame__meta">
+                  <h3 class="polaroid-frame__title">{{ p.title }}</h3>
+                  @if (p.description) {
+                    <p class="polaroid-frame__description">{{ p.description }}</p>
+                  }
+                  <span class="polaroid-frame__code">{{ p.code }} • {{ p.year }}</span>
+                </div>
+
+                @if (i === selectedIndex()) {
+                  <button
+                    type="button"
+                    class="polaroid-frame__cta"
+                    (click)="openProject(p.slug, $event)"
+                    [attr.aria-label]="'Ver proyecto ' + p.title"
+                  >
+                    VER PROYECTO →
+                  </button>
+                }
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+
+      <!-- Navigation Arrow Right -->
+      <button
+        type="button"
+        class="projects__nav-btn projects__nav-btn--next"
+        (click)="next($event)"
+        aria-label="Proyecto siguiente"
+      >
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
+    </div>
+
+    <!-- HUD Counter & Progress Bar -->
+    <div class="projects__hud">
+      <span class="projects__hud-counter">
+        <strong>{{ formattedIndex() }}</strong> / {{ formattedTotal() }}
+      </span>
+      <div class="projects__hud-track">
+        <div class="projects__hud-bar" [style.width.%]="progressPercent()"></div>
+      </div>
+      <span class="projects__hud-percent">{{ progressPercent() }}%</span>
     </div>
   </div>
+
+  <!-- Cinematic Blackout Flash Overlay -->
+  <div
+    class="projects__blackout"
+    [class.projects__blackout--active]="isBlackoutActive()"
+    aria-hidden="true"
+  ></div>
 </section>

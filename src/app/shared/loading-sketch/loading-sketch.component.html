@@ -1,6 +1,60 @@
 <div class="loading-sketch">
+  <div class="loading-sketch__noise"></div>
+
   <div class="loading-sketch__content">
-    <div class="loading-sketch__spinner"></div>
+    <!-- Animated Anime Eye (Enlarged, Clean & Sharp Vector Definition) -->
+    <div class="loading-sketch__eye-container">
+      <div class="loading-sketch__eye">
+        <svg class="loading-sketch__eye-svg" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="eye-clip">
+              <path d="M 8,35 Q 60,-2 112,35 Q 60,72 8,35 Z" />
+            </clipPath>
+          </defs>
+
+          <!-- Sclera / Eye White (Clipped) -->
+          <g clip-path="url(#eye-clip)">
+            <!-- Sclera Background -->
+            <path class="loading-sketch__eye-bg" d="M 0,0 L 120,0 L 120,70 L 0,70 Z" />
+
+            <!-- Moving Iris & Pupil (Look Left -> Look Right -> Center) -->
+            <g class="loading-sketch__iris-group">
+              <!-- Outer Iris -->
+              <circle class="loading-sketch__iris" cx="60" cy="35" r="20" />
+              <!-- Inner Iris Pattern -->
+              <circle class="loading-sketch__iris-inner" cx="60" cy="35" r="14" />
+              <!-- Pupil -->
+              <circle class="loading-sketch__pupil" cx="60" cy="35" r="9" />
+              <!-- Specular Glints / Highlights -->
+              <circle class="loading-sketch__glint-main" cx="54" cy="27" r="4.2" />
+              <circle class="loading-sketch__glint-sub" cx="66" cy="42" r="2.2" />
+            </g>
+
+            <!-- Eyelids (Opening, Holding & Closing) -->
+            <path
+              class="loading-sketch__eyelid loading-sketch__eyelid--top"
+              d="M -10,35 Q 60,-15 130,35 L 130,-15 L -10,-15 Z"
+            />
+            <path
+              class="loading-sketch__eyelid loading-sketch__eyelid--bottom"
+              d="M -10,35 Q 60,85 130,35 L 130,85 L -10,85 Z"
+            />
+          </g>
+
+          <!-- Crisp Manga Lash Contour (Top & Bottom) -->
+          <path
+            class="loading-sketch__eye-top-lash"
+            d="M 6,37 Q 60,-3 114,35"
+          />
+          <path
+            class="loading-sketch__eye-bottom-lash"
+            d="M 12,37 Q 60,71 108,35"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Clean Typography Text (No box, clean and minimal) -->
     <p class="loading-sketch__text">{{ phrase() }}</p>
   </div>
 </div>

@@ -1,0 +1,376 @@
+<div class="project-modal" (click)="onBackdropClick($event)">
+  <div class="project-modal__backdrop"></div>
+
+  <div class="project-modal__container" role="dialog" aria-modal="true" [attr.aria-label]="project()?.title">
+    <!-- Masking Tape Accents on Container -->
+    <div class="project-modal__corner-tape project-modal__corner-tape--tl"></div>
+    <div class="project-modal__corner-tape project-modal__corner-tape--tr"></div>
+    <div class="project-modal__corner-tape project-modal__corner-tape--br"></div>
+
+    <!-- Modal Header Bar -->
+    <header class="project-modal__header">
+      <div class="project-modal__header-left">
+        <button
+          type="button"
+          class="project-modal__close-btn"
+          (click)="close()"
+          aria-label="Cerrar expediente"
+        >
+          <span class="material-symbols-outlined project-modal__close-icon">arrow_back</span>
+          <span class="project-modal__close-text">VOLVER [ESC]</span>
+        </button>
+
+        <div class="project-modal__stamp">
+          <span>TOP SECRET // CASE-FILE</span>
+        </div>
+      </div>
+
+      <div class="project-modal__header-title">
+        <div class="project-modal__code-badge">
+          <span class="project-modal__status-dot"></span>
+          <span>{{ project()?.code }}</span>
+        </div>
+        <h2 class="project-modal__heading">{{ project()?.title }}</h2>
+      </div>
+
+      <!-- Action Links: Using Original High-Impact Buttons -->
+      <div class="project-modal__header-actions">
+        @if (project()?.demoUrl; as demoUrl) {
+          <a
+            [href]="demoUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-modal__cta-primary"
+            title="Ver proyecto en vivo"
+          >
+            <span class="material-symbols-outlined project-modal__cta-icon">warning</span>
+            <span>VER DEMO EN VIVO</span>
+            <span class="material-symbols-outlined project-modal__cta-icon">warning</span>
+          </a>
+        }
+        @if (project()?.repoUrl; as repoUrl) {
+          <a
+            [href]="repoUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-modal__cta-github"
+            title="Ver repositorio en GitHub"
+          >
+            <svg class="project-modal__github-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <span>VER REPO</span>
+          </a>
+        }
+      </div>
+    </header>
+
+    <!-- Modal Body: Left Fixed Sidebar + Right Content Stage -->
+    <div class="project-modal__body">
+      <!-- Left Sidebar: Meta & Section Selector -->
+      <aside class="project-modal__sidebar">
+        <!-- Ficha Táctica Dossier Card -->
+        <div class="project-modal__dossier-card">
+          <div class="project-modal__dossier-tape"></div>
+          <div class="project-modal__dossier-stamp">VERIFIED</div>
+
+          <div class="project-modal__meta-group">
+            <span class="project-modal__meta-label">EXPEDIENTE:</span>
+            <span class="project-modal__meta-val">{{ project()?.code }}</span>
+          </div>
+          <div class="project-modal__meta-group">
+            <span class="project-modal__meta-label">AÑO / FECHA:</span>
+            <span class="project-modal__meta-val">{{ project()?.year }}</span>
+          </div>
+          @if (project()?.subtitle; as sub) {
+            <div class="project-modal__meta-group">
+              <span class="project-modal__meta-label">ENFOQUE:</span>
+              <span class="project-modal__meta-val">{{ sub }}</span>
+            </div>
+          }
+        </div>
+
+        <!-- Navigation Tabs: Simple 1-Word Clean Titles -->
+        <nav class="project-modal__nav" aria-label="Secciones del proyecto">
+          <button
+            type="button"
+            class="project-modal__nav-btn"
+            [class.project-modal__nav-btn--active]="activeTab() === 'overview'"
+            (click)="setTab('overview', $event)"
+          >
+            <span class="project-modal__nav-num">01</span>
+            <span class="project-modal__nav-label">RESUMEN</span>
+            <span class="material-symbols-outlined project-modal__nav-arrow">chevron_right</span>
+          </button>
+
+          <button
+            type="button"
+            class="project-modal__nav-btn"
+            [class.project-modal__nav-btn--active]="activeTab() === 'scope'"
+            (click)="setTab('scope', $event)"
+          >
+            <span class="project-modal__nav-num">02</span>
+            <span class="project-modal__nav-label">DESAFÍOS</span>
+            <span class="material-symbols-outlined project-modal__nav-arrow">chevron_right</span>
+          </button>
+
+          <button
+            type="button"
+            class="project-modal__nav-btn"
+            [class.project-modal__nav-btn--active]="activeTab() === 'tech'"
+            (click)="setTab('tech', $event)"
+          >
+            <span class="project-modal__nav-num">03</span>
+            <span class="project-modal__nav-label">STACK</span>
+            <span class="material-symbols-outlined project-modal__nav-arrow">chevron_right</span>
+          </button>
+
+          <button
+            type="button"
+            class="project-modal__nav-btn"
+            [class.project-modal__nav-btn--active]="activeTab() === 'footage'"
+            (click)="setTab('footage', $event)"
+          >
+            <span class="project-modal__nav-num">04</span>
+            <span class="project-modal__nav-label">GALERÍA</span>
+            <span class="material-symbols-outlined project-modal__nav-arrow">chevron_right</span>
+          </button>
+        </nav>
+
+        <!-- Project Switcher Quick Navigation -->
+        <div class="project-modal__switcher">
+          <span class="project-modal__switcher-title">OTROS EXPEDIENTES:</span>
+          <div class="project-modal__switcher-btns">
+            @if (prevProject(); as prev) {
+              <button
+                type="button"
+                class="project-modal__switch-btn"
+                (click)="switchProject(prev.slug, $event)"
+                [title]="'Ir a ' + prev.title"
+              >
+                ◀ {{ prev.code }}
+              </button>
+            }
+            @if (nextProject(); as next) {
+              <button
+                type="button"
+                class="project-modal__switch-btn"
+                (click)="switchProject(next.slug, $event)"
+                [title]="'Ir a ' + next.title"
+              >
+                {{ next.code }} ▶
+              </button>
+            }
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Content Stage: 1 Screen Per Tab (Internal Smooth Scroll) -->
+      <main class="project-modal__content">
+        @if (project(); as p) {
+          @switch (activeTab()) {
+            @case ('overview') {
+              <div class="project-modal__screen project-modal__screen--overview">
+                <!-- Hero Cover Mockup Screen -->
+                <div class="project-modal__cover">
+                  <div class="project-modal__screen-frame">
+                    <div class="project-modal__screen-inner">
+                      @if (p.heroImage || p.image; as coverImg) {
+                        <img
+                          [src]="coverImg"
+                          [alt]="p.title"
+                          class="project-modal__cover-img"
+                        />
+                      }
+                      <div class="project-modal__screen-glint"></div>
+                      <div class="project-modal__screen-dots">
+                        <span class="project-modal__dot-item project-modal__dot-item--red"></span>
+                        <span class="project-modal__dot-item project-modal__dot-item--yellow"></span>
+                        <span class="project-modal__dot-item project-modal__dot-item--green"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Executive Summary in Paper Panel -->
+                <div class="project-dossier-card">
+                  <div class="project-dossier-card__tape"></div>
+                  <h3 class="project-dossier-card__title">
+                    <span class="material-symbols-outlined">description</span>
+                    Resumen del Proyecto
+                  </h3>
+                  <p class="project-dossier-card__lead">{{ p.description }}</p>
+                  @if (p.longDescription) {
+                    <p class="project-dossier-card__text">{{ p.longDescription }}</p>
+                  }
+                  @if (p.tagline) {
+                    <div class="project-dossier-card__badge">
+                      <span class="material-symbols-outlined">label</span>
+                      <span>{{ p.tagline }}</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+
+            @case ('scope') {
+              <div class="project-modal__screen project-modal__screen--scope">
+                <!-- Authentic High-Contrast Paper Dossier File -->
+                @if (p.technicalChallenges?.length) {
+                  <div class="project-dossier-folder">
+                    <div class="project-dossier-folder__frame"></div>
+                    <div class="project-dossier-folder__card">
+                      <div class="project-dossier-folder__tape"></div>
+                      <div class="project-dossier-folder__watermark">CONFIDENTIAL // RESOLVED</div>
+
+                      <header class="project-dossier-folder__header">
+                        <span class="material-symbols-outlined project-dossier-folder__icon">task_alt</span>
+                        <h3 class="project-dossier-folder__title">Desafíos Técnicos & Soluciones</h3>
+                      </header>
+
+                      <ul class="project-dossier-folder__list">
+                        @for (item of p.technicalChallenges; track item; let i = $index) {
+                          <li class="project-dossier-folder__item">
+                            <div class="project-dossier-folder__index">
+                              {{ (i + 1).toString().padStart(2, '0') }}
+                            </div>
+                            <div class="project-dossier-folder__item-body">
+                              <h4 class="project-dossier-folder__item-title">{{ item.title }}</h4>
+                              @if (item.description) {
+                                <p class="project-dossier-folder__item-desc">{{ item.description }}</p>
+                              }
+                            </div>
+                          </li>
+                        }
+                      </ul>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+
+            @case ('tech') {
+              <div class="project-modal__screen project-modal__screen--tech">
+                <!-- System Architecture Diagram (Placed on Top) -->
+                @if (p.archImage) {
+                  <div class="project-dossier-card">
+                    <div class="project-dossier-card__tape"></div>
+                    <h3 class="project-dossier-card__title">
+                      <span class="material-symbols-outlined">account_tree</span>
+                      Arquitectura del Sistema
+                    </h3>
+                    <div class="project-modal__arch-box" (click)="openImagePreview(p.archImage, 'Arquitectura del Sistema')">
+                      <img
+                        [src]="p.archImage"
+                        alt="Arquitectura del sistema"
+                        class="project-modal__arch-img"
+                      />
+                      <div class="project-modal__arch-overlay">
+                        <span class="material-symbols-outlined">zoom_in</span>
+                        <span>CLIC PARA AMPLIAR DIAGRAMA</span>
+                      </div>
+                    </div>
+                  </div>
+                }
+
+                <!-- Tech Stack Section -->
+                <div class="project-dossier-card">
+                  <h3 class="project-dossier-card__title">
+                    <span class="material-symbols-outlined">memory</span>
+                    Stack Tecnológico Implementado
+                  </h3>
+                  @if (p.techStackDetail?.length) {
+                    <div class="project-tech__grid">
+                      @for (tech of p.techStackDetail; track tech) {
+                        @if (techCardFor(tech); as card) {
+                          <article
+                            class="project-tech__card {{ card.variant }}"
+                            [style.--tech-bg]="card.color"
+                            [style.--tech-border]="card.border"
+                            [style.--tech-text]="card.text"
+                            [style.--tech-shadow]="card.shadow"
+                            [style.--tech-tag-bg]="card.tagBg"
+                            [style.--tech-tag-text]="card.tagText"
+                            [style.--tech-logo]="card.logoColor"
+                          >
+                            <div class="project-tech__card-body">
+                              <span
+                                class="project-tech__logo"
+                                aria-hidden="true"
+                                [style.maskImage]="'url(' + card.logo + ')'"
+                                [style.webkitMaskImage]="'url(' + card.logo + ')'"
+                              ></span>
+                              <span class="project-tech__name">{{ card.displayName }}</span>
+                              @if (card.tagLabel) {
+                                <span class="project-tech__tag">{{ card.tagLabel }}</span>
+                              }
+                            </div>
+                          </article>
+                        }
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+
+            @case ('footage') {
+              <div class="project-modal__screen project-modal__screen--footage">
+                <div class="project-modal__panel-transparent">
+                  <h3 class="project-dossier-card__title project-dossier-card__title--heading">
+                    <span class="material-symbols-outlined">photo_library</span>
+                    Galería de Capturas // Polaroids
+                  </h3>
+                  @if (p.gallery?.length) {
+                    <!-- Authentic Vintage Polaroid Gallery Grid -->
+                    <div class="project-modal__polaroid-grid">
+                      @for (shot of p.gallery; track shot; let i = $index) {
+                        <button
+                          type="button"
+                          class="project-modal__polaroid {{ getPolaroidClass(i) }}"
+                          (click)="openImagePreview(shot.src, shot.caption)"
+                          [attr.aria-label]="'Ampliar ' + shot.caption"
+                        >
+                          <div class="project-modal__polaroid-tape {{ getTapeClass(i) }}"></div>
+                          <div class="project-modal__polaroid-photo">
+                            <img [src]="shot.src" [alt]="shot.caption" class="project-modal__polaroid-img" />
+                          </div>
+                          <div class="project-modal__polaroid-chin">
+                            <span class="project-modal__polaroid-caption">{{ shot.caption }}</span>
+                          </div>
+                        </button>
+                      }
+                    </div>
+                  } @else {
+                    <p class="project-modal__empty-text">No hay capturas adicionales registradas para este expediente.</p>
+                  }
+                </div>
+              </div>
+            }
+          }
+        }
+      </main>
+    </div>
+  </div>
+
+  <!-- Image Lightbox Modal Preview with Transition Animation -->
+  @if (previewImage()) {
+    <div
+      class="project-modal__lightbox"
+      [class.project-modal__lightbox--closing]="isLightboxClosing()"
+      (click)="closeImagePreview()"
+    >
+      <div class="project-modal__lightbox-content" (click)="$event.stopPropagation()">
+        <button
+          type="button"
+          class="project-modal__lightbox-close"
+          (click)="closeImagePreview()"
+        >
+          ✕
+        </button>
+        <img [src]="previewImage()!.src" [alt]="previewImage()!.caption" class="project-modal__lightbox-img" />
+        <p class="project-modal__lightbox-caption">{{ previewImage()!.caption }}</p>
+      </div>
+    </div>
+  }
+</div>
