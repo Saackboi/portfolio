@@ -16,6 +16,7 @@ export class TopNavComponent {
   private readonly gsapAnimation = inject(GsapAnimationService);
 
   protected readonly activeSection = this.sectionNav.activeSection;
+  protected readonly isDark = this.theme.isDark;
   protected readonly isMenuOpen = signal(false);
 
   navigateTo(section: SectionId, event?: MouseEvent): void {
