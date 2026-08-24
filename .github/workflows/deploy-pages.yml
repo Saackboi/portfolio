@@ -1,0 +1,75 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "master" ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.gitignore'
+      - 'LICENSE'
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Create environment.ts from Secret
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+        run: |
+          mkdir -p src/environments
+          if [ -n "$ENV_FILE" ]; then
+            node -e 'fs.writeFileSync("src/environments/environment.ts", process.env.ENV_FILE)'
+          else
+            cp src/environments/environment.example.ts src/environments/environment.ts
+          fi
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Angular Application
+        run: npm run build
+
+      - name: Configure SPA Routing Fallback
+        run: cp dist/Portfolio/browser/index.html dist/Portfolio/browser/404.html
+
+      - name: Upload Pages Artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist/Portfolio/browser'
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
