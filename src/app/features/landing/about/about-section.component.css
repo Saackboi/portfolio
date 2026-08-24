@@ -1,13 +1,14 @@
 @reference "../../../../styles.css";
 
 .about {
-  @apply w-full min-h-[calc(100dvh-4.5rem)] pt-24 pb-20 sm:pt-26 md:pt-28 bg-background-light dark:bg-[#0a0a0d] relative flex flex-col justify-start overflow-y-auto overflow-x-hidden;
+  @apply w-full h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-4.5rem)] pt-14 pb-28 sm:pt-20 md:pt-24 bg-background-light dark:bg-[#0a0a0d] relative flex flex-col justify-start overflow-y-auto overflow-x-hidden;
+  -webkit-overflow-scrolling: touch;
   transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Dual Background Layers for Smooth Theme Cross-Fade */
 .about__tablero {
-  position: absolute;
+  position: fixed;
   inset: 0;
   background-size: cover;
   background-position: center;
@@ -38,7 +39,7 @@
 }
 
 .about__noise {
-  @apply absolute inset-0 pointer-events-none z-2;
+  @apply fixed inset-0 pointer-events-none z-2;
   opacity: 0.035;
   background-image: url("/assets/backgrounds/bg-noise.svg");
 }
@@ -110,9 +111,7 @@
      0 2px 10px rgba(0, 0, 0, 0.95);
 }
 
-/* Content Stage */
+/* Stage container for 2-column dossier content */
 .about__content-stage {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  @apply w-full;
 }
