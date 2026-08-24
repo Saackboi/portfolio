@@ -40,10 +40,10 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
       // Optical Multi-Plane Depth Hierarchy
       const layers = [
-        ...(bgArtwork ? [{ element: bgArtwork, depth: 6 }] : []),
-        ...(intro ? [{ element: intro, depth: 8 }] : []),
-        ...(errorGlow ? [{ element: errorGlow, depth: 18 }] : []),
-        ...(bodyArtwork ? [{ element: bodyArtwork, depth: 38 }] : [])
+        ...(bgArtwork ? [{ element: bgArtwork, depth: 10 }] : []),
+        ...(intro ? [{ element: intro, depth: 14 }] : []),
+        ...(errorGlow ? [{ element: errorGlow, depth: 24 }] : []),
+        ...(bodyArtwork ? [{ element: bodyArtwork, depth: 46 }] : [])
       ];
 
       this.cleanupParallax = this.gsapAnimation.setupParallax(heroSection, layers);

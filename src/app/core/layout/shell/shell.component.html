@@ -7,7 +7,7 @@
   @if (!isDetailRoute()) {
     <app-top-nav />
   }
-  <main [class.pt-16]="!isDetailRoute()" [class.md:pt-18]="!isDetailRoute()" class="bg-[#1a1a1a] min-h-screen">
+  <main [class.pt-16]="!isDetailRoute()" [class.md:pt-18]="!isDetailRoute()" class="bg-[#1a1a1a] h-dvh max-h-dvh overflow-hidden flex flex-col">
     <!-- Feature routes render here. -->
     <router-outlet />
   </main>
