@@ -3,7 +3,7 @@ import { Meta, Title } from '@angular/platform-browser';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
-  private readonly baseUrl = 'https://portfolio.sackboi.win';
+  private readonly baseUrl = 'https://kojidev.me';
 
   constructor(
     private readonly title: Title,

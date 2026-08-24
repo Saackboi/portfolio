@@ -16,7 +16,7 @@
 This is my personal portfolio, built with **Angular**. I developed this project to explore creative **UI/UX** while maintaining a functional and scalable architecture. The "Sketch-Punk" aesthetic is powered by a **Firebase Firestore** integration that acts as a dynamic CMS, allowing me to manage my projects and tech stack in real-time without redeployments.
 
 <p align="center">
-  <a href="https://portfolio.sackboi.win/" target="_blank">
+  <a href="https://kojidev.me/" target="_blank">
     <img src="https://i.postimg.cc/nzhdmXX7/image.png" alt="Launch Live Demo" width="300">
   </a>
 </p>

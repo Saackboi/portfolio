@@ -52,8 +52,8 @@ export class LandingPage implements OnInit {
     const title = 'Kevin Sánchez — Desarrollador Full-Stack | .NET & Angular';
     const description =
       'Desarrollador Full-Stack especializado en .NET y Angular. Construyo sistemas completos y escalables de inicio a fin, combinando arquitectura sólida, automatización y buenas prácticas de infraestructura.';
-    const url = 'https://portfolio.sackboi.win/';
-    const image = 'https://portfolio.sackboi.win/og-image.jpg';
+    const url = 'https://kojidev.me/';
+    const image = 'https://kojidev.me/og-image.jpg';
 
     this.seo.setTitle(title);
     this.seo.setDescription(description);
