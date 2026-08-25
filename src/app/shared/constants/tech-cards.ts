@@ -351,13 +351,78 @@ function normalizeSlug(name: string): string {
     .replace(/[^a-z0-9]/g, '');
 }
 
-const DYNAMIC_VARIANTS = [
-  { variant: 'project-tech__card--blue', color: '#2496ED', border: '#0b0b0b', text: '#ffffff', logoColor: '#ffffff', tagLabel: 'TECH', tagBg: '#ffffff', tagText: '#2496ED' },
-  { variant: 'project-tech__card--green', color: '#339933', border: '#0b0b0b', text: '#ffffff', logoColor: '#ffffff', tagLabel: 'TECH', tagBg: '#ffffff', tagText: '#339933' },
-  { variant: 'project-tech__card--orange', color: '#E34F26', border: '#0b0b0b', text: '#ffffff', logoColor: '#ffffff', tagLabel: 'TECH', tagBg: '#ffffff', tagText: '#E34F26' },
-  { variant: 'project-tech__card--red', color: '#DD0031', border: '#0b0b0b', text: '#ffffff', logoColor: '#ffffff', tagLabel: 'TECH', tagBg: '#ffffff', tagText: '#DD0031' },
-  { variant: 'project-tech__card--purple', color: '#6A1B9A', border: '#0b0b0b', text: '#ffffff', logoColor: '#ffffff', tagLabel: 'TECH', tagBg: '#ffffff', tagText: '#6A1B9A' },
-  { variant: 'project-tech__card--magenta', color: '#D81B60', border: '#0b0b0b', text: '#ffffff', logoColor: '#ffffff', tagLabel: 'TECH', tagBg: '#ffffff', tagText: '#D81B60' }
+interface BrandMeta {
+  color: string;
+  tag: string;
+  isLightBg?: boolean;
+}
+
+const BRAND_METAS: Record<string, BrandMeta> = {
+  angular: { color: '#DD0031', tag: 'FRONTEND' },
+  react: { color: '#61DAFB', tag: 'FRONTEND', isLightBg: true },
+  vuedotjs: { color: '#4FC08D', tag: 'FRONTEND' },
+  nextdotjs: { color: '#000000', tag: 'FRONTEND' },
+  nuxtdotjs: { color: '#00DC82', tag: 'FRONTEND' },
+  svelte: { color: '#FF3E00', tag: 'FRONTEND' },
+  tailwindcss: { color: '#06B6D4', tag: 'FRONTEND' },
+  typescript: { color: '#3178C6', tag: 'LANGUAGE' },
+  javascript: { color: '#F7DF1E', tag: 'LANGUAGE', isLightBg: true },
+  html5: { color: '#E34F26', tag: 'FRONTEND' },
+  css3: { color: '#1572B6', tag: 'FRONTEND' },
+  sass: { color: '#CC6699', tag: 'FRONTEND' },
+  bootstrap: { color: '#7952B3', tag: 'FRONTEND' },
+  threedotjs: { color: '#040404', tag: 'FRONTEND' },
+  vite: { color: '#646CFF', tag: 'TOOL' },
+  dotnet: { color: '#512BD4', tag: 'BACKEND' },
+  csharp: { color: '#239120', tag: 'LANGUAGE' },
+  cplusplus: { color: '#00599C', tag: 'LANGUAGE' },
+  nodedotjs: { color: '#339933', tag: 'BACKEND' },
+  nestjs: { color: '#E0234E', tag: 'BACKEND' },
+  express: { color: '#111111', tag: 'BACKEND' },
+  springboot: { color: '#6DB33F', tag: 'BACKEND' },
+  openjdk: { color: '#ED8B00', tag: 'LANGUAGE' },
+  java: { color: '#ED8B00', tag: 'LANGUAGE' },
+  python: { color: '#3776AB', tag: 'LANGUAGE' },
+  fastapi: { color: '#009688', tag: 'BACKEND' },
+  django: { color: '#092E20', tag: 'BACKEND' },
+  flask: { color: '#000000', tag: 'BACKEND' },
+  go: { color: '#00ADD8', tag: 'LANGUAGE' },
+  rust: { color: '#B7410E', tag: 'LANGUAGE' },
+  php: { color: '#777BB4', tag: 'LANGUAGE' },
+  laravel: { color: '#FF2D20', tag: 'BACKEND' },
+  postgresql: { color: '#4169E1', tag: 'DATABASE' },
+  microsoftsqlserver: { color: '#CC292B', tag: 'DATABASE' },
+  mysql: { color: '#4479A1', tag: 'DATABASE' },
+  mongodb: { color: '#47A248', tag: 'DATABASE' },
+  redis: { color: '#DC382D', tag: 'DATABASE' },
+  sqlite: { color: '#003B57', tag: 'DATABASE' },
+  supabase: { color: '#3FCF8E', tag: 'DATABASE' },
+  firebase: { color: '#FFCA28', tag: 'DATABASE', isLightBg: true },
+  prisma: { color: '#2D3748', tag: 'DATABASE' },
+  docker: { color: '#2496ED', tag: 'CONTAINER' },
+  kubernetes: { color: '#326CE5', tag: 'DEVOPS' },
+  amazonwebservices: { color: '#FF9900', tag: 'CLOUD', isLightBg: true },
+  microsoftazure: { color: '#0078D4', tag: 'CLOUD' },
+  googlecloud: { color: '#4285F4', tag: 'CLOUD' },
+  linux: { color: '#FCC624', tag: 'SYSTEM', isLightBg: true },
+  nginx: { color: '#009639', tag: 'DEVOPS' },
+  githubactions: { color: '#2088FF', tag: 'CI/CD' },
+  rabbitmq: { color: '#FF6600', tag: 'QUEUE' },
+  apachekafka: { color: '#231F20', tag: 'STREAM' },
+  graphql: { color: '#E10098', tag: 'API' },
+  git: { color: '#F05032', tag: 'TOOL' },
+  github: { color: '#181717', tag: 'TOOL' },
+  figma: { color: '#F24E1E', tag: 'DESIGN' },
+  postman: { color: '#FF6C37', tag: 'API' }
+};
+
+const CARD_VARIANTS = [
+  'project-tech__card--blue',
+  'project-tech__card--green',
+  'project-tech__card--orange',
+  'project-tech__card--red',
+  'project-tech__card--purple',
+  'project-tech__card--magenta'
 ];
 
 export const getTechCard = (name: string): TechCardConfig => {
@@ -387,22 +452,29 @@ export const getTechCard = (name: string): TechCardConfig => {
     return TECH_CARD_MAP[match];
   }
 
-  // Universal CDN resolution for any tech stack
+  // Universal Brand Color & CDN resolution
   const slug = normalizeSlug(name);
+  const brand = BRAND_METAS[slug];
   const hash = Math.abs(name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0));
-  const style = DYNAMIC_VARIANTS[hash % DYNAMIC_VARIANTS.length];
+  const variant = CARD_VARIANTS[hash % CARD_VARIANTS.length];
+
+  const bgColor = brand?.color || '#2496ED';
+  const isLight = brand?.isLightBg ?? false;
+  const textColor = isLight ? '#0b0b0b' : '#ffffff';
+  const tagBg = isLight ? '#0b0b0b' : '#ffffff';
+  const tagText = isLight ? '#ffffff' : bgColor;
 
   return {
     displayName: name,
     logo: `https://cdn.simpleicons.org/${slug}`,
-    color: style.color,
-    border: style.border,
-    text: style.text,
-    logoColor: style.logoColor,
+    color: bgColor,
+    border: isLight ? '#0b0b0b' : '#0b0b0b',
+    text: textColor,
+    logoColor: textColor,
     shadow: 'rgba(0,0,0,0.5)',
-    variant: style.variant,
-    tagLabel: style.tagLabel,
-    tagBg: style.tagBg,
-    tagText: style.tagText
+    variant: variant,
+    tagLabel: brand?.tag || 'TECH',
+    tagBg: tagBg,
+    tagText: tagText
   };
 };
