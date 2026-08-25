@@ -412,6 +412,44 @@ const BRAND_METAS: Record<string, BrandMeta> = {
   graphql: { color: '#E10098', tag: 'API' },
   git: { color: '#F05032', tag: 'TOOL' },
   github: { color: '#181717', tag: 'TOOL' },
+  // CMS & E-Commerce
+  wordpress: { color: '#21759B', tag: 'CMS' },
+  shopify: { color: '#7AB55C', tag: 'E-COMMERCE' },
+  woocommerce: { color: '#96588A', tag: 'E-COMMERCE' },
+  strapi: { color: '#4945FF', tag: 'CMS' },
+  ghost: { color: '#15171A', tag: 'CMS' },
+  webflow: { color: '#146EF5', tag: 'CMS' },
+
+  // Modern Frameworks & Runtimes
+  astro: { color: '#BC52EE', tag: 'FRONTEND' },
+  remix: { color: '#000000', tag: 'FULLSTACK' },
+  solid: { color: '#2C4F7C', tag: 'FRONTEND' },
+  solidjs: { color: '#2C4F7C', tag: 'FRONTEND' },
+  qwik: { color: '#18B6F6', tag: 'FRONTEND' },
+  bun: { color: '#FBF0DF', tag: 'RUNTIME', isLightBg: true },
+  deno: { color: '#000000', tag: 'RUNTIME' },
+
+  // Mobile & Desktop
+  flutter: { color: '#02569B', tag: 'MOBILE' },
+  dart: { color: '#0175C2', tag: 'LANGUAGE' },
+  reactnative: { color: '#61DAFB', tag: 'MOBILE', isLightBg: true },
+  swift: { color: '#F05138', tag: 'LANGUAGE' },
+  kotlin: { color: '#7F52FF', tag: 'LANGUAGE' },
+  electron: { color: '#47848F', tag: 'DESKTOP' },
+  expo: { color: '#000020', tag: 'MOBILE' },
+  ionic: { color: '#3880FF', tag: 'MOBILE' },
+
+  // AI & Data
+  openai: { color: '#412991', tag: 'AI/ML' },
+  pytorch: { color: '#EE4C2C', tag: 'AI/ML' },
+  tensorflow: { color: '#FF6F00', tag: 'AI/ML' },
+  huggingface: { color: '#FFD21E', tag: 'AI/ML', isLightBg: true },
+
+  // Tools & Testing
+  vitest: { color: '#6E9F18', tag: 'TESTING' },
+  jest: { color: '#C21325', tag: 'TESTING' },
+  cypress: { color: '#69D3A7', tag: 'TESTING', isLightBg: true },
+  playwright: { color: '#2EAD33', tag: 'TESTING' },
   figma: { color: '#F24E1E', tag: 'DESIGN' },
   postman: { color: '#FF6C37', tag: 'API' }
 };
