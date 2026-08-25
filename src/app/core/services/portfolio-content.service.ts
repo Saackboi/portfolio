@@ -40,7 +40,13 @@ export class PortfolioContentService {
       const projectsQuery = query(collection(this.db, 'projects'), orderBy('order', 'asc'));
       const projectsSnap = await getDocs(projectsQuery);
 
-      const toWebp = (url?: string) => (url ? url.replace(/\.(png|jpg|jpeg|jfif)$/i, '.webp') : '');
+      const toWebp = (url?: string) => {
+        if (!url) return '';
+        if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+          return url;
+        }
+        return url.replace(/\.(png|jpg|jpeg|jfif)$/i, '.webp');
+      };
 
       const projects = projectsSnap.docs.map(doc => {
         const p = doc.data() as ProjectCard;
